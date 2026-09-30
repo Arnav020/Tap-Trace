@@ -386,8 +386,9 @@ def main():
         if i:
             shape(sl, x - 0.14, 5.38, 0.01, 0.85, fill="5A4F45")
     shape(sl, 0.75, 6.72, 11.85, 0.01, fill="5A4F45")
-    T(sl, 0.75, 6.82, 11.85, 0.3, [(f"THEME ID 02   |   TEAM TAPTRACE   |   THAPAR INSTITUTE OF ENGINEERING & TECHNOLOGY   |   "
-                                    f"ARNAV JOSHI · ajoshi4_be23@thapar.edu   |   {_bare(args.github)}   |   LIVE {_bare(args.deployed)}", {"size": 8.5, "color": "CFC6BA", "spc": 120})])
+    T(sl, 0.75, 6.8, 11.85, 0.5, [("THEME ID 02   |   TEAM TAPTRACE   |   THAPAR INSTITUTE OF ENGINEERING & TECHNOLOGY   |   "
+                                   "ARNAV JOSHI · ajoshi4_be23@thapar.edu", {"size": 8.5, "color": "CFC6BA", "spc": 120, "space": 3}),
+                                  (f"CODE  {_bare(args.github)}   |   LIVE DEMO  {_bare(args.deployed)}", {"size": 8.5, "color": WARM, "spc": 120})])
 
     # ================================================================ 2 THEME / PROBLEM
     sl = S[1]

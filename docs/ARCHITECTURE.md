@@ -31,7 +31,7 @@ flowchart TD
 | `taptrace/siis.py` | SIIS normaliser, Relevance Gate, candidate units | steps are derived from exactly one source sentence by meaning-preserving rewrites; span ids kept for provenance |
 | `taptrace/facets.py` | Facet frames | symbolic view of a complaint: symptoms, problem contexts, components, screen part, on/off polarity |
 | `taptrace/resolver.py` | Deeplink resolution | leaf-only exact label -> fuzzy with confidence+margin (never for critical) -> abstain to `dummy_positive`/null; step-path memo for 10k-scenario reuse |
-| `taptrace/llm.py` | LLM adapter | any OpenAI-compatible endpoint; JSON mode; temperature 0 + seed; token cost accounting; bounded Retry-After |
+| `taptrace/llm.py` | LLM adapter | any OpenAI-compatible endpoint; JSON mode; temperature 0 + seed; token cost accounting per model; bounded Retry-After; model fallback chain (gpt-oss-120b -> gpt-oss-20b when the primary is rate-limited) |
 | `taptrace/llm_stage.py` | Stage A / Stage B prompts + validation | LLM may only select/group/name grounded candidates; deterministic fallbacks |
 | `taptrace/plan.py` | Composer | verbatim catalog deeplinks + validation probes, rule-based category, disruption-cost ordering, computed score, organisers' schema validation |
 | `taptrace/fields.py` | Field compiler + validators | every PDF 4.1 rule as code; zero-leak scrubber |
@@ -56,4 +56,4 @@ flowchart TD
 ## Latency budget (cold path)
 
 Stage A (enrichment) starts at t=0 in a worker thread. The gate, units and resolution take roughly 20-60 ms on CPU.
-Stage B then runs, and the two LLM calls overlap. Each has a hard timeout under the 7 s budget, and a timeout degrades to the deterministic path, so the service never fails a request because of the LLM.
+Stage B then runs, and the two LLM calls overlap. Each has a hard timeout under the 7 s budget. A rate-limited primary model hands the call to the fallback model; a timeout, or a failure of every model, degrades to the deterministic path, so the service never fails a request because of the LLM. Measured cold-path P95: 3.8 s (metrics.md).

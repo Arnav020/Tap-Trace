@@ -2,7 +2,7 @@
 
 **Samsung PRISM GenAI Hackathon 3.0 · Theme 02 · Team TapTrace (Thapar Institute of Engineering and Technology) · Arnav Joshi**
 
-**Live demo:** https://taptrace.onrender.com/ (API docs at https://taptrace.onrender.com/docs) · **Code:** https://github.com/Arnav020/Tap-Trace
+**Live demo:** https://taptrace.onrender.com/ (API docs at https://taptrace.onrender.com/docs) · **Code:** https://github.com/Arnav020/Tap-Trace · **Demo video:** https://youtu.be/72Otbd-1QvM · **Deck:** [submission/TIET_TapTrace.pdf](submission/TIET_TapTrace.pdf)
 
 > The live demo runs on Render's free plan, which sleeps after 15 minutes idle: the first request can take about a minute to wake it.
 
@@ -17,6 +17,17 @@ It answers repeat or paraphrased complaints from a contrastively calibrated sema
 POST /v1/troubleshoot  {"query": "My Nexa X1 touch is laggy", "siis_response": {...}}
 -> {"query", "query_variations": [8-10], "response": {"contexts": [Goal...]}, "meta": {"latency_ms","cache_hit","model","cost_usd",...}}
 ```
+
+![TapTrace console: the knowledge article with each step's source sentence highlighted, and the simulated phone with one-tap Settings actions and a validation probe](docs/img/demo.png)
+
+### Try it in 60 seconds (live site)
+
+1. Open https://taptrace.onrender.com/ and wait for the **Healthy** pill (the free server may need up to a minute to wake).
+2. Pick scenario **#19**, switch **Bypass cache** on and press **Troubleshoot**: the full cold path (both LLM stages, gate, resolver, output gate) answers in a few seconds. Every highlighted sentence on the left is the source of a step on the phone.
+3. Press **One tap** on the phone: the exact Settings screen opens through its catalog deeplink and the validation probe confirms the change.
+4. Press **Try paraphrase** (served from the semantic cache in milliseconds, $0) and **Try hard negative** (same words, different fix: the cache refuses and says why).
+5. Pick scenario **#7** and press **Troubleshoot**: the article is about TV mirroring, so the engine returns an empty plan with `no_match` instead of inventing steps.
+6. The API itself is documented at https://taptrace.onrender.com/docs.
 
 ## Results (measured by `scripts/evaluate.py`, full report in [metrics.md](metrics.md))
 
@@ -40,6 +51,31 @@ Evaluation hygiene:
 - Gold annotations carry written rationale.
 - Paraphrase sets were written with a different model family than the cache builder.
 - The cache numbers above come from a **test set frozen before the last round of changes**. The dev set used for error analysis is reported separately in metrics.md.
+
+## Architecture
+
+Five stages; the LLM may select and name steps but never write one. Module-by-module detail in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
+```mermaid
+flowchart TD
+    Q["POST /v1/troubleshoot<br/>query + optional SIIS"] --> F["[0] Normalise + facet frame<br/>(symptom, context, component,<br/>screen part, polarity) - no LLM"]
+    F --> C{"[3] Fast path<br/>exact key or contrastive<br/>semantic hit?"}
+    C -- "hit (&lt;300 ms, $0)" --> R["Validated plan from cache"]
+    C -- miss, no SIIS --> NS["contexts: [] + fallback no_siis_context"]
+    C -- miss + SIIS --> P["[1a] SIIS normaliser<br/>strip prefix, sections, span ids,<br/>corrupt / leak flags"]
+    P --> G{"Relevance Gate<br/>doc context and symptom<br/>vs complaint"}
+    G -- none / escalation-only --> NM["contexts: [] + fallback no_match"]
+    G -- full / partial --> U["[1b] Evidence-locked candidate units<br/>(verbatim steps + span ids)"]
+    U --> S2["Stage B LLM: select / group / name<br/>(cannot write steps)"]
+    F -. parallel .-> S1["Stage A LLM: canonical query,<br/>8-10 paraphrases, hard negatives"]
+    U --> M["[2] Screen resolver<br/>exact label -> fuzzy+margin -> abstain<br/>+ polarity variant + validation probe"]
+    S2 --> K["Composer: category rules, disruption-cost<br/>sequencing, field compiler, computed score"]
+    M --> K
+    K --> H["Hard output gate<br/>organisers' schema.py, catalog URI set,<br/>zero-leak regex, rule audit"]
+    H --> W["[3w] Cache write<br/>per-entry calibrated tau"]
+    S1 --> W
+    W --> R2["Response JSON + meta<br/>(latency, cache_hit, model, cost)"]
+```
 
 ## What makes it different
 
@@ -66,6 +102,23 @@ Full audit in [docs/DESIGN_DECISIONS.md](docs/DESIGN_DECISIONS.md); data finding
    - The demo runs action → probe → ✓ on a simulated device.
 6. **Conditional polarity.** Touch sensitivity ON *with* a screen protector and OFF *without* becomes one action (one screen) with two step groups, each with its own deeplink and probe.
 7. **10k-scenario reuse.** Step-path → screen memo and a persistent SQLite cache with stored vectors.
+
+## Robustness beyond the provided data
+
+The 20 provided scenarios are all Display complaints, so we also tested the engine on data it was never tuned on:
+Battery, Camera, Performance and Wi-Fi articles written in the organisers' SIIS format, a prompt-injection article full of
+URLs, and a wrong-document pairing.
+
+- **Held:** every Settings step resolved to the exact catalog screen with the right on/off variant (8/8), every output
+  passed the organisers' schema and field rules, injected URLs and instructions were scrubbed, and identical cold requests
+  returned byte-identical plans.
+- **Fixed:** the audit found plan-assembly defects (a factory reset inside a "back up and reset" sentence was not marked
+  critical, article preambles became actions, a same-screen follow-up became a second action, multi-action sentences were
+  not atomic, an LLM action name could contradict its deeplink). Each is fixed in code and locked by a regression test
+  (`tests/test_engine.py`, 27 tests). Details: [docs/DESIGN_DECISIONS.md](docs/DESIGN_DECISIONS.md) (D11).
+- **Known limitations** (documented, not hidden): a few near-miss complaints still hit a cached plan because the facet
+  guard has no facet for the difference (for example "camera lens cracked" vs "screen cracked"), and a wrong document keeps
+  its generic remedies as a partial fit. See [metrics.md](metrics.md), section 6.
 
 ## Quick start
 
@@ -115,12 +168,13 @@ curl -s -X POST localhost:8000/v1/troubleshoot -H "Content-Type: application/jso
 ### Reproduce everything
 
 ```bash
-pip install -r requirements-dev.txt
-pytest -q                                  # contract, rules, traps, gate, cache guard, API, determinism (no key needed)
+pip install -r requirements-dev.txt         # runtime + pytest + deck/disclosure tools (no torch)
+pytest -q                                  # 27 tests: contract, rules, traps, gate, cache guard, API, determinism, unseen domains, model fallback (no key needed)
 python scripts/build_results.py            # pre-warm cache + results.jsonl (uses the LLM if a key is set)
 python scripts/evaluate.py                 # -> metrics.md (Appendix C template, all values computed)
 python scripts/audit_report.py             # -> docs/DATA_AUDIT.md
-python scripts/export_embedder.py          # (optional) re-export the INT8 ONNX embedder
+python scripts/build_deck.py --template <CollegeName_TeamName_Submission.pptx>   # -> submission/TIET_TapTrace.pptx
+python scripts/export_embedder.py          # (optional, needs requirements-export.txt) re-export the INT8 ONNX embedder
 ```
 
 ## API
@@ -157,13 +211,16 @@ taptrace/        engine: catalog, siis (gate + extraction), facets, resolver, ll
 data/            organisers' files, byte-identical (schema.py, deeplinks.json, siis_responses.json, input.txt, sample_output.json)
 artifacts/       INT8 ONNX embedder, pre-warmed cache.sqlite, per-scenario explain traces
 eval/            gold annotations, held-out paraphrases, hard negatives, 37-case mapping benchmark
-scripts/         build_results, evaluate, audit_report, build_deck, fill_disclosure, export_embedder
-tests/           pytest gates
+scripts/         build_results, evaluate, stress_test, audit_report, build_deck, deck_postprocess.ps1, make_hero, fill_disclosure, export_embedder
+tests/           27 pytest gates (no API key needed)
 demo/            single-page console served at /
-docs/            ARCHITECTURE, DESIGN_DECISIONS, DATA_AUDIT, VIDEO_SCRIPT
-submission/      TIET_TapTrace.pptx, AI disclosure form
+docs/            ARCHITECTURE, DESIGN_DECISIONS, DATA_AUDIT, DEPLOY, VIDEO_SCRIPT
+submission/      TIET_TapTrace.pptx + .pdf (deck), TIET_TapTrace_AI_Disclosure.docx, deck_assets/
 results.jsonl    one Appendix-B line per provided input
 metrics.md       Appendix-C report
+run.py           one-command local launcher (uses ./.venv)
+Dockerfile, docker-compose.yml, render.yaml   container + one-click Render deployment
+requirements.txt (runtime) · requirements-dev.txt (tests, deck) · requirements-export.txt (optional model re-export)
 ```
 
 ## Notes on the provided data

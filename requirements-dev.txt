@@ -1,7 +1,6 @@
+# Tests, evaluation and submission artefacts (deck + AI disclosure). No torch needed.
 -r requirements.txt
 pytest==9.0.2
-# only needed to re-export the embedding model (scripts/export_embedder.py); the INT8 ONNX file is committed
-torch
-transformers==4.50.3
-onnx
-huggingface_hub
+python-pptx==1.0.2
+python-docx==1.2.0
+pillow==11.1.0

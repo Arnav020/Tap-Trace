@@ -1,0 +1,6 @@
+# Only needed to re-export the embedding model (scripts/export_embedder.py); the INT8 ONNX file is already committed.
+-r requirements.txt
+torch
+transformers==4.50.3
+onnx
+huggingface_hub
