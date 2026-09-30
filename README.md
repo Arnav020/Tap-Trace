@@ -2,6 +2,10 @@
 
 **Samsung PRISM GenAI Hackathon 3.0 · Theme 02 · Team TapTrace (Thapar Institute of Engineering and Technology) · Arnav Joshi**
 
+**Live demo:** https://taptrace.onrender.com/ (API docs at https://taptrace.onrender.com/docs) · **Code:** https://github.com/Arnav020/Tap-Trace
+
+> The live demo runs on Render's free plan, which sleeps after 15 minutes idle: the first request can take about a minute to wake it.
+
 TapTrace turns a vague device complaint (plus optional SIIS knowledge text) into a clean, validated, machine-actionable troubleshooting plan:
 - every step comes from the knowledge article,
 - every Settings step is one tap away through the exact masked catalog deeplink, with a validation probe to confirm it,
@@ -27,9 +31,9 @@ POST /v1/troubleshoot  {"query": "My Nexa X1 touch is laggy", "siis_response": {
 | Exact deeplinks, 37-case / 5-domain benchmark | - | **100%** (hybrid 46%, rules 59%, full-LLM 81%) |
 | Cache hit rate on unseen cross-model paraphrases (frozen test, N=40) | >= 80% | **80%** (77.5% correct; dev 87%) |
 | False hits on hard negatives (frozen test, N=15) | (our metric) | **7%** (global threshold: 7%) |
-| Cache-hit latency P95 (exact / paraphrase) | <= 300 ms | **0.4 ms / 3.2 ms** |
-| Cold-path latency P95 | <= 8000 ms | **5059 ms** |
-| Cold-query cost | tracked | **$0.00063** (cache hit $0) |
+| Cache-hit latency P95 (exact / paraphrase) | <= 300 ms | **0.4 ms / 3.5 ms** |
+| Cold-path latency P95 | <= 8000 ms | **3820 ms** |
+| Cold-query cost | tracked | **$0.00031** (cache hit $0) |
 <!-- /RESULTS_TABLE -->
 
 Evaluation hygiene:
@@ -171,6 +175,7 @@ metrics.md       Appendix-C report
 ## Model & cost
 
 - The cold path uses Groq `openai/gpt-oss-120b` (free tier; list price $0.15 / $0.60 per 1M tokens, used for cost accounting).
+- If the primary is rate-limited (for example, the free tier's daily token cap), the same call goes automatically to `openai/gpt-oss-20b` ($0.075 / $0.30 per 1M). The primary is skipped until its Retry-After passes. Only if both fail does the engine use its deterministic path. Each response's `meta.model` names the model that actually answered, and `metrics.md` reports the mix for its run.
 - Any OpenAI-compatible provider works through `.env` (`GEMINI_API_KEY`, `OPENAI_API_KEY`, `OPENROUTER_API_KEY`).
 - Embeddings: `all-MiniLM-L6-v2` in INT8 ONNX (23 MB, CPU).
 - Cache hits cost $0.

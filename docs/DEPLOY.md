@@ -1,5 +1,7 @@
 # Deploying TapTrace
 
+Live deployment: https://taptrace.onrender.com/ (Render, free plan, from https://github.com/Arnav020/Tap-Trace).
+
 TapTrace is one Docker container that serves the REST API and the demo UI together.
 - The embedder (23 MB INT8 ONNX) and the pre-warmed cache are baked into the image.
 - It runs on a free CPU instance and needs about 150 MB of RAM.
@@ -14,7 +16,7 @@ TapTrace is one Docker container that serves the REST API and the demo UI togeth
 4. When asked for environment variables, set `GROQ_API_KEY` to your key.
    - Without a key, set `TAPTRACE_OFFLINE=1` instead. The 20 scenarios are still served from the cache, and new complaints use the deterministic path.
 5. Click **Apply** / **Create**. The first build takes about 3–5 minutes.
-6. You get a URL like `https://taptrace-xxxx.onrender.com`:
+6. You get a URL like `https://taptrace-xxxx.onrender.com` (ours: https://taptrace.onrender.com/):
    - `/` is the demo;
    - `/docs` is the interactive API;
    - `POST /v1/troubleshoot` is the endpoint.

@@ -18,11 +18,41 @@
     "contexts": [
       {
         "goal": "Follow these steps to perform this Blank Screen Troubleshooting",
-        "title": "Blank screen troubleshooting",
+        "title": "Blank screen recovery",
         "actions": [
           {
-            "actionName": "Inspect Device for Damage",
-            "description": "It will identify physical or liquid damage",
+            "actionName": "Charge Device",
+            "description": "It will power the phone",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Connect your phone or tablet to its appropriate charger and let it charge for at least 1 hour."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Attempt to Power On",
+            "description": "It will confirm the device powers on",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Disconnect the phone or tablet from the charger.",
+                  "Try to turn it on by pressing and holding the Power button (or Side button) for 15 to 20 seconds.",
+                  "Turn off your device and reconnect it to the appropriate charger until it is fully charged."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Check for Physical Damage",
+            "description": "It will reveal physical or liquid damage",
             "stepGroups": [
               {
                 "steps": [
@@ -41,24 +71,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Power Cycle Device",
-            "description": "It will confirm the device powers on",
-            "stepGroups": [
-              {
-                "steps": [
-                  "Disconnect the phone or tablet from the charger.",
-                  "Try to turn it on by pressing and holding the Power button (or Side button) for 15 to 20 seconds.",
-                  "Turn off your device and reconnect it to the appropriate charger until it is fully charged."
-                ],
-                "actionableDeeplink": null,
-                "validationDeeplink": null
-              }
-            ],
-            "category": "manual"
-          },
-          {
-            "actionName": "Contact Customer Support",
-            "description": "It will provide further assistance options",
+            "actionName": "Visit an Authorized Service Center",
+            "description": "It will get your device professionally repaired",
             "stepGroups": [
               {
                 "steps": [
@@ -71,8 +85,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Force Restart Device",
-            "description": "It will reboot system to clear glitches",
+            "actionName": "Restart Device",
+            "description": "It will reboot the phone",
             "stepGroups": [
               {
                 "steps": [
@@ -93,18 +107,18 @@
     ]
   },
   "meta": {
-    "latency_ms": 2204,
+    "latency_ms": 1224,
     "cache_hit": false,
-    "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.000792,
+    "model": "groq/openai/gpt-oss-20b",
+    "cost_usd": 0.000131,
     "fallback": null,
     "knowledge_fit": "full",
     "tokens": {
-      "prompt": 1234,
-      "completion": 1011
+      "prompt": 873,
+      "completion": 217
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "llm"
     }
   },
@@ -262,60 +276,35 @@
       "goals": [
         {
           "topic": "Blank Screen",
-          "title": "Blank screen troubleshooting",
+          "title": "Blank screen recovery",
           "config_request": false,
           "units": [
-            "U1",
             "U2",
-            "U4",
-            "U5"
+            "U3",
+            "U4"
           ]
         }
       ],
       "actions": {
-        "U1": {
-          "keep": true,
-          "name": "Inspect Device for Damage",
-          "description": "It will identify physical or liquid damage",
-          "drop_steps": []
-        },
         "U2": {
           "keep": true,
-          "name": "Force Restart Device",
-          "description": "It will reboot the system to clear glitches",
-          "drop_steps": []
-        },
-        "U4": {
-          "keep": true,
-          "name": "Power Cycle Device",
-          "description": "It will reset power to resolve display issues",
-          "drop_steps": []
-        },
-        "U5": {
-          "keep": true,
-          "name": "Contact Customer Support",
-          "description": "It will provide further assistance options",
+          "name": "Restart Device",
+          "description": "It will reboot the phone",
           "drop_steps": []
         },
         "U3": {
-          "keep": false,
-          "name": "Charge Device for One Hour",
-          "description": "It will ensure sufficient battery power",
+          "keep": true,
+          "name": "Charge Device",
+          "description": "It will power the phone",
           "drop_steps": []
         }
       }
     },
     "actions": [
       {
-        "unit": "U1",
+        "unit": "U3",
         "spans": [
-          "S2.1",
-          "S2.2",
-          "S2.3",
-          "S2.5",
-          "S2.8",
-          "S2.9",
-          "S2.10"
+          "S4.1"
         ],
         "kind": "other",
         "resolution": null,
@@ -333,13 +322,28 @@
         "description_source": "deterministic"
       },
       {
+        "unit": "U1",
+        "spans": [
+          "S2.1",
+          "S2.2",
+          "S2.3",
+          "S2.5",
+          "S2.8",
+          "S2.9",
+          "S2.10"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "deterministic"
+      },
+      {
         "unit": "U5",
         "spans": [
           "S5.7"
         ],
         "kind": "other",
         "resolution": null,
-        "description_source": "llm"
+        "description_source": "deterministic"
       },
       {
         "unit": "U2",
@@ -350,7 +354,7 @@
         ],
         "kind": "other",
         "resolution": null,
-        "description_source": "llm-repaired"
+        "description_source": "llm"
       }
     ],
     "output_gate": [],

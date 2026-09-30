@@ -17,12 +17,12 @@
   "response": {
     "contexts": [
       {
-        "goal": "Follow these steps to perform this Screen Damage Troubleshooting",
-        "title": "Screen repair",
+        "goal": "Follow these steps to perform this Cracked Screen Troubleshooting",
+        "title": "Cracked screen repair",
         "actions": [
           {
-            "actionName": "Schedule Screen Repair",
-            "description": "It will arrange repair with genuine parts",
+            "actionName": "Schedule Repair",
+            "description": "It will arrange repair for cracked screen",
             "stepGroups": [
               {
                 "steps": [
@@ -41,18 +41,18 @@
     ]
   },
   "meta": {
-    "latency_ms": 4863,
+    "latency_ms": 665,
     "cache_hit": false,
-    "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.000659,
+    "model": "groq/openai/gpt-oss-20b",
+    "cost_usd": 7e-05,
     "fallback": null,
     "knowledge_fit": "full",
     "tokens": {
-      "prompt": 902,
-      "completion": 873
+      "prompt": 551,
+      "completion": 94
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "llm"
     }
   },
@@ -121,8 +121,8 @@
       "no_viable_solution": false,
       "goals": [
         {
-          "topic": "Screen Damage",
-          "title": "Screen repair",
+          "topic": "Cracked Screen",
+          "title": "Cracked screen repair",
           "config_request": false,
           "units": [
             "U1"
@@ -132,8 +132,8 @@
       "actions": {
         "U1": {
           "keep": true,
-          "name": "Schedule Screen Repair",
-          "description": "It will arrange repair with genuine parts",
+          "name": "Schedule Repair",
+          "description": "It will arrange a repair for your cracked screen",
           "drop_steps": []
         }
       }
@@ -147,7 +147,7 @@
         ],
         "kind": "other",
         "resolution": null,
-        "description_source": "llm"
+        "description_source": "llm-repaired"
       }
     ],
     "output_gate": [],

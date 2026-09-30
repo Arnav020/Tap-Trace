@@ -1,6 +1,6 @@
 # 5-minute demo video script (limit: 5:00)
 
-Record the screen at 1080p. Before recording, start the stack with `docker compose up --build` (or `uvicorn taptrace.api:app`) and open http://localhost:8000.
+Record the screen at 1080p. Before recording, start the stack with `python run.py` (or `docker compose up --build`) and open http://localhost:8000, or use the live deployment https://taptrace.onrender.com/ (open it about a minute before recording so the free instance has time to wake up).
 
 | Time | Screen | Say (short) | Criterion hit |
 | :--- | :--- | :--- | :--- |

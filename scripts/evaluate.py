@@ -11,6 +11,7 @@ Nothing here is hand-typed into metrics.md: every number is computed below.
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import json
 import os
 import platform
@@ -138,7 +139,7 @@ def accuracy(results, gold, cat):
 
 
 # ============================================================================ 4/5. mapping ablation
-def mapping_variants(eng, use_llm):
+def mapping_variants(eng, use_llm, reuse_llm=None):
     cases = J("eval/mapping_benchmark.json")["cases"]
     cat, emb, res = eng.catalog, eng.embedder, eng.resolver
     by_id = {r.id: r for r in cat.rows}
@@ -194,7 +195,9 @@ def mapping_variants(eng, use_llm):
         preds.append(sorted(rows, key=lambda r: r.id)[0].id if rows else "DUMMY")
     out["rules"] = score(preds, (time.perf_counter() - t0) * 1000 / len(parsed))
     # Baseline: full-LLM mapping (the whole phone+TV catalog as compact id|type|label list, one batched call)
-    if use_llm and eng.llm.available:
+    if reuse_llm:  # same benchmark + same baseline code, measured earlier with the primary model: reuse, do not re-measure
+        out["llm"] = dict(reuse_llm, reused=True)
+    elif use_llm and eng.llm.available:
         short = {"onClickURL": "open", "onURL": "on", "offURL": "off", "updateURL": "set"}
         # compact listing (~5K tokens) so one request fits the free tier's 8K tokens/minute
         listing = "\n".join(f"{r.id[3:]}|{short.get(r.original_type, 'other')}|{r.label}" for r in cat.rows if r.uri != DUMMY_URI)
@@ -299,6 +302,7 @@ def main():
     ap.add_argument("--no-llm", action="store_true")
     ap.add_argument("--cold-extra", type=int, default=10)
     ap.add_argument("--pace", type=float, default=22.0)
+    ap.add_argument("--reuse-llm-baseline", default=None, help="eval_raw.json whose full-LLM mapping baseline is reused")
     args = ap.parse_args()
     results = [json.loads(l) for l in (ROOT / "results.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
     gold = J("eval/gold.json")["scenarios"]
@@ -311,19 +315,31 @@ def main():
     s2 = accuracy(results, gold, cat)
     cache = cache_eval(eng, results)
     gate_ab = gate_ablation(results)
-    maps = mapping_variants(eng, not args.no_llm)
+    reuse_llm = None
+    if args.reuse_llm_baseline:
+        reuse_llm = json.loads(Path(args.reuse_llm_baseline).read_text(encoding="utf-8"))["mapping"].get("llm")
+    maps = mapping_variants(eng, not args.no_llm, reuse_llm)
 
-    cold = [r["meta"]["latency_ms"] for r in results if not r["meta"]["cache_hit"]]
-    cold_cost = [r["meta"]["cost_usd"] for r in results if not r["meta"]["cache_hit"]]
-    tokens_ = [r["meta"].get("tokens", {}) for r in results]
+    def _live(r):  # a full cold request (both LLM stages ran live), not a re-plan with stored Stage A output
+        return not r["meta"]["cache_hit"] and not str(r["meta"].get("llm_stages", {}).get("enrichment", "")).startswith("reused:")
+
+    reused = [r for r in results if not _live(r) and not r["meta"]["cache_hit"]]
+    cold = [r["meta"]["latency_ms"] for r in results if _live(r)]
+    cold_cost = [r["meta"]["cost_usd"] for r in results if _live(r)]
+    tokens_ = [r["meta"].get("tokens", {}) for r in results if _live(r)]
+    used_models = [r["meta"]["model"] for r in results if not r["meta"]["cache_hit"]]
+    if reused:  # latency/cost need full cold requests: time enough live ones for N >= 30
+        args.cold_extra = max(args.cold_extra, 30 - len(cold))
     if args.cold_extra and eng.llm.available and not args.no_llm:
         siis = J("data/siis_responses.json")["responses"]
         for k in range(args.cold_extra):
             time.sleep(args.pace)
-            rec, q = siis[k], results[k]["query"]
+            rec, q = siis[k % len(siis)], results[k % len(results)]["query"]
             o = eng.troubleshoot(q, rec["siis_response"], use_cache=False, write_cache=False)
             cold.append(o["meta"]["latency_ms"])
             cold_cost.append(o["meta"]["cost_usd"])
+            used_models.append(o["meta"]["model"])
+            tokens_.append(o["meta"].get("tokens", {}))
     ex50, ex95 = p50_p95(cache["adaptive"]["lat_exact"])
     pa50, pa95 = p50_p95(cache["adaptive"]["lat_para"])
     co50, co95 = p50_p95(cold)
@@ -336,7 +352,17 @@ def main():
     L = []
     w = L.append
     w("# System Performance Metrics & Evaluation Report")
-    w(f"**Model(s):** `{eng.llm.label}` (cold path: Stage A enrichment + Stage B structuring; everything else is deterministic code)  ")
+    chain = " -> ".join(f"`{eng.llm.provider}/{m}`" for m, _, _ in getattr(eng.llm, "chain", [])) or f"`{eng.llm.label}`"
+    mix = ", ".join(f"{m}: {n}" for m, n in Counter(used_models).most_common())
+    w(f"**Model(s):** primary {chain.split(' -> ')[0]}"
+      + (f", automatic fallback {' -> '.join(chain.split(' -> ')[1:])} when the primary is rate-limited" if ' -> ' in chain else "")
+      + " (cold path: Stage A enrichment + Stage B structuring; everything else is deterministic code)  ")
+    w(f"**Model that answered each cold request in this run:** {mix}  ")
+    if reused:
+        src = sorted({r["meta"]["llm_stages"]["enrichment"].split(":", 1)[1] for r in reused})
+        w(f"**Note:** results.jsonl was re-planned after a plan-assembly fix; its Stage A output (canonical query, paraphrases, hard "
+          f"negatives - a function of the query text only) was reused from the earlier run by `{', '.join(src)}`, so its "
+          f"{len(reused)} rows ran Stage B only. Cold-path latency and cost below come only from full live cold requests.  ")
     w(f"**Embeddings:** `sentence-transformers/all-MiniLM-L6-v2`, exported to INT8 ONNX (`artifacts/model`, CPU-only, no torch at runtime)  ")
     w(f"**Environment:** {os.cpu_count()} logical CPUs / {platform.system()} {platform.release()} / Python {platform.python_version()}; "
       f"engine cold start {eng.startup_ms} ms  ")
@@ -394,7 +420,8 @@ def main():
     w(f"| Cold query average inference cost | Tracked | ${avg_cold_cost:.6f} (~{ptok:.0f} prompt + {ctok:.0f} completion tokens) |")
     w("| Cache hit inference cost | $0.00 | $0.00 (no LLM call on the fast path) |")
     w(f"| Semantic cache hit rate (on unseen paraphrases) | >= 80% | **TEST (frozen): {ca['test']['hit_rate']:.1f}% hits, {ca['test']['correct_hit_rate']:.1f}% correct** (N={ca['test']['n_held']}); DEV: {ca['dev']['hit_rate']:.1f}% / {ca['dev']['correct_hit_rate']:.1f}% (N={ca['dev']['n_held']}) |")
-    w("| Cost derivation method | - | (prompt tokens x $0.15/1M + completion tokens x $0.60/1M), Groq list price for openai/gpt-oss-120b |")
+    w("| Cost derivation method | - | prompt tokens x input rate + completion tokens x output rate, at the Groq list price of the model that answered: "
+      "openai/gpt-oss-120b $0.15 / $0.60 per 1M, openai/gpt-oss-20b $0.075 / $0.30 per 1M |")
     w(f"| **False-hit rate on hard negatives** (our extra metric) | 0% | TEST {ca['test']['false_hit_rate']:.1f}% (N={ca['test']['n_neg']}); DEV {ca['dev']['false_hit_rate']:.1f}% (N={ca['dev']['n_neg']}) |")
     w("\n---\n")
     w("## 5. Architectural Ablation Analysis\n")
@@ -403,7 +430,8 @@ def main():
     w("| :--- | :--- | :--- | :--- | :--- |")
     if ml:
         w(f"| Baseline: Full LLM Deeplink Mapping | {ml['acc']:.1f}% exact (polarity {ml['polarity']:.0f}%, traps {ml['trap']:.0f}%) | "
-          f"{ml['lat_ms']:.0f} ms/case (batched) | ${ml['cost']:.6f} | Needs the whole catalog in the prompt (~{ml['tokens']} tokens); misses: {', '.join(ml['fails']) or 'none'} |")
+          f"{ml['lat_ms']:.0f} ms/case (batched) | ${ml['cost']:.6f} | Needs the whole catalog in the prompt (~{ml['tokens']} tokens); misses: {', '.join(ml['fails']) or 'none'}"
+          + (" (measured with openai/gpt-oss-120b in the earlier 30 Sep run; benchmark and baseline code unchanged)" if ml.get('reused') else "") + " |")
     else:
         w(f"| Baseline: Full LLM Deeplink Mapping | not measured ({maps.get('llm_error', 'no LLM key')}) | - | - | - |")
     w(f"| Variant A: Hybrid BM25 + Dense Embedding Retrieval | {mh['acc']:.1f}% (polarity {mh['polarity']:.0f}%, traps {mh['trap']:.0f}%) | "
@@ -437,8 +465,16 @@ def main():
       "stepGroups on one action (one screen) with their own deeplink + validation probe, because the complaint rarely states the condition.")
     w("* **Relevance gate lexicons** (symptom / context facets) cover Display, Battery, Camera, Performance, Connectivity and "
       "Audio vocabulary; a truly novel domain term falls back to dense similarity only.")
-    w("* **Free-tier LLM rate limits** (8K tokens/min) cap cold-path throughput at roughly 3 new scenarios per minute; the "
-      "engine degrades to the deterministic path (never fails) and the fast path is unaffected. A paid tier removes this.")
+    w("* **Free-tier LLM rate limits** (8K tokens/min, 200K tokens/day per model) cap cold-path throughput at roughly 3 new "
+      "scenarios per minute. A rate-limited primary hands the call to the fallback model (gpt-oss-20b); only if both fail does the "
+      "engine use its deterministic path (never fails). The fast path is unaffected. A paid tier removes this.")
+    w("* **Facet-guard blind spots found by an unseen-query audit** (30 Sep): a few near-misses that share the scenario's words "
+      "still hit its cached plan, because the guard has no facet for the difference: \"camera lens is cracked but the screen is "
+      "fine\" -> cracked-screen plan, \"screen far too bright during Data Transfer\" -> blank-screen plan, \"Fold hinge squeaks\" "
+      "/ \"cover screen cracked, inner fine\" -> cracked-fold plan. Fix path: lens / hinge / brightness-excess facets.")
+    w("* **Wrong-document partial fits**: when the article matches neither the complaint's device area nor its symptom, the "
+      "gate still keeps the article's generic remedies (restart, safe mode, reset) as a partial fit, exactly as for provided "
+      "line 18; `no_match` is returned only when nothing generic remains.")
     w("* **Settings hierarchy variations**: when a SIIS path names a screen absent from the catalog (Safe mode, Software update, "
       "Clear cache, Factory data reset) we emit `voiceassist://dummy_positive` with a generated 5-7 word description instead of "
       "the nearest-looking wrong screen (e.g. DL-0022 auto factory reset).")

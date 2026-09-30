@@ -21,8 +21,8 @@
         "title": "Black screen recovery",
         "actions": [
           {
-            "actionName": "Use USB Mouse and Keyboard",
-            "description": "It will let you control phone",
+            "actionName": "Use USB Mouse",
+            "description": "It will let you navigate the device",
             "stepGroups": [
               {
                 "steps": [
@@ -37,8 +37,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Backup Data via Monitor",
-            "description": "It will enable data backup via monitor",
+            "actionName": "Backup to Monitor",
+            "description": "It will keep your personal data safe",
             "stepGroups": [
               {
                 "steps": [
@@ -51,8 +51,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Check Device and Cable Damage",
-            "description": "It will verify hardware for display",
+            "actionName": "Check Charger and Cable",
+            "description": "It will rule out damaged charging parts",
             "stepGroups": [
               {
                 "steps": [
@@ -65,12 +65,13 @@
             "category": "manual"
           },
           {
-            "actionName": "Force Restart and Charge",
-            "description": "It will restart device and recharge battery",
+            "actionName": "Force Restart the Device",
+            "description": "It will reboot an unresponsive device",
             "stepGroups": [
               {
                 "steps": [
-                  "Try forcing a restart by pressing and holding the Power and Volume down buttons for 20 seconds, and then charging the device for at least one hour."
+                  "Force a restart by pressing and holding the Power and Volume down buttons for 20 seconds.",
+                  "Charge the device for at least one hour."
                 ],
                 "actionableDeeplink": null,
                 "validationDeeplink": null
@@ -84,18 +85,18 @@
     ]
   },
   "meta": {
-    "latency_ms": 3699,
+    "latency_ms": 1056,
     "cache_hit": false,
-    "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.000732,
+    "model": "groq/openai/gpt-oss-20b",
+    "cost_usd": 0.00011,
     "fallback": null,
     "knowledge_fit": "full",
     "tokens": {
-      "prompt": 1061,
-      "completion": 954
+      "prompt": 691,
+      "completion": 195
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "llm"
     }
   },
@@ -192,7 +193,8 @@
           "S0.5"
         ],
         "steps": [
-          "Try forcing a restart by pressing and holding the Power and Volume down buttons for 20 seconds, and then charging the device for at least one hour."
+          "Force a restart by pressing and holding the Power and Volume down buttons for 20 seconds.",
+          "Charge the device for at least one hour."
         ],
         "evidence": {
           "S0.5": "You can also try forcing a restart by pressing and holding the Power and Volume down buttons for 20 seconds, and then charging the device for at least one hour."
@@ -226,26 +228,14 @@
       "actions": {
         "U1": {
           "keep": true,
-          "name": "Use USB Mouse and Keyboard",
-          "description": "It will let you control phone",
+          "name": "Use USB Mouse",
+          "description": "It will let you navigate the device",
           "drop_steps": []
         },
         "U2": {
           "keep": true,
-          "name": "Backup Data via Monitor",
-          "description": "It will enable data backup via monitor",
-          "drop_steps": []
-        },
-        "U3": {
-          "keep": true,
-          "name": "Check Device and Cable Damage",
-          "description": "It will verify hardware for display",
-          "drop_steps": []
-        },
-        "U4": {
-          "keep": true,
-          "name": "Force Restart and Charge",
-          "description": "It will restart device and recharge battery",
+          "name": "Backup to Monitor",
+          "description": "It will allow you to back up data",
           "drop_steps": []
         }
       }
@@ -268,7 +258,7 @@
         ],
         "kind": "other",
         "resolution": null,
-        "description_source": "llm"
+        "description_source": "deterministic"
       },
       {
         "unit": "U3",
@@ -277,7 +267,7 @@
         ],
         "kind": "other",
         "resolution": null,
-        "description_source": "llm"
+        "description_source": "deterministic"
       },
       {
         "unit": "U4",
@@ -286,7 +276,7 @@
         ],
         "kind": "other",
         "resolution": null,
-        "description_source": "llm"
+        "description_source": "deterministic"
       }
     ],
     "output_gate": [],

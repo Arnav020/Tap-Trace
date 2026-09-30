@@ -17,11 +17,25 @@
   "response": {
     "contexts": [
       {
-        "goal": "Follow these steps to perform this Display Issue Troubleshooting",
+        "goal": "Follow these steps to perform this Half Black Screen Troubleshooting",
         "title": "Half black screen",
         "actions": [
           {
-            "actionName": "Use External Input Devices",
+            "actionName": "Check for Damage",
+            "description": "It will help identify physical issues",
+            "stepGroups": [
+              {
+                "steps": [
+                  "If your device displays only a blank or black screen, check the device, charger, and USB cable for damage."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Access Data With a Mouse",
             "description": "It will let you reach your data",
             "stepGroups": [
               {
@@ -37,8 +51,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Back Up Data via Monitor",
-            "description": "It will protect your data during repair",
+            "actionName": "Back Up Phone Data",
+            "description": "It will keep your personal data safe",
             "stepGroups": [
               {
                 "steps": [
@@ -51,26 +65,13 @@
             "category": "manual"
           },
           {
-            "actionName": "Inspect Device for Damage",
-            "description": "It will identify hardware causing black screen",
+            "actionName": "Force Restart",
+            "description": "It will reboot the device",
             "stepGroups": [
               {
                 "steps": [
-                  "If your device displays only a blank or black screen, check the device, charger, and USB cable for damage."
-                ],
-                "actionableDeeplink": null,
-                "validationDeeplink": null
-              }
-            ],
-            "category": "manual"
-          },
-          {
-            "actionName": "Force Restart Device",
-            "description": "It will attempt to recover screen functionality",
-            "stepGroups": [
-              {
-                "steps": [
-                  "Try forcing a restart by pressing and holding the Power and Volume down buttons for 20 seconds, and then charging the device for at least one hour."
+                  "Force a restart by pressing and holding the Power and Volume down buttons for 20 seconds.",
+                  "Charge the device for at least one hour."
                 ],
                 "actionableDeeplink": null,
                 "validationDeeplink": null
@@ -84,18 +85,18 @@
     ]
   },
   "meta": {
-    "latency_ms": 1887,
+    "latency_ms": 1287,
     "cache_hit": false,
-    "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.000679,
+    "model": "groq/openai/gpt-oss-20b",
+    "cost_usd": 0.000102,
     "fallback": null,
     "knowledge_fit": "full",
     "tokens": {
-      "prompt": 1054,
-      "completion": 869
+      "prompt": 695,
+      "completion": 166
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "llm"
     }
   },
@@ -190,7 +191,8 @@
           "S0.5"
         ],
         "steps": [
-          "Try forcing a restart by pressing and holding the Power and Volume down buttons for 20 seconds, and then charging the device for at least one hour."
+          "Force a restart by pressing and holding the Power and Volume down buttons for 20 seconds.",
+          "Charge the device for at least one hour."
         ],
         "evidence": {
           "S0.5": "You can also try forcing a restart by pressing and holding the Power and Volume down buttons for 20 seconds, and then charging the device for at least one hour."
@@ -210,45 +212,40 @@
       "no_viable_solution": false,
       "goals": [
         {
-          "topic": "Display Issue",
-          "title": "Half black screen",
+          "topic": "Half Black Screen",
+          "title": null,
           "config_request": false,
           "units": [
-            "U1",
-            "U2",
             "U3",
             "U4"
           ]
         }
       ],
       "actions": {
-        "U1": {
-          "keep": true,
-          "name": "Use External Input Devices",
-          "description": "It will let you control device without touch",
-          "drop_steps": []
-        },
-        "U2": {
-          "keep": true,
-          "name": "Back Up Data via Monitor",
-          "description": "It will protect your data during repair",
-          "drop_steps": []
-        },
         "U3": {
           "keep": true,
-          "name": "Inspect Device for Damage",
-          "description": "It will identify hardware causing black screen",
+          "name": "Check for Damage",
+          "description": "It will help identify physical issues",
           "drop_steps": []
         },
         "U4": {
           "keep": true,
-          "name": "Force Restart Device",
-          "description": "It will attempt to recover screen functionality",
+          "name": "Force Restart",
+          "description": "It will reboot the device",
           "drop_steps": []
         }
       }
     },
     "actions": [
+      {
+        "unit": "U3",
+        "spans": [
+          "S0.4"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
       {
         "unit": "U1",
         "spans": [
@@ -266,16 +263,7 @@
         ],
         "kind": "other",
         "resolution": null,
-        "description_source": "llm"
-      },
-      {
-        "unit": "U3",
-        "spans": [
-          "S0.4"
-        ],
-        "kind": "other",
-        "resolution": null,
-        "description_source": "llm"
+        "description_source": "deterministic"
       },
       {
         "unit": "U4",

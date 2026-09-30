@@ -17,12 +17,12 @@
   "response": {
     "contexts": [
       {
-        "goal": "Follow these steps to perform this Screen Damage Troubleshooting",
-        "title": "Screen repair",
+        "goal": "Follow these steps to perform this Cracked Screen Troubleshooting",
+        "title": "Cracked screen repair",
         "actions": [
           {
-            "actionName": "Schedule Repair Appointment",
-            "description": "It will arrange professional screen replacement",
+            "actionName": "Schedule Repair",
+            "description": "It will fix your cracked screen",
             "stepGroups": [
               {
                 "steps": [
@@ -41,21 +41,20 @@
     ]
   },
   "meta": {
-    "latency_ms": 3453,
+    "latency_ms": 750,
     "cache_hit": false,
-    "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.000562,
+    "model": "groq/openai/gpt-oss-20b",
+    "cost_usd": 7.7e-05,
     "fallback": null,
     "knowledge_fit": "full",
     "tokens": {
-      "prompt": 964,
-      "completion": 696
+      "prompt": 592,
+      "completion": 110
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "llm"
-    },
-    "retried": true
+    }
   },
   "trace": {
     "frame": {
@@ -124,8 +123,8 @@
       "no_viable_solution": false,
       "goals": [
         {
-          "topic": "Screen Damage",
-          "title": "Screen repair",
+          "topic": "Cracked Screen",
+          "title": "Cracked screen repair",
           "config_request": false,
           "units": [
             "U1"
@@ -135,8 +134,8 @@
       "actions": {
         "U1": {
           "keep": true,
-          "name": "Schedule Repair Appointment",
-          "description": "It will arrange professional screen replacement",
+          "name": "Schedule Repair",
+          "description": "It will fix your cracked screen",
           "drop_steps": []
         }
       }

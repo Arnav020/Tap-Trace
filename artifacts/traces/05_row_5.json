@@ -17,12 +17,12 @@
   "response": {
     "contexts": [
       {
-        "goal": "Follow these steps to perform this Blank Screen Troubleshooting",
-        "title": "Blank screen troubleshooting",
+        "goal": "Follow these steps to perform this Data Transfer Troubleshooting",
+        "title": "Data transfer",
         "actions": [
           {
-            "actionName": "Check Wireless Proximity",
-            "description": "It will ensure devices are close enough",
+            "actionName": "Check Transfer Method Proximity",
+            "description": "It will ensure devices are correctly positioned",
             "stepGroups": [
               {
                 "steps": [
@@ -37,7 +37,7 @@
           },
           {
             "actionName": "Open Data Transfer App",
-            "description": "It will launch the transfer application correctly",
+            "description": "It will move your data between devices",
             "stepGroups": [
               {
                 "steps": [
@@ -55,8 +55,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Initiate Wireless Transfer",
-            "description": "It will start QR code scanning process",
+            "actionName": "Initiate Wireless QR Scan",
+            "description": "It will start scanning QR code correctly",
             "stepGroups": [
               {
                 "steps": [
@@ -77,21 +77,20 @@
     ]
   },
   "meta": {
-    "latency_ms": 1936,
+    "latency_ms": 871,
     "cache_hit": false,
     "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.000651,
+    "cost_usd": 0.000252,
     "fallback": null,
     "knowledge_fit": "full",
     "tokens": {
-      "prompt": 1120,
-      "completion": 805
+      "prompt": 753,
+      "completion": 231
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "llm"
-    },
-    "retried": true
+    }
   },
   "trace": {
     "frame": {
@@ -205,8 +204,8 @@
       "no_viable_solution": false,
       "goals": [
         {
-          "topic": "Blank Screen",
-          "title": "Blank screen troubleshooting",
+          "topic": "Data Transfer",
+          "title": null,
           "config_request": false,
           "units": [
             "U1",
@@ -218,20 +217,20 @@
       "actions": {
         "U1": {
           "keep": true,
-          "name": "Check Wireless Proximity",
-          "description": "It will ensure devices are close enough",
+          "name": "Check Transfer Method Proximity",
+          "description": "It will ensure devices are correctly positioned",
           "drop_steps": []
         },
         "U2": {
           "keep": true,
           "name": "Open Data Transfer App",
-          "description": "It will launch the transfer application correctly",
+          "description": "It will guide you to launch the transfer app",
           "drop_steps": []
         },
         "U3": {
           "keep": true,
-          "name": "Initiate Wireless Transfer",
-          "description": "It will start the QR code scanning process",
+          "name": "Initiate Wireless QR Scan",
+          "description": "It will start scanning the QR code correctly",
           "drop_steps": []
         }
       }
@@ -258,7 +257,7 @@
         ],
         "kind": "other",
         "resolution": null,
-        "description_source": "llm"
+        "description_source": "deterministic"
       },
       {
         "unit": "U3",

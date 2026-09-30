@@ -17,12 +17,12 @@
   "response": {
     "contexts": [
       {
-        "goal": "Follow these steps to perform this Black Screen Troubleshooting",
-        "title": "Black screen recovery",
+        "goal": "Follow these steps to perform this Blank Screen Troubleshooting",
+        "title": "Blank screen recovery",
         "actions": [
           {
-            "actionName": "Inspect Device for Damage",
-            "description": "It will identify physical or liquid issues",
+            "actionName": "Inspect Physical Damage",
+            "description": "It will help identify any visible damage",
             "stepGroups": [
               {
                 "steps": [
@@ -41,8 +41,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Charge the Device",
-            "description": "It will ensure sufficient battery power",
+            "actionName": "Charge Phone",
+            "description": "It will provide power to the device",
             "stepGroups": [
               {
                 "steps": [
@@ -55,8 +55,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Hard Power Press",
-            "description": "It will try turning on the device",
+            "actionName": "Power Button Test",
+            "description": "It will try to start the phone",
             "stepGroups": [
               {
                 "steps": [
@@ -71,8 +71,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Contact Customer Support",
-            "description": "It will provide further assistance options",
+            "actionName": "Contact Support",
+            "description": "It will get professional help",
             "stepGroups": [
               {
                 "steps": [
@@ -85,8 +85,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Force a Restart",
-            "description": "It will attempt to reboot the device",
+            "actionName": "Force Restart Device",
+            "description": "It will attempt to reboot the phone",
             "stepGroups": [
               {
                 "steps": [
@@ -107,18 +107,18 @@
     ]
   },
   "meta": {
-    "latency_ms": 4563,
+    "latency_ms": 724,
     "cache_hit": false,
-    "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.000753,
+    "model": "groq/openai/gpt-oss-20b",
+    "cost_usd": 0.000137,
     "fallback": null,
     "knowledge_fit": "full",
     "tokens": {
-      "prompt": 1222,
-      "completion": 949
+      "prompt": 864,
+      "completion": 239
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "llm"
     }
   },
@@ -275,8 +275,8 @@
       "no_viable_solution": false,
       "goals": [
         {
-          "topic": "Black Screen",
-          "title": "Black screen recovery",
+          "topic": "Blank Screen",
+          "title": "Blank screen recovery",
           "config_request": false,
           "units": [
             "U1",
@@ -290,32 +290,32 @@
       "actions": {
         "U1": {
           "keep": true,
-          "name": "Inspect Device for Damage",
-          "description": "It will identify physical or liquid issues",
+          "name": "Inspect Physical Damage",
+          "description": "It will help identify any visible damage",
           "drop_steps": []
         },
         "U2": {
           "keep": true,
-          "name": "Force a Restart",
-          "description": "It will attempt to reboot the device",
+          "name": "Force Restart Device",
+          "description": "It will attempt to reboot the phone",
           "drop_steps": []
         },
         "U3": {
           "keep": true,
-          "name": "Charge the Device",
-          "description": "It will ensure sufficient battery power",
+          "name": "Charge Phone",
+          "description": "It will provide power to the device",
           "drop_steps": []
         },
         "U4": {
           "keep": true,
-          "name": "Hard Power Press",
-          "description": "It will try turning on the device",
+          "name": "Power Button Test",
+          "description": "It will try to start the phone",
           "drop_steps": []
         },
         "U5": {
           "keep": true,
-          "name": "Contact Customer Support",
-          "description": "It will provide further assistance options",
+          "name": "Contact Support",
+          "description": "It will get professional help",
           "drop_steps": []
         }
       }

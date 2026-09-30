@@ -18,18 +18,18 @@
     "contexts": []
   },
   "meta": {
-    "latency_ms": 1584,
+    "latency_ms": 46,
     "cache_hit": false,
-    "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.000382,
+    "model": "deterministic (no LLM)",
+    "cost_usd": 0.0,
     "fallback": "no_match",
     "knowledge_fit": "none",
     "tokens": {
-      "prompt": 364,
-      "completion": 545
+      "prompt": 0,
+      "completion": 0
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "deterministic"
     }
   },

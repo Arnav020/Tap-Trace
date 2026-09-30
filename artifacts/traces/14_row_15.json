@@ -17,12 +17,12 @@
   "response": {
     "contexts": [
       {
-        "goal": "Follow these steps to perform this Black Screen Troubleshooting",
-        "title": "Black screen recovery",
+        "goal": "Follow these steps to perform this Blue Screen Troubleshooting",
+        "title": "Blue screen recovery",
         "actions": [
           {
-            "actionName": "Inspect Device for Damage",
-            "description": "It will identify physical or liquid issues",
+            "actionName": "Inspect Physical Damage",
+            "description": "It will help identify any visible damage",
             "stepGroups": [
               {
                 "steps": [
@@ -41,8 +41,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Charge Device for One Hour",
-            "description": "It will ensure sufficient battery power",
+            "actionName": "Charge Phone",
+            "description": "It will provide power to the device",
             "stepGroups": [
               {
                 "steps": [
@@ -55,8 +55,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Disconnect Charger and Power On",
-            "description": "It will try a fresh power cycle",
+            "actionName": "Power Button Reset",
+            "description": "It will try to start the phone",
             "stepGroups": [
               {
                 "steps": [
@@ -71,8 +71,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Contact Customer Support",
-            "description": "It will provide further assistance options",
+            "actionName": "Contact Support",
+            "description": "It will get professional help",
             "stepGroups": [
               {
                 "steps": [
@@ -107,18 +107,18 @@
     ]
   },
   "meta": {
-    "latency_ms": 3857,
+    "latency_ms": 909,
     "cache_hit": false,
-    "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.000763,
+    "model": "groq/openai/gpt-oss-20b",
+    "cost_usd": 0.000142,
     "fallback": null,
     "knowledge_fit": "full",
     "tokens": {
-      "prompt": 1249,
-      "completion": 960
+      "prompt": 883,
+      "completion": 253
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "llm"
     }
   },
@@ -276,8 +276,8 @@
       "no_viable_solution": false,
       "goals": [
         {
-          "topic": "Black Screen",
-          "title": "Black screen recovery",
+          "topic": "Blue Screen",
+          "title": "Blue screen recovery",
           "config_request": false,
           "units": [
             "U1",
@@ -291,8 +291,8 @@
       "actions": {
         "U1": {
           "keep": true,
-          "name": "Inspect Device for Damage",
-          "description": "It will identify physical or liquid issues",
+          "name": "Inspect Physical Damage",
+          "description": "It will help identify any visible damage",
           "drop_steps": []
         },
         "U2": {
@@ -303,20 +303,20 @@
         },
         "U3": {
           "keep": true,
-          "name": "Charge Device for One Hour",
-          "description": "It will ensure sufficient battery power",
+          "name": "Charge Phone",
+          "description": "It will provide power to the device",
           "drop_steps": []
         },
         "U4": {
           "keep": true,
-          "name": "Disconnect Charger and Power On",
-          "description": "It will try a fresh power cycle",
+          "name": "Power Button Reset",
+          "description": "It will try to start the phone",
           "drop_steps": []
         },
         "U5": {
           "keep": true,
-          "name": "Contact Customer Support",
-          "description": "It will provide further assistance options",
+          "name": "Contact Support",
+          "description": "It will get professional help",
           "drop_steps": []
         }
       }

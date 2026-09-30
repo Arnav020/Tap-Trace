@@ -22,7 +22,7 @@
         "actions": [
           {
             "actionName": "Use USB Mouse",
-            "description": "It will let you navigate without touch",
+            "description": "It will let you navigate the device",
             "stepGroups": [
               {
                 "steps": [
@@ -37,22 +37,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Connect to Monitor",
-            "description": "It will enable data backup externally",
-            "stepGroups": [
-              {
-                "steps": [
-                  "Back up your device's data by connecting it to a monitor."
-                ],
-                "actionableDeeplink": null,
-                "validationDeeplink": null
-              }
-            ],
-            "category": "manual"
-          },
-          {
-            "actionName": "Inspect Hardware Damage",
-            "description": "It will identify broken components quickly",
+            "actionName": "Check for Damage",
+            "description": "It will help identify hardware issues",
             "stepGroups": [
               {
                 "steps": [
@@ -65,12 +51,27 @@
             "category": "manual"
           },
           {
-            "actionName": "Force Restart Device",
-            "description": "It will reboot the system safely",
+            "actionName": "Back Up Phone Data",
+            "description": "It will keep your personal data safe",
             "stepGroups": [
               {
                 "steps": [
-                  "Try forcing a restart by pressing and holding the Power and Volume down buttons for 20 seconds, and then charging the device for at least one hour."
+                  "Back up your device's data by connecting it to a monitor."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Force Restart",
+            "description": "It will reboot the device",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Force a restart by pressing and holding the Power and Volume down buttons for 20 seconds.",
+                  "Charge the device for at least one hour."
                 ],
                 "actionableDeeplink": null,
                 "validationDeeplink": null
@@ -84,18 +85,18 @@
     ]
   },
   "meta": {
-    "latency_ms": 3715,
+    "latency_ms": 1076,
     "cache_hit": false,
-    "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.000668,
+    "model": "groq/openai/gpt-oss-20b",
+    "cost_usd": 0.000122,
     "fallback": null,
     "knowledge_fit": "full",
     "tokens": {
-      "prompt": 1063,
-      "completion": 847
+      "prompt": 699,
+      "completion": 232
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "llm"
     }
   },
@@ -192,7 +193,8 @@
           "S0.5"
         ],
         "steps": [
-          "Try forcing a restart by pressing and holding the Power and Volume down buttons for 20 seconds, and then charging the device for at least one hour."
+          "Force a restart by pressing and holding the Power and Volume down buttons for 20 seconds.",
+          "Charge the device for at least one hour."
         ],
         "evidence": {
           "S0.5": "You can also try forcing a restart by pressing and holding the Power and Volume down buttons for 20 seconds, and then charging the device for at least one hour."
@@ -217,7 +219,6 @@
           "config_request": false,
           "units": [
             "U1",
-            "U2",
             "U3",
             "U4"
           ]
@@ -227,25 +228,19 @@
         "U1": {
           "keep": true,
           "name": "Use USB Mouse",
-          "description": "It will let you navigate without touch",
-          "drop_steps": []
-        },
-        "U2": {
-          "keep": true,
-          "name": "Connect to Monitor",
-          "description": "It will enable data backup externally",
+          "description": "It will let you navigate the device",
           "drop_steps": []
         },
         "U3": {
           "keep": true,
-          "name": "Inspect Hardware Damage",
-          "description": "It will identify broken components quickly",
+          "name": "Check for Damage",
+          "description": "It will help identify hardware issues",
           "drop_steps": []
         },
         "U4": {
           "keep": true,
-          "name": "Force Restart Device",
-          "description": "It will reboot the system safely",
+          "name": "Force Restart",
+          "description": "It will reboot the device",
           "drop_steps": []
         }
       }
@@ -262,15 +257,6 @@
         "description_source": "llm"
       },
       {
-        "unit": "U2",
-        "spans": [
-          "S0.3"
-        ],
-        "kind": "other",
-        "resolution": null,
-        "description_source": "llm"
-      },
-      {
         "unit": "U3",
         "spans": [
           "S0.4"
@@ -278,6 +264,15 @@
         "kind": "other",
         "resolution": null,
         "description_source": "llm"
+      },
+      {
+        "unit": "U2",
+        "spans": [
+          "S0.3"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "deterministic"
       },
       {
         "unit": "U4",

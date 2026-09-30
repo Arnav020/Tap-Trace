@@ -17,12 +17,12 @@
   "response": {
     "contexts": [
       {
-        "goal": "Follow these steps to perform this Display Distortion Troubleshooting",
-        "title": "Display distortion check",
+        "goal": "Follow these steps to perform this Screen Distortion Troubleshooting",
+        "title": "Screen distortion recovery",
         "actions": [
           {
-            "actionName": "Back Up Data",
-            "description": "It will protect data before changes",
+            "actionName": "Back Up Phone Data",
+            "description": "It will keep your personal data safe",
             "stepGroups": [
               {
                 "steps": [
@@ -46,8 +46,8 @@
             "category": "auto"
           },
           {
-            "actionName": "Check Screen Damage",
-            "description": "It will identify visible screen defects",
+            "actionName": "Check for Damage",
+            "description": "It will help identify screen cracks",
             "stepGroups": [
               {
                 "steps": [
@@ -60,8 +60,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Contact Support for Damage",
-            "description": "It will arrange service for damaged screen",
+            "actionName": "Contact Support",
+            "description": "It will arrange for service",
             "stepGroups": [
               {
                 "steps": [
@@ -76,7 +76,7 @@
           },
           {
             "actionName": "Restart Device",
-            "description": "It will refresh system to clear glitches",
+            "description": "It will refresh the device software",
             "stepGroups": [
               {
                 "steps": [
@@ -93,8 +93,8 @@
             "category": "critical"
           },
           {
-            "actionName": "Factory Data Reset",
-            "description": "It will erase all data and settings",
+            "actionName": "Perform a Factory Data Reset",
+            "description": "It will restore original factory settings",
             "stepGroups": [
               {
                 "steps": [
@@ -123,18 +123,18 @@
     ]
   },
   "meta": {
-    "latency_ms": 1749,
+    "latency_ms": 1295,
     "cache_hit": false,
-    "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.000663,
+    "model": "groq/openai/gpt-oss-20b",
+    "cost_usd": 0.000149,
     "fallback": null,
     "knowledge_fit": "partial",
     "tokens": {
-      "prompt": 1132,
-      "completion": 822
+      "prompt": 776,
+      "completion": 302
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "llm"
     }
   },
@@ -296,45 +296,28 @@
       "no_viable_solution": false,
       "goals": [
         {
-          "topic": "Display Distortion",
-          "title": "Display distortion check",
+          "topic": "Screen Distortion",
+          "title": "Screen distortion recovery",
           "config_request": false,
           "units": [
             "U1",
             "U2",
-            "U3"
+            "U3",
+            "U5"
           ]
         }
       ],
       "actions": {
         "U1": {
           "keep": true,
-          "name": "Check Screen Damage",
-          "description": "It will identify visible screen defects",
+          "name": "Check for Damage",
+          "description": "It will help identify screen cracks",
           "drop_steps": []
         },
         "U2": {
           "keep": true,
-          "name": "Contact Support for Damage",
-          "description": "It will arrange service for damaged screen",
-          "drop_steps": []
-        },
-        "U3": {
-          "keep": true,
-          "name": "Restart Device",
-          "description": "It will refresh system to clear glitches",
-          "drop_steps": []
-        },
-        "U4": {
-          "keep": false,
-          "name": "Back Up Data",
-          "description": "It will protect data before changes",
-          "drop_steps": []
-        },
-        "U5": {
-          "keep": false,
-          "name": "Factory Data Reset",
-          "description": "It will erase all data and settings",
+          "name": "Contact Support",
+          "description": "It will arrange for service",
           "drop_steps": []
         }
       }
@@ -353,7 +336,7 @@
           "reason": "head 'back data' contained in label 'Back up data (TechCorp Cloud)' (cos=0.42)",
           "candidates": []
         },
-        "description_source": "llm"
+        "description_source": "deterministic"
       },
       {
         "unit": "U1",
@@ -385,7 +368,7 @@
         ],
         "kind": "other",
         "resolution": null,
-        "description_source": "llm"
+        "description_source": "deterministic"
       },
       {
         "unit": "U5",
@@ -403,7 +386,7 @@
           "reason": "chain opens Settings but no catalog screen matches the target exactly",
           "candidates": []
         },
-        "description_source": "llm"
+        "description_source": "deterministic"
       }
     ],
     "output_gate": [],

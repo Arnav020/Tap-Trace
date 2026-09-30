@@ -21,8 +21,8 @@
         "title": "Black screen recovery",
         "actions": [
           {
-            "actionName": "Inspect Device for Damage",
-            "description": "It will identify physical or liquid issues",
+            "actionName": "Inspect Physical Damage",
+            "description": "It will help identify any visible damage",
             "stepGroups": [
               {
                 "steps": [
@@ -41,8 +41,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Charge Device for One Hour",
-            "description": "It will ensure sufficient power for display",
+            "actionName": "Charge Device",
+            "description": "It will provide power to the phone",
             "stepGroups": [
               {
                 "steps": [
@@ -55,8 +55,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Power Cycle Without Charger",
-            "description": "It will reset device without external power",
+            "actionName": "Power On After Charging",
+            "description": "It will try to start the phone",
             "stepGroups": [
               {
                 "steps": [
@@ -71,8 +71,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Contact Customer Support",
-            "description": "It will provide professional assistance options",
+            "actionName": "Contact Support",
+            "description": "It will get professional help",
             "stepGroups": [
               {
                 "steps": [
@@ -86,7 +86,7 @@
           },
           {
             "actionName": "Force Restart Device",
-            "description": "It will attempt to revive unresponsive screen",
+            "description": "It will attempt to reboot the phone",
             "stepGroups": [
               {
                 "steps": [
@@ -107,18 +107,18 @@
     ]
   },
   "meta": {
-    "latency_ms": 3054,
+    "latency_ms": 952,
     "cache_hit": false,
-    "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.000707,
+    "model": "groq/openai/gpt-oss-20b",
+    "cost_usd": 0.000134,
     "fallback": null,
     "knowledge_fit": "full",
     "tokens": {
-      "prompt": 1236,
-      "completion": 870
+      "prompt": 873,
+      "completion": 230
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "llm"
     }
   },
@@ -290,32 +290,32 @@
       "actions": {
         "U1": {
           "keep": true,
-          "name": "Inspect Device for Damage",
-          "description": "It will identify physical or liquid issues",
+          "name": "Inspect Physical Damage",
+          "description": "It will help identify any visible damage",
           "drop_steps": []
         },
         "U2": {
           "keep": true,
           "name": "Force Restart Device",
-          "description": "It will attempt to revive an unresponsive screen",
+          "description": "It will attempt to reboot the phone",
           "drop_steps": []
         },
         "U3": {
           "keep": true,
-          "name": "Charge Device for One Hour",
-          "description": "It will ensure sufficient power for display",
+          "name": "Charge Device",
+          "description": "It will provide power to the phone",
           "drop_steps": []
         },
         "U4": {
           "keep": true,
-          "name": "Power Cycle Without Charger",
-          "description": "It will reset the device without external power",
+          "name": "Power On After Charging",
+          "description": "It will try to start the phone",
           "drop_steps": []
         },
         "U5": {
           "keep": true,
-          "name": "Contact Customer Support",
-          "description": "It will provide professional assistance options",
+          "name": "Contact Support",
+          "description": "It will get professional help",
           "drop_steps": []
         }
       }
@@ -354,7 +354,7 @@
         ],
         "kind": "other",
         "resolution": null,
-        "description_source": "llm-repaired"
+        "description_source": "llm"
       },
       {
         "unit": "U5",
@@ -374,7 +374,7 @@
         ],
         "kind": "other",
         "resolution": null,
-        "description_source": "llm-repaired"
+        "description_source": "llm"
       }
     ],
     "output_gate": [],

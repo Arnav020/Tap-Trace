@@ -17,11 +17,11 @@
   "response": {
     "contexts": [
       {
-        "goal": "Follow these steps to perform this Inner Screen Failure Troubleshooting",
-        "title": "Inner screen failure",
+        "goal": "Follow these steps to perform this Inner Screen Troubleshooting",
+        "title": "Inner screen recovery",
         "actions": [
           {
-            "actionName": "Connect Mouse and Keyboard",
+            "actionName": "Use USB Mouse",
             "description": "It will let you control the phone",
             "stepGroups": [
               {
@@ -38,8 +38,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Backup Data via TV",
-            "description": "It will safeguard your files externally",
+            "actionName": "Backup to TV",
+            "description": "It will let you save data",
             "stepGroups": [
               {
                 "steps": [
@@ -52,8 +52,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Use DeX Station Backup",
-            "description": "It will enable data transfer without screen",
+            "actionName": "Connect to TV",
+            "description": "It will let you view the screen",
             "stepGroups": [
               {
                 "steps": [
@@ -73,7 +73,7 @@
           },
           {
             "actionName": "Visit Service Center",
-            "description": "It will arrange professional repair",
+            "description": "It will get professional repair",
             "stepGroups": [
               {
                 "steps": [
@@ -91,18 +91,18 @@
     ]
   },
   "meta": {
-    "latency_ms": 3039,
+    "latency_ms": 1049,
     "cache_hit": false,
-    "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.000674,
+    "model": "groq/openai/gpt-oss-20b",
+    "cost_usd": 0.000126,
     "fallback": null,
     "knowledge_fit": "full",
     "tokens": {
-      "prompt": 1167,
-      "completion": 832
+      "prompt": 805,
+      "completion": 219
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "llm"
     }
   },
@@ -233,40 +233,40 @@
       "no_viable_solution": false,
       "goals": [
         {
-          "topic": "Inner Screen Failure",
-          "title": null,
+          "topic": "Inner Screen",
+          "title": "Inner screen recovery",
           "config_request": false,
           "units": [
             "U1",
-            "U2",
             "U3",
-            "U4"
+            "U4",
+            "U2"
           ]
         }
       ],
       "actions": {
         "U1": {
           "keep": true,
-          "name": "Connect Mouse and Keyboard",
+          "name": "Use USB Mouse",
           "description": "It will let you control the phone",
+          "drop_steps": []
+        },
+        "U3": {
+          "keep": true,
+          "name": "Backup to TV",
+          "description": "It will let you save data",
+          "drop_steps": []
+        },
+        "U4": {
+          "keep": true,
+          "name": "Connect to TV",
+          "description": "It will let you view the screen",
           "drop_steps": []
         },
         "U2": {
           "keep": true,
           "name": "Visit Service Center",
-          "description": "It will arrange professional repair",
-          "drop_steps": []
-        },
-        "U3": {
-          "keep": true,
-          "name": "Backup Data via TV",
-          "description": "It will safeguard your files externally",
-          "drop_steps": []
-        },
-        "U4": {
-          "keep": true,
-          "name": "Use DeX Station Backup",
-          "description": "It will enable data transfer without screen",
+          "description": "It will get professional repair",
           "drop_steps": []
         }
       }

@@ -56,7 +56,11 @@ class Engine:
 
     # ------------------------------------------------------------------ public
     def troubleshoot(self, query: str, siis: Any = None, explain: bool = False, use_cache: bool = True,
-                     write_cache: bool = True, wait_budget: float = 0.0, cache_mode: Optional[str] = None) -> Dict:
+                     write_cache: bool = True, wait_budget: float = 0.0, cache_mode: Optional[str] = None,
+                     enrichment: Optional[Dict] = None) -> Dict:
+        """`enrichment`: a stored Stage A result for this exact query (canonical, variations, hard negatives). Stage A
+        depends only on the query text, so re-planning after a plan-assembly change can reuse it (scripts/build_results.py
+        --reuse-enrichment); the request then runs Stage B only and its meta/cost say so."""
         t0 = time.perf_counter()
         self.stats["requests"] += 1
         query = normalize(query)
@@ -95,7 +99,12 @@ class Engine:
         # ---- cold path
         self.stats["cold"] += 1
         timeout = max(2.0, COLD_BUDGET_S - 1.0)
-        f_enrich = self.pool.submit(enrich, self.llm, query, cf, timeout, wait_budget)
+        if enrichment is not None:
+            from concurrent.futures import Future
+            f_enrich = Future()
+            f_enrich.set_result((dict(enrichment), Usage()))
+        else:
+            f_enrich = self.pool.submit(enrich, self.llm, query, cf, timeout, wait_budget)
 
         doc_body = doc.title + ". " + " ".join(x.text for s in doc.sections for x in s.sentences)[:1500]
         doc_sim = float(self.embedder.encode_one(query) @ self.embedder.encode_one(doc_body))
@@ -135,7 +144,7 @@ class Engine:
         response = to_contract(goals)
         usage = e_usage + s_usage
         self.stats["cost_usd"] += usage.cost_usd
-        model = self.llm.label if (usage.ok) else "deterministic (no LLM)"
+        model = (usage.model or self.llm.label) if usage.ok else "deterministic (no LLM)"  # the model that actually answered
         meta = {"latency_ms": _ms(t0), "cache_hit": False, "model": model, "cost_usd": round(usage.cost_usd, 6),
                 "fallback": fallback, "knowledge_fit": g.fit,
                 "tokens": {"prompt": usage.prompt_tokens, "completion": usage.completion_tokens},

@@ -99,8 +99,11 @@ def distinct(items: List[str], query: str, max_jaccard: float = 0.85) -> List[st
 def canonical_fallback(query: str, cf: Frame) -> str:
     topic, _ = topic_for(cf, cf.contexts)
     dev = {"foldable": "Foldable phone", "tablet": "Tablet", "phone": "Phone"}.get(cf.device, "Device")
-    part = {"inner": " inner display", "cover": " cover display"}.get(cf.part, " display")
-    return f"{dev}{part} issue: {topic.lower()} ({', '.join(sorted(s.lower() for s in cf.symptoms)) or 'unspecified'})"
+    if topic == "Device Issue":  # no known facet: restate the complaint rather than invent a component
+        return f"{dev} issue: {normalize(query).rstrip('.')}"
+    part = {"inner": " inner display", "cover": " cover display"}.get(cf.part, "")
+    syms = ", ".join(sorted(s.lower() for s in cf.symptoms))
+    return f"{dev}{part} issue: {topic.lower()}" + (f" ({syms})" if syms else "")
 
 
 _SWAPS = [("screen", "display"), ("phone", "device"), ("goes", "turns"), ("won't", "will not"), ("completely", "totally"),
@@ -130,7 +133,6 @@ def paraphrase_fallback(query: str, cf: Frame) -> List[str]:
     first = clauses[0] if clauses else core
     first_sw = swapped.split(",")[0].split(";")[0]
     fl = first[0].lower() + first[1:]
-    topic = canonical_fallback(query, cf)
     return [
         f"I am experiencing the following problem: {fl}.",
         f"Could you please help? {swapped}.",
@@ -138,7 +140,6 @@ def paraphrase_fallback(query: str, cf: Frame) -> List[str]:
         " ".join(kw),
         f"This is so frustrating - {first_sw.lower()}!!",
         typo(first.lower()),
-        topic,
         f"{' '.join(kw[:4])} problem",
         f"why does this keep happening: {first_sw.lower()}?",
         typo(swapped.lower()),

@@ -17,12 +17,12 @@
   "response": {
     "contexts": [
       {
-        "goal": "Follow these steps to perform this Email App Display Troubleshooting",
-        "title": "Email app display",
+        "goal": "Follow these steps to perform this Screen Blank Troubleshooting",
+        "title": "Screen blank recovery",
         "actions": [
           {
-            "actionName": "Clear Email App Storage",
-            "description": "It will remove corrupted cache files",
+            "actionName": "Clear App Cache",
+            "description": "It will reduce app memory usage",
             "stepGroups": [
               {
                 "steps": [
@@ -46,8 +46,8 @@
             "category": "auto"
           },
           {
-            "actionName": "Boot Into Safe Mode",
-            "description": "It will isolate third-party app conflicts",
+            "actionName": "Safe Mode Test",
+            "description": "It will isolate app conflicts",
             "stepGroups": [
               {
                 "steps": [
@@ -72,18 +72,18 @@
     ]
   },
   "meta": {
-    "latency_ms": 2699,
+    "latency_ms": 1549,
     "cache_hit": false,
-    "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.000566,
+    "model": "groq/openai/gpt-oss-20b",
+    "cost_usd": 0.000123,
     "fallback": null,
     "knowledge_fit": "partial",
     "tokens": {
-      "prompt": 1093,
-      "completion": 670
+      "prompt": 722,
+      "completion": 229
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "llm"
     }
   },
@@ -216,8 +216,8 @@
       "no_viable_solution": false,
       "goals": [
         {
-          "topic": "Email App Display",
-          "title": null,
+          "topic": "Screen Blank",
+          "title": "Screen blank recovery",
           "config_request": false,
           "units": [
             "U1",
@@ -228,14 +228,14 @@
       "actions": {
         "U1": {
           "keep": true,
-          "name": "Clear Email App Storage",
-          "description": "It will remove corrupted cache files",
+          "name": "Clear App Cache",
+          "description": "It will reduce app memory usage",
           "drop_steps": []
         },
         "U2": {
           "keep": true,
-          "name": "Boot Into Safe Mode",
-          "description": "It will isolate third‑party app conflicts",
+          "name": "Safe Mode Test",
+          "description": "It will isolate app conflicts",
           "drop_steps": []
         }
       }

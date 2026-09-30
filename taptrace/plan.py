@@ -17,7 +17,7 @@ from typing import Dict, List, Optional
 
 from .catalog import DUMMY_URI, Catalog, Row
 from .fields import (action_name, clean_step, description_for, dummy_texts, fit_description, goal_text,
-                     topic_for, valid_step, validate_goal_obj)
+                     topic_for, valid_action_name, valid_step, validate_goal_obj)
 from .resolver import Resolution, Resolver
 from .text import sentence_case, title_case
 
@@ -145,6 +145,8 @@ class Composer:
         # escalation units inherit a section heading that describes the PREVIOUS remedy -> describe the steps only
         desc_text = " ".join(steps) if u.__dict__.get("escalation") else text
         desc, dsrc = fit_description((llm_a or {}).get("description"), desc_text)
+        if category == "critical" and dsrc.startswith("llm") and not _critical_desc_ok(desc, text):
+            desc, dsrc = description_for(desc_text), "deterministic (llm description off-topic for critical action)"
         trace["description_source"] = dsrc
         return BuiltAction(u.uid, name, desc, category, groups, _cost(category, text, u.__dict__.get("escalation", False), order),
                            order, conf, trace)
@@ -193,6 +195,21 @@ class Composer:
         return goals
 
 
+# A critical action's benefit must describe what that disruptive action does (a factory reset must not be
+# described as "keep your personal data safe" just because its first step backs data up).
+_CRIT_DESC = [(re.compile(r"factory (data )?reset|reset (network|all) settings", re.I), re.compile(r"reset|restor|default|erase|wipe|clean slate|fresh", re.I)),
+              (re.compile(r"safe mode", re.I), re.compile(r"app|third|isolat|safe|conflict|cause", re.I)),
+              (re.compile(r"update|firmware", re.I), re.compile(r"updat|bug|fix|patch|latest|software", re.I)),
+              (re.compile(r"restart|reboot|force", re.I), re.compile(r"restart|reboot|refresh|clear|reset|respon|glitch|process|memory", re.I))]
+
+
+def _critical_desc_ok(desc: str, text: str) -> bool:
+    for action_rx, benefit_rx in _CRIT_DESC:
+        if action_rx.search(text):
+            return bool(benefit_rx.search(desc))
+    return True
+
+
 _NAME_ON = re.compile(r"^(Enable|Activate|Turn On|Switch On)\b")
 _NAME_OFF = re.compile(r"^(Disable|Deactivate|Turn Off|Switch Off)\b")
 _FLIP = {"Enable": "Disable", "Activate": "Deactivate", "Turn On": "Turn Off", "Switch On": "Switch Off"}
@@ -220,10 +237,19 @@ def _merge_same_name(actions: List[BuiltAction]) -> List[BuiltAction]:
             tgt = out[a.name].step_groups[0]["steps"]
             tgt += [s for s in a.step_groups[0]["steps"] if s not in tgt]
             continue
-        if a.name in out:
-            a.name = title_case(f"{a.name} Again") if a.name + " Again" not in out else a.name + " II"
+        if a.name in out:  # two different actions got the same name: name the second after its own first step
+            alt = _step_name(a.step_groups[0]["steps"][0])
+            a.name = alt if alt and alt not in out else (title_case(f"{a.name} Again") if a.name + " Again" not in out else a.name + " II")
         out[a.name] = a
     return list(out.values())
+
+
+def _step_name(step: str) -> str:
+    core = re.sub(r"^(?:if|when|on|for) [^,]{2,120},\s*", "", step, flags=re.I)
+    core = re.sub(r"\b(?:the|your|a|an|any|my)\b\s*", "", core, flags=re.I)
+    words = [w for w in re.sub(r"[^A-Za-z0-9 -]", " ", core).split(" ") if w][:4]
+    name = title_case(" ".join(words)) if len(words) >= 2 else ""
+    return name if valid_action_name(name) else ""
 
 
 def to_contract(goals: List[dict]) -> dict:

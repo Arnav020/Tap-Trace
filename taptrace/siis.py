@@ -42,6 +42,8 @@ _TRY_GERUND = re.compile(r"^try (\w+ing)\b", re.I)
 _THEN_ACTION = re.compile(r",?\s+and then\s+(\w+)\b", re.I)
 # "perform a factory data reset: go to Settings, tap ..." -> the Settings path becomes its own chain
 _COLON_PATH = re.compile(r":\s+(?=(?:go to|navigate to|open)\s+(?:the\s+)?settings\b)", re.I)
+# "back up your data and perform a factory data reset" -> backup and reset are two interactions
+_BACKUP_THEN_CRIT = re.compile(r"(?<=\bdata)\s+and\s+(?=(?:perform|do|run)\s+(?:a\s+)?factory|reset\b)", re.I)
 # Contexts whose sentences are dropped when the complaint does not mention them. Remedy-tool words
 # (TV/monitor, Data Transfer, Wi-Fi) are deliberately NOT here: "back up your data to a TV" is a remedy.
 EXCLUSIVE_CTX = frozenset({"fingerprint", "kids", "account_lock", "keyboard", "stylus", "email", "camera", "multiwindow", "rotation"})
@@ -263,6 +265,7 @@ def _core(text: str) -> tuple[str, str]:
             t = re.sub(r"^please\s+", "", m.group(1), flags=re.I)
     t = _THEN_ACTION.sub(_then_step, t)
     t = _COLON_PATH.sub("; ", t)
+    t = _BACKUP_THEN_CRIT.sub("; ", t)
     if cond and _VAGUE_COND.search(cond):
         cond = ""
     return t.strip(), cond

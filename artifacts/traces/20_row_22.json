@@ -21,8 +21,28 @@
         "title": "Black screen recovery",
         "actions": [
           {
-            "actionName": "Charge Device Fully",
-            "description": "It will ensure sufficient power for screen",
+            "actionName": "Inspect Physical Damage",
+            "description": "It will help identify any visible damage",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Inspect your phone or tablet, charger, and USB cable for any physical damage or signs of liquid exposure.",
+                  "Remove any cases or accessories that might be covering the charging port or buttons.",
+                  "Examine the USB connections for any corrosion or bent pins.",
+                  "Check the Liquid Damage Indicator (LDI).",
+                  "Turn off your phone or tablet.",
+                  "Insert the ejector tool into the small hole next to the SIM/MicroSD tray to eject the tray.",
+                  "Shine a flashlight into the SIM/MicroSD slot."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Charge the Device",
+            "description": "It will provide power to the phone",
             "stepGroups": [
               {
                 "steps": [
@@ -35,8 +55,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Power Cycle Without Charger",
-            "description": "It will reset phone without external power",
+            "actionName": "Power Button Reset",
+            "description": "It will attempt to turn on phone",
             "stepGroups": [
               {
                 "steps": [
@@ -51,8 +71,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Contact Customer Support",
-            "description": "It will connect you with further assistance",
+            "actionName": "Contact Support",
+            "description": "It will get professional help",
             "stepGroups": [
               {
                 "steps": [
@@ -65,8 +85,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Force Device Restart",
-            "description": "It will reboot phone to restore display",
+            "actionName": "Force a Restart",
+            "description": "It will reboot the device",
             "stepGroups": [
               {
                 "steps": [
@@ -87,18 +107,18 @@
     ]
   },
   "meta": {
-    "latency_ms": 2386,
+    "latency_ms": 1119,
     "cache_hit": false,
-    "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.000749,
+    "model": "groq/openai/gpt-oss-20b",
+    "cost_usd": 0.000135,
     "fallback": null,
     "knowledge_fit": "full",
     "tokens": {
-      "prompt": 1231,
-      "completion": 941
+      "prompt": 866,
+      "completion": 234
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "llm"
     }
   },
@@ -270,38 +290,53 @@
       ],
       "actions": {
         "U1": {
-          "keep": false,
-          "name": "Inspect Device for Damage",
-          "description": "It will verify any physical or liquid damage",
+          "keep": true,
+          "name": "Inspect Physical Damage",
+          "description": "It will help identify any visible damage",
           "drop_steps": []
         },
         "U2": {
           "keep": true,
-          "name": "Force Device Restart",
-          "description": "It will reboot the phone to restore display",
+          "name": "Force a Restart",
+          "description": "It will reboot the device",
           "drop_steps": []
         },
         "U3": {
           "keep": true,
-          "name": "Charge Device Fully",
-          "description": "It will ensure sufficient power for the screen",
+          "name": "Charge the Device",
+          "description": "It will provide power to the phone",
           "drop_steps": []
         },
         "U4": {
           "keep": true,
-          "name": "Power Cycle Without Charger",
-          "description": "It will reset the phone without external power",
+          "name": "Power Button Reset",
+          "description": "It will attempt to turn on the phone",
           "drop_steps": []
         },
         "U5": {
           "keep": true,
-          "name": "Contact Customer Support",
-          "description": "It will connect you with further assistance",
+          "name": "Contact Support",
+          "description": "It will get professional help",
           "drop_steps": []
         }
       }
     },
     "actions": [
+      {
+        "unit": "U1",
+        "spans": [
+          "S2.1",
+          "S2.2",
+          "S2.3",
+          "S2.5",
+          "S2.8",
+          "S2.9",
+          "S2.10"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
       {
         "unit": "U3",
         "spans": [
@@ -309,7 +344,7 @@
         ],
         "kind": "other",
         "resolution": null,
-        "description_source": "llm-repaired"
+        "description_source": "llm"
       },
       {
         "unit": "U4",
@@ -340,7 +375,7 @@
         ],
         "kind": "other",
         "resolution": null,
-        "description_source": "llm-repaired"
+        "description_source": "llm"
       }
     ],
     "output_gate": [],

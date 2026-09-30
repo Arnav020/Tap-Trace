@@ -17,12 +17,12 @@
   "response": {
     "contexts": [
       {
-        "goal": "Follow these steps to perform this Screen Flicker Troubleshooting",
-        "title": "Screen flicker fix",
+        "goal": "Follow these steps to perform this Screen Flashing Troubleshooting",
+        "title": "Screen flashing",
         "actions": [
           {
-            "actionName": "Inspect Charging Components",
-            "description": "It will identify physical damage causes",
+            "actionName": "Inspect Physical Condition",
+            "description": "It will help identify damage or corrosion",
             "stepGroups": [
               {
                 "steps": [
@@ -30,9 +30,7 @@
                   "Remove any cases or accessories that might be covering the charging port or buttons.",
                   "Examine the USB connections for any corrosion or bent pins.",
                   "Check the Liquid Damage Indicator (LDI).",
-                  "Turn off your phone or tablet.",
-                  "Insert the ejector tool into the small hole next to the SIM/MicroSD tray to eject the tray.",
-                  "Shine a flashlight into the SIM/MicroSD slot."
+                  "Turn off your phone or tablet."
                 ],
                 "actionableDeeplink": null,
                 "validationDeeplink": null
@@ -41,8 +39,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Force Device Restart",
-            "description": "It will reset system to stop flickering",
+            "actionName": "Force Restart Device",
+            "description": "It will reset device and stop flashing",
             "stepGroups": [
               {
                 "steps": [
@@ -63,18 +61,18 @@
     ]
   },
   "meta": {
-    "latency_ms": 3142,
+    "latency_ms": 1001,
     "cache_hit": false,
-    "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.00063,
+    "model": "groq/openai/gpt-oss-20b",
+    "cost_usd": 0.000111,
     "fallback": null,
     "knowledge_fit": "partial",
     "tokens": {
-      "prompt": 1104,
-      "completion": 774
+      "prompt": 743,
+      "completion": 184
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "llm"
     }
   },
@@ -179,8 +177,8 @@
       "no_viable_solution": false,
       "goals": [
         {
-          "topic": "Screen Flicker",
-          "title": "Screen flicker fix",
+          "topic": "Screen Flashing",
+          "title": null,
           "config_request": false,
           "units": [
             "U1",
@@ -191,14 +189,17 @@
       "actions": {
         "U1": {
           "keep": true,
-          "name": "Inspect Charging Components",
-          "description": "It will identify physical damage causes",
-          "drop_steps": []
+          "name": "Inspect Physical Condition",
+          "description": "It will help identify damage or corrosion",
+          "drop_steps": [
+            5,
+            6
+          ]
         },
         "U2": {
           "keep": true,
-          "name": "Force Device Restart",
-          "description": "It will reset system to stop flickering",
+          "name": "Force Restart Device",
+          "description": "It will reset the device and stop flashing",
           "drop_steps": []
         }
       }
@@ -228,7 +229,7 @@
         ],
         "kind": "other",
         "resolution": null,
-        "description_source": "llm"
+        "description_source": "llm-repaired"
       }
     ],
     "output_gate": [],

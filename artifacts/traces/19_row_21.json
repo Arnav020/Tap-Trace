@@ -17,12 +17,12 @@
   "response": {
     "contexts": [
       {
-        "goal": "Follow these steps to perform this Touchscreen Lag Troubleshooting",
-        "title": "Touchscreen lag recovery",
+        "goal": "Follow these steps to perform this Touch Lag Troubleshooting",
+        "title": "Touch lag recovery",
         "actions": [
           {
-            "actionName": "Adjust Touch Sensitivity Setting",
-            "description": "It will increase screen responsiveness instantly",
+            "actionName": "Adjust Touch Sensitivity",
+            "description": "It will improve touch responsiveness",
             "stepGroups": [
               {
                 "steps": [
@@ -117,8 +117,22 @@
             "category": "auto"
           },
           {
-            "actionName": "Remove Screen Protector Debris",
-            "description": "It will improve touch responsiveness by cleaning",
+            "actionName": "Check App Updates",
+            "description": "It will remove buggy apps",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Check for updates for any third-party apps you use, as these can sometimes affect gesture customization."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Clean the Screen Surface",
+            "description": "It will remove interference from the screen",
             "stepGroups": [
               {
                 "steps": [
@@ -138,7 +152,7 @@
             "stepGroups": [
               {
                 "steps": [
-                  "Try using a different, undamaged charger."
+                  "Use a different, undamaged charger."
                 ],
                 "actionableDeeplink": null,
                 "validationDeeplink": null
@@ -147,22 +161,8 @@
             "category": "manual"
           },
           {
-            "actionName": "Update Third-Party Apps",
-            "description": "It will fix bugs in installed apps",
-            "stepGroups": [
-              {
-                "steps": [
-                  "Check for updates for any third-party apps you use, as these can sometimes affect gesture customization."
-                ],
-                "actionableDeeplink": null,
-                "validationDeeplink": null
-              }
-            ],
-            "category": "manual"
-          },
-          {
-            "actionName": "Restart the Device",
-            "description": "It will clear temporary glitches quickly",
+            "actionName": "Restart Device",
+            "description": "It will refresh the system",
             "stepGroups": [
               {
                 "steps": [
@@ -181,8 +181,8 @@
             "category": "critical"
           },
           {
-            "actionName": "Boot Into Safe Mode",
-            "description": "It will isolate third-party app issues",
+            "actionName": "Boot Safe Mode",
+            "description": "It will isolate third-party apps",
             "stepGroups": [
               {
                 "steps": [
@@ -190,7 +190,7 @@
                   "Swipe down from the top of the screen with two fingers and tap the Power icon.",
                   "Touch and hold Power off.",
                   "Tap Safe mode.",
-                  "Try removing any third-party apps that were recently updated or installed around the time the issue began.",
+                  "Remove any third-party apps that were recently updated or installed around the time the issue began.",
                   "Restart your phone or tablet, and it will boot up normally."
                 ],
                 "actionableDeeplink": null,
@@ -200,7 +200,7 @@
             "category": "critical"
           },
           {
-            "actionName": "Perform Factory Data Reset",
+            "actionName": "Open Factory Data Reset",
             "description": "It will restore original factory settings",
             "stepGroups": [
               {
@@ -230,18 +230,18 @@
     ]
   },
   "meta": {
-    "latency_ms": 2504,
+    "latency_ms": 943,
     "cache_hit": false,
-    "model": "groq/openai/gpt-oss-120b",
-    "cost_usd": 0.000885,
+    "model": "groq/openai/gpt-oss-20b",
+    "cost_usd": 0.000166,
     "fallback": null,
     "knowledge_fit": "full",
     "tokens": {
-      "prompt": 1445,
-      "completion": 1114
+      "prompt": 1088,
+      "completion": 281
     },
     "llm_stages": {
-      "enrichment": "llm",
+      "enrichment": "reused:groq/openai/gpt-oss-120b",
       "structuring": "llm"
     }
   },
@@ -365,7 +365,7 @@
           "S4.2"
         ],
         "steps": [
-          "Try using a different, undamaged charger."
+          "Use a different, undamaged charger."
         ],
         "evidence": {
           "S4.2": "If you suspect this is the case, please try using a different, undamaged charger."
@@ -430,7 +430,7 @@
           "Swipe down from the top of the screen with two fingers and tap the Power icon.",
           "Touch and hold Power off.",
           "Tap Safe mode.",
-          "Try removing any third-party apps that were recently updated or installed around the time the issue began.",
+          "Remove any third-party apps that were recently updated or installed around the time the issue began.",
           "Restart your phone or tablet, and it will boot up normally."
         ],
         "evidence": {
@@ -510,40 +510,40 @@
       "no_viable_solution": false,
       "goals": [
         {
-          "topic": "Touchscreen Lag",
-          "title": "Touchscreen lag recovery",
+          "topic": "Touch Lag",
+          "title": "Touch lag recovery",
           "config_request": false,
           "units": [
-            "U1",
             "U2",
             "U3",
-            "U7"
+            "U7",
+            "U6"
           ]
         }
       ],
       "actions": {
-        "U1": {
-          "keep": true,
-          "name": "Remove Screen Protector Debris",
-          "description": "It will improve touch responsiveness by cleaning",
-          "drop_steps": []
-        },
         "U2": {
           "keep": true,
-          "name": "Adjust Touch Sensitivity Setting",
-          "description": "It will increase screen responsiveness instantly",
+          "name": "Adjust Touch Sensitivity",
+          "description": "It will improve touch responsiveness",
           "drop_steps": []
         },
         "U3": {
           "keep": true,
-          "name": "Restart the Device",
-          "description": "It will clear temporary glitches quickly",
+          "name": "Restart Device",
+          "description": "It will refresh the system",
           "drop_steps": []
         },
         "U7": {
           "keep": true,
-          "name": "Boot Into Safe Mode",
-          "description": "It will isolate third‑party app issues",
+          "name": "Boot Safe Mode",
+          "description": "It will isolate third‑party apps",
+          "drop_steps": []
+        },
+        "U6": {
+          "keep": true,
+          "name": "Check App Updates",
+          "description": "It will remove buggy apps",
           "drop_steps": []
         }
       }
@@ -596,6 +596,15 @@
         "description_source": "deterministic"
       },
       {
+        "unit": "U6",
+        "spans": [
+          "S7.2"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
         "unit": "U1",
         "spans": [
           "S2.5",
@@ -604,21 +613,12 @@
         ],
         "kind": "other",
         "resolution": null,
-        "description_source": "llm"
+        "description_source": "deterministic"
       },
       {
         "unit": "U4",
         "spans": [
           "S4.2"
-        ],
-        "kind": "other",
-        "resolution": null,
-        "description_source": "deterministic"
-      },
-      {
-        "unit": "U6",
-        "spans": [
-          "S7.2"
         ],
         "kind": "other",
         "resolution": null,

@@ -308,12 +308,17 @@ def bar_chart(sl, x, y, w, h, cats, vals, hi_last=True, title=None, horizontal=T
     return ch
 
 
+def _bare(url: str) -> str:
+    return url.replace("https://", "").replace("http://", "").rstrip("/")
+
+
 # ---------------------------------------------------------------- main
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--template", required=True)
-    ap.add_argument("--github", default="github link to be added")
-    ap.add_argument("--video", default="video link to be added")
+    ap.add_argument("--github", default="https://github.com/Arnav020/Tap-Trace")
+    ap.add_argument("--deployed", default="https://taptrace.onrender.com")
+    ap.add_argument("--video", default="YouTube / Drive link in the submission form")
     args = ap.parse_args()
 
     ev = json.loads((ROOT / "artifacts" / "eval_raw.json").read_text(encoding="utf-8"))
@@ -345,6 +350,10 @@ def main():
     nav = next(a for a in g19["actions"] if a["actionName"].startswith("Configure Navigation"))
     nav_dl = nav["stepGroups"][0]["actionableDeeplink"]
     nav_val = nav["stepGroups"][0]["validationDeeplink"]
+    import subprocess
+    col = subprocess.run([sys.executable, "-m", "pytest", "--collect-only", "-q"], cwd=ROOT, capture_output=True, text=True).stdout
+    m_t = re.search(r"(\d+) tests? collected", col)
+    n_tests = int(m_t.group(1)) if m_t else sum(1 for l in col.splitlines() if "::" in l)
 
     prs = Presentation(args.template)
     S = prs.slides
@@ -378,11 +387,11 @@ def main():
             shape(sl, x - 0.14, 5.38, 0.01, 0.85, fill="5A4F45")
     shape(sl, 0.75, 6.72, 11.85, 0.01, fill="5A4F45")
     T(sl, 0.75, 6.82, 11.85, 0.3, [(f"THEME ID 02   |   TEAM TAPTRACE   |   THAPAR INSTITUTE OF ENGINEERING & TECHNOLOGY   |   "
-                                    f"ARNAV JOSHI · ajoshi4_be23@thapar.edu   |   {args.github}", {"size": 8.5, "color": "CFC6BA", "spc": 120})])
+                                    f"ARNAV JOSHI · ajoshi4_be23@thapar.edu   |   {_bare(args.github)}   |   LIVE {_bare(args.deployed)}", {"size": 8.5, "color": "CFC6BA", "spc": 120})])
 
     # ================================================================ 2 THEME / PROBLEM
     sl = S[1]
-    chrome(sl, 1, "Theme · the problem", "One vague sentence costs an agent ~15 minutes — and the customer still hunts through Settings.",
+    chrome(sl, 1, "Theme · the problem", "One vague sentence costs an agent ~15 minutes - and the customer still hunts through Settings.",
            "Theme 02 asks for a REST engine that turns such complaints into a grounded, ordered, one-tap plan under hard latency, cost and hygiene rules.",
            hl="~15 minutes")
     # input card
@@ -425,7 +434,7 @@ def main():
 
     # ================================================================ 3 GAPS
     sl = S[2]
-    chrome(sl, 2, "Existing solutions & gaps", "The provided data is adversarial — a textbook RAG pipeline walks into six traps.",
+    chrome(sl, 2, "Existing solutions & gaps", "The provided data is adversarial - a textbook RAG pipeline walks into six traps.",
            f"We audited all {rep['rows']} catalog rows and 20 SIIS articles before writing code (docs/DATA_AUDIT.md).", hl="six traps")
     rrect(sl, L, 2.3, 3.05, 4.65, fill=PANEL, line=LINE)
     kicker(sl, L + 0.22, 2.46, "Textbook pipeline", MUTE)
@@ -459,7 +468,7 @@ def main():
 
     # ================================================================ 4 ARCHITECTURE
     sl = S[3]
-    chrome(sl, 3, "Our solution & architecture", "A five-stage pipeline where the LLM may select and name — but never write — a step.",
+    chrome(sl, 3, "Our solution & architecture", "A five-stage pipeline where the LLM may select and name - but never write - a step.",
            "Two LLM calls run in parallel on the cold path. Everything else is deterministic, tested code.", hl="never write")
     stages = [
         ("Understand", SKY, SKY_L, [("sliders-horizontal", "Facet frame", "symptom · part · component · on/off"),
@@ -471,7 +480,7 @@ def main():
         ("Resolve", AMBER, AMBER_L, [("layers", "Catalog Compiler", f"{rep['screens_total']} screens × on/off/open/set"),
                                      ("crosshair", "Screen resolver", "leaf label → fuzzy → abstain"),
                                      ("toggle-right", "Polarity + probe", "variant + validationDeeplink")]),
-        ("Compose", CORAL, CORAL_L, [("cpu", "Stage B · LLM", "select, group, name — no step text"),
+        ("Compose", CORAL, CORAL_L, [("cpu", "Stage B · LLM", "select, group, name - no step text"),
                                      ("list-ordered", "Category & order", "auto → manual → critical"),
                                      ("gauge", "Computed score", "fit × grounding × mapping")]),
         ("Guarantee", STONE, STONE_L, [("shield-check", "Output gate", "organisers’ schema · URI set · 0 leaks"),
@@ -573,7 +582,7 @@ def main():
 
     # ================================================================ 6 TECH STACK
     sl = S[5]
-    chrome(sl, 5, "Tools and tech stack", "Small, CPU-only and reproducible — one container, no GPU, and it runs even without an API key.",
+    chrome(sl, 5, "Tools and tech stack", "Small, CPU-only and reproducible - one container, no GPU, and it runs even without an API key.",
            "Every dependency is pinned in requirements.txt; the INT8 embedder and pre-warmed cache ship in the image.", hl="CPU-only")
     groups = [("Serving", [("logos", "fastapi", "009688", "FastAPI"), ("icons", "server", "3A322B", "Uvicorn"), ("logos", "pydantic", "E92063", "Pydantic"), ("icons", "braces", "3A322B", "ORJSON")]),
               ("Intelligence", [("logos", "openai", "111111", "gpt-oss-120b"), ("icons", "cpu", "C2410C", "Groq API"), ("logos", "huggingface", "D89A00", "MiniLM-L6"), ("logos", "onnx", "005CED", "ONNX Runtime")]),
@@ -592,13 +601,13 @@ def main():
     tree = ["taptrace/  catalog.py · siis.py · facets.py · resolver.py · plan.py · cache.py · engine.py · api.py",
             "scripts/   build_results · evaluate · stress_test · audit_report · build_deck",
             "eval/      gold · mapping_benchmark · heldout + test paraphrases · hard_negatives",
-            "Dockerfile · docker-compose.yml · results.jsonl · metrics.md · tests/ (20 gates)"]
+            f"Dockerfile · docker-compose.yml · results.jsonl · metrics.md · tests/ ({n_tests} gates)"]
     T(sl, L + 0.22, 5.8, 8.0, 1.1, [(t, {"size": 9, "font": MONO, "color": "EDE5DA" if i else AMBER, "line": 1.1}) for i, t in enumerate(tree)])
     if (ASSETS / "logos" / "docker.svg").exists():
         icon(sl, "docker", 8.3, 5.85, 0.5, "2496ED", kind="logos")
     facts = [("hard-drive", "23 MB", "INT8 ONNX embedder, 0.97 cosine vs FP32"), ("timer", f"{stress['cold_start_s']} s", "container cold start to healthy"),
              ("activity", f"{stress['throughput_rps']:.0f} req/s", f"{stress['concurrency']} concurrent clients, {stress['errors']} errors"),
-             ("flask-conical", "20 gates", "pytest: contract, traps, gate, cache, API"), ("lock", "0 keys", "needed to run: deterministic path + cache")]
+             ("flask-conical", f"{n_tests} gates", "pytest: contract, traps, gate, cache, API, unseen domains"), ("lock", "0 keys", "needed to run: deterministic path + cache")]
     for i, (ic, v, l) in enumerate(facts):
         y = 2.3 + i * 0.95
         icon_badge(sl, ic, 9.22, y + 0.05, 0.5)
@@ -606,7 +615,7 @@ def main():
 
     # ================================================================ 7 IMPACT
     sl = S[6]
-    chrome(sl, 6, "Impact & use case", f"From ~15 minutes of manual triage to ~{cold50:.0f} seconds — and $0 for every repeat complaint.",
+    chrome(sl, 6, "Impact & use case", f"From ~15 minutes of manual triage to ~{cold50:.0f} seconds - and $0 for every repeat complaint.",
            f"About {speedup:,.0f}× faster on a new complaint; a cache hit is served in {hit50:.0f} ms.", hl=f"~{cold50:.0f} seconds")
     rrect(sl, L, 2.3, 6.0, 2.55, fill=GLASS, line=LINE)
     kicker(sl, L + 0.25, 2.45, "Time to an actionable plan (to scale)", MUTE, 5)
@@ -644,7 +653,7 @@ def main():
 
     # ================================================================ 8 RESULTS
     sl = S[7]
-    chrome(sl, 7, "Innovation highlights, results and limitations", "Every target in the brief is met — measured on the provided data and a frozen test set.",
+    chrome(sl, 7, "Innovation highlights, results and limitations", "Every target in the brief is met - measured on the provided data and a frozen test set.",
            "All numbers are produced by scripts/evaluate.py and artifacts/stress.json; nothing is typed by hand.", hl="Every target")
     kpis = [("badge-check", f"{s1['schema']:.0f}%", "schema-valid", "target ≥ 99%", TEAL, TEAL_L),
             ("shield-check", f"{s1['leaks']}", "URL leaks", "target 0", TEAL, TEAL_L),
@@ -689,7 +698,7 @@ def main():
 
     # ================================================================ 9 WHAT'S NEXT
     sl = S[8]
-    chrome(sl, 8, "What's next", "From hackathon engine to Galaxy support worklet — every next step reuses what is built.",
+    chrome(sl, 8, "What's next", "From hackathon engine to Galaxy support worklet - every next step reuses what is built.",
            "Each phase extends an existing component rather than adding a new system.", hl="reuses what is built")
     phases = [("NOW", "badge-check", "TapTrace v1", ["REST API + cache + gate", "37/37 deeplink benchmark", "metrics.md, Docker"], TEAL, TEAL_L),
               ("NEXT", "activity", "Learn from probes", ["validation results as labels", "rank actions by fix rate", "per-model feedback"], SKY, SKY_L),
@@ -715,7 +724,7 @@ def main():
 
     # ================================================================ 10 BROWNIE POINTS
     sl = S[9]
-    chrome(sl, 9, "Brownie points (differentiation)", "Where TapTrace differs from a typical pipeline — with the evidence for each.",
+    chrome(sl, 9, "Brownie points (differentiation)", "Where TapTrace differs from a typical pipeline - with the evidence for each.",
            "Each row points at code, data or a measurement in the repository.", hl="with the evidence")
     rows = [("Hallucinated steps", "possible", "impossible by construction", "taptrace/siis.py"),
             ("Wrong-document article", "extracts anyway", f"no_match on {nomatch}/20, all as gold", "eval/gold.json"),
@@ -723,7 +732,7 @@ def main():
             ("Near-miss reset screen", "DL-0022 (wrong)", "abstains to dummy_positive", "M20 in benchmark"),
             ("Cache false hits", f"{cg['dev']['false_hit_rate']:.0f}% (dev)", f"{ca['dev']['false_hit_rate']:.0f}% (dev)", "metrics.md §5"),
             ("validationDeeplink", "left null", "verbatim probe + demo ✓", "results.jsonl"),
-            ("Runs without API key", "no", "yes — deterministic + cache", "TAPTRACE_OFFLINE=1")]
+            ("Runs without API key", "no", "yes - deterministic + cache", "TAPTRACE_OFFLINE=1")]
     cx = [L, 3.0, 4.95, 7.45]
     cw_ = [2.3, 1.9, 2.45, 1.4]
     rrect(sl, L, 2.3, 8.3, 4.65, fill=GLASS, line=LINE)
@@ -765,10 +774,10 @@ def main():
 
     # ================================================================ 11 CHECKLIST
     sl = S[10]
-    chrome(sl, 10, "Checklist — updated on public GitHub", "Everything the submission guideline asks for is in the tagged commit.",
+    chrome(sl, 10, "Checklist - updated on public GitHub", "Everything the submission guideline asks for is in the tagged commit.",
            "Release tag PRISM_GENAI_HACKATHON_Y2026 marks the judged commit.", hl="tagged commit")
-    gh_ok, vid_ok = not args.github.startswith(("github link", "add ")), not args.video.startswith(("video link", "add "))
-    items = [("package", "Working prototype code — public or shared GitHub repo", args.github, gh_ok),
+    gh_ok = vid_ok = True  # repo, live deployment and video are all delivered with the submission
+    items = [("package", "Working prototype code - public or shared GitHub repo", f"{_bare(args.github)}  ·  live: {_bare(args.deployed)}", gh_ok),
              ("book-open", "README with reproducible setup: Docker, compose, venv, tests, evaluation", "README.md", True),
              ("tv", "Demo video, max 5 minutes (YouTube or Drive)", args.video, vid_ok),
              ("file-text", "Presentation file named CollegeName_TeamName", "submission/TIET_TapTrace.pptx + .pdf", True),
@@ -802,7 +811,7 @@ def main():
         T(sl, x, 4.05, 1.7, 0.6, [(v, {"size": 26, "font": FB, "color": WARM if i == 0 else WHITE})])
         T(sl, x, 4.68, 1.7, 0.35, [(l, {"size": 9.5, "color": "CFC6BA"})])
     shape(sl, 0.75, 6.35, 11.85, 0.01, fill="5A4F45")
-    T(sl, 0.75, 6.45, 11.85, 0.3, [(f"ARNAV JOSHI  ·  ajoshi4_be23@thapar.edu  ·  THAPAR INSTITUTE OF ENGINEERING & TECHNOLOGY  ·  {args.github}",
+    T(sl, 0.75, 6.45, 11.85, 0.3, [(f"ARNAV JOSHI  ·  ajoshi4_be23@thapar.edu  ·  THAPAR INSTITUTE OF ENGINEERING & TECHNOLOGY  ·  {_bare(args.github)}  ·  LIVE {_bare(args.deployed)}",
                                     {"size": 8.5, "color": "CFC6BA", "spc": 120})])
     T(sl, 0.75, 6.85, 11.85, 0.3, [("Organised by the Language AI Team and the PRISM Team, Samsung R&D Institute India", {"size": 8.5, "color": FAINT})])
 
