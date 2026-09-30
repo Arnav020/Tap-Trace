@@ -1,0 +1,7 @@
+-r requirements.txt
+pytest==9.0.2
+# only needed to re-export the embedding model (scripts/export_embedder.py); the INT8 ONNX file is committed
+torch
+transformers==4.50.3
+onnx
+huggingface_hub

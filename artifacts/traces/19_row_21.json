@@ -1,0 +1,680 @@
+{
+  "input_line": 19,
+  "siis_id": "row_21",
+  "query": "My Nexa X1 screen inputs are delayed and the touch responsiveness is laggy, causing a noticeable delay when I try to interact with the phone.",
+  "query_variations": [
+    "The Nexa X1 phone exhibits delayed touch input on its screen, resulting in laggy responsiveness during use.",
+    "On the Nexa X1, screen touch responses are sluggish, producing noticeable delays whenever the device is operated.",
+    "My Nexa X1's screen feels slow to register taps, it's lagging whenever I try to use it.",
+    "The phone's touch is laggy on my Nexa X1, it takes forever to respond when I tap.",
+    "Nexa X1 screen touch lag delay",
+    "phone touch input slow lag",
+    "Why is my Nexa X1 screen so laggy? Touch inputs are always delayed!",
+    "This phone's touch is terrible - Nexa X1 delays every tap, it's unbearable!",
+    "My Nexa X1 scren touch is lagging, inputs are delyed.",
+    "Nexa X1 phne screen touch responce is slow and laggy."
+  ],
+  "response": {
+    "contexts": [
+      {
+        "goal": "Follow these steps to perform this Touchscreen Lag Troubleshooting",
+        "title": "Touchscreen lag recovery",
+        "actions": [
+          {
+            "actionName": "Adjust Touch Sensitivity Setting",
+            "description": "It will increase screen responsiveness instantly",
+            "stepGroups": [
+              {
+                "steps": [
+                  "If you wish to keep your screen protector on, turn on Touch sensitivity.",
+                  "Navigate to and open Settings.",
+                  "Tap Display.",
+                  "Tap the switch next to Touch sensitivity."
+                ],
+                "validationDeeplink": {
+                  "deeplink": "voiceassist://masked/val/6451858b28",
+                  "key": "Touch sensitivity",
+                  "resultType": "boolean",
+                  "condition": "equal",
+                  "value": "True"
+                },
+                "actionableDeeplink": {
+                  "deeplink": "voiceassist://masked/act/14eb42b895",
+                  "description": "Enables touch sensitivity via device Settings on the device.",
+                  "message": "Enable Touch sensitivity",
+                  "originalType": "onURL"
+                }
+              },
+              {
+                "steps": [
+                  "If the Touch sensitivity setting is enabled when you are not using a protective film, turn off Touch sensitivity.",
+                  "Navigate to and open Settings.",
+                  "Tap Display.",
+                  "Tap the switch next to Touch sensitivity to disable it."
+                ],
+                "validationDeeplink": {
+                  "deeplink": "voiceassist://masked/val/6451858b28",
+                  "key": "Touch sensitivity"
+                },
+                "actionableDeeplink": {
+                  "deeplink": "voiceassist://masked/act/1b0d34e9b4",
+                  "description": "Disables touch sensitivity via device Settings on the device.",
+                  "message": "Disable Touch sensitivity",
+                  "originalType": "offURL"
+                }
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Configure Navigation Bar",
+            "description": "It will stop gestures blocking your taps",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Navigate to and open Settings.",
+                  "Tap Display.",
+                  "Tap Navigation bar.",
+                  "Select Buttons to turn off full screen gestures."
+                ],
+                "validationDeeplink": {
+                  "deeplink": "voiceassist://masked/val/d8310c1b7d",
+                  "key": "Navigation bar"
+                },
+                "actionableDeeplink": {
+                  "deeplink": "voiceassist://masked/act/2f3dd95259",
+                  "description": "Opens the navigation bar settings page in device Settings on the device.",
+                  "message": "View Navigation bar",
+                  "originalType": "onClickURL"
+                }
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Back Up Phone Data",
+            "description": "It will keep your personal data safe",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Back up your personal data to avoid losing it."
+                ],
+                "validationDeeplink": {
+                  "deeplink": "voiceassist://masked/val/266037d0c5",
+                  "key": "Back up data (TechCorp Cloud)",
+                  "resultType": "boolean",
+                  "condition": "equal",
+                  "value": "True"
+                },
+                "actionableDeeplink": {
+                  "deeplink": "voiceassist://masked/act/b3ed3ed663",
+                  "description": "Enables data backup to TechCorp Cloud via device Settings on the device.",
+                  "message": "Enable Back up data (TechCorp Cloud)",
+                  "originalType": "onURL"
+                }
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Remove Screen Protector Debris",
+            "description": "It will improve touch responsiveness by cleaning",
+            "stepGroups": [
+              {
+                "steps": [
+                  "If your screen protector is peeling or has debris under it, remove it.",
+                  "Wipe the front and back with a lint-free, soft microfiber cloth or a camera lens cleaning cloth.",
+                  "Avoid applying too much pressure when cleaning."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Try a Different Charger",
+            "description": "It will rule out a faulty charger",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Try using a different, undamaged charger."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Update Third-Party Apps",
+            "description": "It will fix bugs in installed apps",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Check for updates for any third-party apps you use, as these can sometimes affect gesture customization."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Restart the Device",
+            "description": "It will clear temporary glitches quickly",
+            "stepGroups": [
+              {
+                "steps": [
+                  "For devices with a Power button, press and hold the Power button.",
+                  "Tap Restart.",
+                  "Tap Restart again to confirm.",
+                  "For devices with a Side button, swipe down from the top of the screen with two fingers to open the Quick settings panel.",
+                  "Tap the Power icon.",
+                  "If the touchscreen is completely unresponsive, force a restart by pressing and holding the Volume down button and the Power button (or Side button) simultaneously for about 10 seconds.",
+                  "Press the Power button or Side button again to turn it back on."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "critical"
+          },
+          {
+            "actionName": "Boot Into Safe Mode",
+            "description": "It will isolate third-party app issues",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Press and hold the Power button (or Side button) and the Volume down button at the same time.",
+                  "Swipe down from the top of the screen with two fingers and tap the Power icon.",
+                  "Touch and hold Power off.",
+                  "Tap Safe mode.",
+                  "Try removing any third-party apps that were recently updated or installed around the time the issue began.",
+                  "Restart your phone or tablet, and it will boot up normally."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "critical"
+          },
+          {
+            "actionName": "Perform Factory Data Reset",
+            "description": "It will restore original factory settings",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Navigate to and open Settings.",
+                  "Tap General management.",
+                  "Tap Reset.",
+                  "Tap Factory data reset.",
+                  "Swipe to and tap Reset.",
+                  "Tap Delete all.",
+                  "Enter your TechCorp account credentials to complete the reset."
+                ],
+                "actionableDeeplink": {
+                  "deeplink": "voiceassist://dummy_positive",
+                  "description": "Opens the Factory data reset settings screen",
+                  "message": "Open Factory data reset in device Settings",
+                  "originalType": "placeholder"
+                },
+                "validationDeeplink": null
+              }
+            ],
+            "category": "critical"
+          }
+        ],
+        "score": 0.95
+      }
+    ]
+  },
+  "meta": {
+    "latency_ms": 2504,
+    "cache_hit": false,
+    "model": "groq/openai/gpt-oss-120b",
+    "cost_usd": 0.000885,
+    "fallback": null,
+    "knowledge_fit": "full",
+    "tokens": {
+      "prompt": 1445,
+      "completion": 1114
+    },
+    "llm_stages": {
+      "enrichment": "llm",
+      "structuring": "llm"
+    }
+  },
+  "trace": {
+    "frame": {
+      "symptoms": [
+        "TOUCH"
+      ],
+      "contexts": [],
+      "device": "phone",
+      "part": "",
+      "polarity": "",
+      "config_request": false,
+      "components": [
+        "display"
+      ]
+    },
+    "gate": {
+      "fit": "full",
+      "fit_score": 0.932,
+      "reason": "context_ok=True (doc [] vs complaint []); symptom_ok=True (doc ['TCH'] vs complaint ['TCH']); doc_sim=0.44",
+      "kept_sections": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "dropped": {}
+    },
+    "units": [
+      {
+        "uid": "U1",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S2.5",
+          "S2.12",
+          "S2.13"
+        ],
+        "steps": [
+          "If your screen protector is peeling or has debris under it, remove it.",
+          "Wipe the front and back with a lint-free, soft microfiber cloth or a camera lens cleaning cloth.",
+          "Avoid applying too much pressure when cleaning."
+        ],
+        "evidence": {
+          "S2.5": "If your screen protector is peeling or has debris under it, please remove it.",
+          "S2.12": "To clean your device, gently wipe the front and back with a lint-free, soft microfiber cloth or a camera lens cleaning cloth.",
+          "S2.13": "Please avoid applying too much pressure when cleaning."
+        }
+      },
+      {
+        "uid": "U2",
+        "kind": "nav",
+        "category": "auto",
+        "polarity": "on",
+        "targets": [
+          "Display",
+          "Touch sensitivity"
+        ],
+        "spans": [
+          "S2.7"
+        ],
+        "steps": [
+          "Navigate to and open Settings.",
+          "Tap Display.",
+          "Tap the switch next to Touch sensitivity."
+        ],
+        "evidence": {
+          "S2.7": "To do this, go to Settings, tap Display, and then tap the switch next to Touch sensitivity."
+        }
+      },
+      {
+        "uid": "U3",
+        "kind": "other",
+        "category": "critical",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S3.3",
+          "S3.4",
+          "S3.5",
+          "S3.6",
+          "S3.7",
+          "S3.8",
+          "S3.9"
+        ],
+        "steps": [
+          "For devices with a Power button, press and hold the Power button.",
+          "Tap Restart.",
+          "Tap Restart again to confirm.",
+          "For devices with a Side button, swipe down from the top of the screen with two fingers to open the Quick settings panel.",
+          "Tap the Power icon.",
+          "If the touchscreen is completely unresponsive, force a restart by pressing and holding the Volume down button and the Power button (or Side button) simultaneously for about 10 seconds.",
+          "Press the Power button or Side button again to turn it back on."
+        ],
+        "evidence": {
+          "S3.3": "For devices with a Power button: Press and hold the Power button, then tap Restart.",
+          "S3.4": "Tap Restart again to confirm.",
+          "S3.5": "For devices with a Side button: Swipe down from the top of the screen with two fingers to open the Quick settings panel.",
+          "S3.6": "Tap the Power icon, then tap Restart.",
+          "S3.7": "Tap Restart again to confirm.",
+          "S3.8": "If the touchscreen is completely unresponsive, you can force a restart by pressing and holding the Volume down button and the Power button (or Side button) simultaneously for about 10 seconds.",
+          "S3.9": "Once the device turns off, press the Power button or Side button again to turn it back on."
+        }
+      },
+      {
+        "uid": "U4",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S4.2"
+        ],
+        "steps": [
+          "Try using a different, undamaged charger."
+        ],
+        "evidence": {
+          "S4.2": "If you suspect this is the case, please try using a different, undamaged charger."
+        }
+      },
+      {
+        "uid": "U5",
+        "kind": "nav",
+        "category": "auto",
+        "polarity": "off",
+        "targets": [
+          "Display",
+          "Navigation bar",
+          "Buttons"
+        ],
+        "spans": [
+          "S5.3",
+          "S5.4"
+        ],
+        "steps": [
+          "Navigate to and open Settings.",
+          "Tap Display.",
+          "Tap Navigation bar.",
+          "Select Buttons to turn off full screen gestures."
+        ],
+        "evidence": {
+          "S5.3": "Go to Settings, tap Display, and then tap Navigation bar.",
+          "S5.4": "Select Buttons to turn off full screen gestures."
+        }
+      },
+      {
+        "uid": "U6",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S7.2"
+        ],
+        "steps": [
+          "Check for updates for any third-party apps you use, as these can sometimes affect gesture customization."
+        ],
+        "evidence": {
+          "S7.2": "You should also check for updates for any third-party apps you use, as these can sometimes affect gesture customization."
+        }
+      },
+      {
+        "uid": "U7",
+        "kind": "other",
+        "category": "critical",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S8.3",
+          "S8.4",
+          "S8.5",
+          "S8.6",
+          "S8.7"
+        ],
+        "steps": [
+          "Press and hold the Power button (or Side button) and the Volume down button at the same time.",
+          "Swipe down from the top of the screen with two fingers and tap the Power icon.",
+          "Touch and hold Power off.",
+          "Tap Safe mode.",
+          "Try removing any third-party apps that were recently updated or installed around the time the issue began.",
+          "Restart your phone or tablet, and it will boot up normally."
+        ],
+        "evidence": {
+          "S8.3": "Press and hold the Power button (or Side button) and the Volume down button at the same time.",
+          "S8.4": "Alternatively, swipe down from the top of the screen with two fingers and tap the Power icon.",
+          "S8.5": "Touch and hold Power off, then tap Safe mode.",
+          "S8.6": "Once in Safe mode, you can try removing any third-party apps that were recently updated or installed around the time the issue began.",
+          "S8.7": "To exit Safe mode, simply restart your phone or tablet, and it will boot up normally."
+        }
+      },
+      {
+        "uid": "U8",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S9.3"
+        ],
+        "steps": [
+          "Back up your personal data to avoid losing it."
+        ],
+        "evidence": {
+          "S9.3": "Before proceeding, it is crucial to back up your personal data to avoid losing it."
+        }
+      },
+      {
+        "uid": "U9",
+        "kind": "nav",
+        "category": "critical",
+        "polarity": "open",
+        "targets": [
+          "General management",
+          "Reset",
+          "Factory data reset",
+          "Delete all"
+        ],
+        "spans": [
+          "S9.5",
+          "S9.6",
+          "S9.7",
+          "S9.8",
+          "S9.9",
+          "S9.10",
+          "S9.11"
+        ],
+        "steps": [
+          "Navigate to and open Settings.",
+          "Tap General management.",
+          "Tap Reset.",
+          "Tap Factory data reset.",
+          "Swipe to and tap Reset.",
+          "Tap Delete all.",
+          "Enter your TechCorp account credentials to complete the reset."
+        ],
+        "evidence": {
+          "S9.5": "Navigate to and open Settings.",
+          "S9.6": "Tap General management.",
+          "S9.7": "Tap Reset.",
+          "S9.8": "Tap Factory data reset.",
+          "S9.9": "Swipe to and tap Reset.",
+          "S9.10": "Tap Delete all.",
+          "S9.11": "You will need to enter your TechCorp account credentials to complete the reset."
+        }
+      }
+    ],
+    "enrichment": {
+      "canonical_query": "Nexa X1 phone screen touch input is lagging when interacting, causing delayed response.",
+      "hard_negatives": [
+        "Nexa X1 phone screen won't turn on when power button is pressed.",
+        "Battery on Nexa X1 drains quickly after charging, causing sudden shutdowns.",
+        "Nexa X1 tablet cover screen flickers when opened, but touch works fine.",
+        "Phone speaker on Nexa X1 makes crackling noise during calls."
+      ]
+    },
+    "structuring": {
+      "no_viable_solution": false,
+      "goals": [
+        {
+          "topic": "Touchscreen Lag",
+          "title": "Touchscreen lag recovery",
+          "config_request": false,
+          "units": [
+            "U1",
+            "U2",
+            "U3",
+            "U7"
+          ]
+        }
+      ],
+      "actions": {
+        "U1": {
+          "keep": true,
+          "name": "Remove Screen Protector Debris",
+          "description": "It will improve touch responsiveness by cleaning",
+          "drop_steps": []
+        },
+        "U2": {
+          "keep": true,
+          "name": "Adjust Touch Sensitivity Setting",
+          "description": "It will increase screen responsiveness instantly",
+          "drop_steps": []
+        },
+        "U3": {
+          "keep": true,
+          "name": "Restart the Device",
+          "description": "It will clear temporary glitches quickly",
+          "drop_steps": []
+        },
+        "U7": {
+          "keep": true,
+          "name": "Boot Into Safe Mode",
+          "description": "It will isolate third‑party app issues",
+          "drop_steps": []
+        }
+      }
+    },
+    "actions": [
+      {
+        "unit": "U2",
+        "spans": [
+          "S2.7"
+        ],
+        "kind": "nav",
+        "resolution": {
+          "method": "exact-label",
+          "uri": "voiceassist://masked/act/14eb42b895",
+          "confidence": 1.0,
+          "reason": "tapped target 'Touch sensitivity' equals screen label 'Touch sensitivity'; variant=on",
+          "candidates": []
+        },
+        "description_source": "llm"
+      },
+      {
+        "unit": "U5",
+        "spans": [
+          "S5.3",
+          "S5.4"
+        ],
+        "kind": "nav",
+        "resolution": {
+          "method": "exact-label",
+          "uri": "voiceassist://masked/act/2f3dd95259",
+          "confidence": 1.0,
+          "reason": "tapped target 'Navigation bar' equals screen label 'Navigation bar'; variant=open",
+          "candidates": []
+        },
+        "description_source": "deterministic"
+      },
+      {
+        "unit": "U8",
+        "spans": [
+          "S9.3"
+        ],
+        "kind": "other",
+        "resolution": {
+          "method": "latent-label",
+          "uri": "voiceassist://masked/act/b3ed3ed663",
+          "confidence": 0.82,
+          "reason": "head 'back personal' contained in label 'Back up data (TechCorp Cloud)' (cos=0.55)",
+          "candidates": []
+        },
+        "description_source": "deterministic"
+      },
+      {
+        "unit": "U1",
+        "spans": [
+          "S2.5",
+          "S2.12",
+          "S2.13"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U4",
+        "spans": [
+          "S4.2"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "deterministic"
+      },
+      {
+        "unit": "U6",
+        "spans": [
+          "S7.2"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "deterministic"
+      },
+      {
+        "unit": "U3",
+        "spans": [
+          "S3.3",
+          "S3.4",
+          "S3.5",
+          "S3.6",
+          "S3.7",
+          "S3.8",
+          "S3.9"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U7",
+        "spans": [
+          "S8.3",
+          "S8.4",
+          "S8.5",
+          "S8.6",
+          "S8.7"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U9",
+        "spans": [
+          "S9.5",
+          "S9.6",
+          "S9.7",
+          "S9.8",
+          "S9.9",
+          "S9.10",
+          "S9.11"
+        ],
+        "kind": "nav",
+        "resolution": {
+          "method": "dummy",
+          "uri": "voiceassist://dummy_positive",
+          "confidence": 0.5,
+          "reason": "chain opens Settings but no catalog screen matches the target exactly",
+          "candidates": []
+        },
+        "description_source": "deterministic"
+      }
+    ],
+    "output_gate": [],
+    "resolver_memo_hits": 0
+  }
+}

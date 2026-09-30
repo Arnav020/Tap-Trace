@@ -1,0 +1,287 @@
+{
+  "input_line": 1,
+  "siis_id": "row_1",
+  "query": "My TechCorp A15G tablet screen flashes and then goes completely blank whenever I tap to open an email in Gmail, and after it works for a short time it goes blank again.",
+  "query_variations": [
+    "The tablet's display intermittently flashes and subsequently turns completely black each time I tap to open an email in Gmail.",
+    "Whenever I select an email in Gmail on the tablet, the screen flashes briefly before becoming entirely blank.",
+    "My tablet screen flickers and then just blacks out whenever I tap an email in Gmail.",
+    "Every time I open an email in Gmail on the tablet, the screen flashes and then goes dark.",
+    "tablet screen flash blank Gmail tap",
+    "screen flashes blank Gmail email tap tablet",
+    "Why does my tablet screen keep flashing and then go completely black every time I try to open an email in Gmail?!",
+    "This is ridiculous - tap an email in Gmail and the tablet screen just flashes and dies!",
+    "My tabllet screen flashs and then goes blnak when tapping an email in Gmail.",
+    "Whenever I tap an email in Gmial, the tablet screeen flashes and goes blank."
+  ],
+  "response": {
+    "contexts": [
+      {
+        "goal": "Follow these steps to perform this Email App Display Troubleshooting",
+        "title": "Email app display",
+        "actions": [
+          {
+            "actionName": "Clear Email App Storage",
+            "description": "It will remove corrupted cache files",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Navigate to and open Settings.",
+                  "Tap Apps.",
+                  "Select your email app.",
+                  "Tap Storage.",
+                  "Tap Clear cache.",
+                  "Tap Clear data.",
+                  "Tap OK."
+                ],
+                "actionableDeeplink": {
+                  "deeplink": "voiceassist://dummy_positive",
+                  "description": "Opens the email app Storage settings screen",
+                  "message": "Open email app Storage in device Settings",
+                  "originalType": "placeholder"
+                },
+                "validationDeeplink": null
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Boot Into Safe Mode",
+            "description": "It will isolate third-party app conflicts",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Press and hold the Power button or Side button.",
+                  "If your phone doesn't have a dedicated Power button, swipe down from the top of the screen to open Quick settings.",
+                  "Tap the Power icon.",
+                  "Touch and hold the Power off icon.",
+                  "Tap Safe mode when it appears on the screen.",
+                  "Check if your email app is still experiencing issues.",
+                  "Uninstall the email app if necessary while in Safe mode.",
+                  "Restart your phone normally."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "critical"
+          }
+        ],
+        "score": 0.76
+      }
+    ]
+  },
+  "meta": {
+    "latency_ms": 2699,
+    "cache_hit": false,
+    "model": "groq/openai/gpt-oss-120b",
+    "cost_usd": 0.000566,
+    "fallback": null,
+    "knowledge_fit": "partial",
+    "tokens": {
+      "prompt": 1093,
+      "completion": 670
+    },
+    "llm_stages": {
+      "enrichment": "llm",
+      "structuring": "llm"
+    }
+  },
+  "trace": {
+    "frame": {
+      "symptoms": [
+        "BLANK",
+        "FLICKER"
+      ],
+      "contexts": [
+        "email"
+      ],
+      "device": "tablet",
+      "part": "",
+      "polarity": "",
+      "config_request": false,
+      "components": [
+        "display"
+      ]
+    },
+    "gate": {
+      "fit": "partial",
+      "fit_score": 0.578,
+      "reason": "context_ok=True (doc ['email'] vs complaint ['email']); symptom_ok=False (doc ['NET', 'TCH'] vs complaint ['FLK', 'VIS']); doc_sim=0.51",
+      "kept_sections": [
+        5,
+        6
+      ],
+      "dropped": {
+        "1": "partial fit: non-generic section",
+        "2": "partial fit: non-generic section",
+        "3": "partial fit: non-generic section",
+        "4": "partial fit: non-generic section",
+        "7": "partial fit: non-generic section"
+      }
+    },
+    "units": [
+      {
+        "uid": "U1",
+        "kind": "nav",
+        "category": "auto",
+        "polarity": "open",
+        "targets": [
+          "Apps",
+          "your email app",
+          "Storage",
+          "Clear cache",
+          "Clear data"
+        ],
+        "spans": [
+          "S5.3",
+          "S5.4",
+          "S5.5",
+          "S5.6",
+          "S5.7",
+          "S5.9",
+          "S5.10",
+          "S5.11",
+          "S5.12",
+          "S5.13"
+        ],
+        "steps": [
+          "Navigate to and open Settings.",
+          "Tap Apps.",
+          "Select your email app.",
+          "Tap Storage.",
+          "Tap Clear cache.",
+          "Tap Clear data.",
+          "Tap OK."
+        ],
+        "evidence": {
+          "S5.3": "Navigate to Settings.",
+          "S5.4": "Tap Apps.",
+          "S5.5": "Select your email app.",
+          "S5.6": "Tap Storage.",
+          "S5.7": "Tap Clear cache.",
+          "S5.9": "Navigate to Settings.",
+          "S5.10": "Tap Apps.",
+          "S5.11": "Select your email app.",
+          "S5.12": "Tap Storage.",
+          "S5.13": "Tap Clear data, and then tap OK."
+        }
+      },
+      {
+        "uid": "U2",
+        "kind": "other",
+        "category": "critical",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S6.2",
+          "S6.3",
+          "S6.4",
+          "S6.5",
+          "S6.7",
+          "S6.9",
+          "S6.10"
+        ],
+        "steps": [
+          "Press and hold the Power button or Side button.",
+          "If your phone doesn't have a dedicated Power button, swipe down from the top of the screen to open Quick settings.",
+          "Tap the Power icon.",
+          "Touch and hold the Power off icon.",
+          "Tap Safe mode when it appears on the screen.",
+          "Check if your email app is still experiencing issues.",
+          "Uninstall the email app if necessary while in Safe mode.",
+          "Restart your phone normally."
+        ],
+        "evidence": {
+          "S6.2": "Press and hold the Power button or Side button.",
+          "S6.3": "If your phone doesn't have a dedicated Power button, swipe down from the top of the screen to open Quick settings, and then tap the Power icon.",
+          "S6.4": "Touch and hold the Power off icon.",
+          "S6.5": "Tap Safe mode when it appears on the screen.",
+          "S6.7": "While in Safe mode, check if your email app is still experiencing issues.",
+          "S6.9": "You can also uninstall the email app if necessary while in Safe mode.",
+          "S6.10": "To exit Safe mode, simply restart your phone normally."
+        }
+      }
+    ],
+    "enrichment": {
+      "canonical_query": "tablet screen flashes and goes blank when tapping an email in Gmail",
+      "hard_negatives": [
+        "tablet screen flickers when charging the device and then stays on",
+        "tablet battery drains quickly after opening Gmail, causing shutdown",
+        "tablet cover screen cracks when tapping the home button, causing display issues",
+        "tablet won't turn on after pressing power button, but screen works fine when connected to charger"
+      ]
+    },
+    "structuring": {
+      "no_viable_solution": false,
+      "goals": [
+        {
+          "topic": "Email App Display",
+          "title": null,
+          "config_request": false,
+          "units": [
+            "U1",
+            "U2"
+          ]
+        }
+      ],
+      "actions": {
+        "U1": {
+          "keep": true,
+          "name": "Clear Email App Storage",
+          "description": "It will remove corrupted cache files",
+          "drop_steps": []
+        },
+        "U2": {
+          "keep": true,
+          "name": "Boot Into Safe Mode",
+          "description": "It will isolate third‑party app conflicts",
+          "drop_steps": []
+        }
+      }
+    },
+    "actions": [
+      {
+        "unit": "U1",
+        "spans": [
+          "S5.3",
+          "S5.4",
+          "S5.5",
+          "S5.6",
+          "S5.7",
+          "S5.9",
+          "S5.10",
+          "S5.11",
+          "S5.12",
+          "S5.13"
+        ],
+        "kind": "nav",
+        "resolution": {
+          "method": "dummy",
+          "uri": "voiceassist://dummy_positive",
+          "confidence": 0.5,
+          "reason": "chain opens Settings but no catalog screen matches the target exactly",
+          "candidates": []
+        },
+        "description_source": "llm"
+      },
+      {
+        "unit": "U2",
+        "spans": [
+          "S6.2",
+          "S6.3",
+          "S6.4",
+          "S6.5",
+          "S6.7",
+          "S6.9",
+          "S6.10"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      }
+    ],
+    "output_gate": [],
+    "resolver_memo_hits": 0
+  }
+}

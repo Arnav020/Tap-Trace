@@ -1,0 +1,12 @@
+services:
+  taptrace:
+    build: .
+    image: taptrace:latest
+    ports:
+      - "8000:8000"
+    # Optional: put GROQ_API_KEY=... (or GEMINI_API_KEY / OPENAI_API_KEY) in .env to enable the LLM cold path.
+    # Without a key the engine runs its deterministic path and still serves the pre-warmed cache.
+    env_file:
+      - path: .env
+        required: false
+    restart: unless-stopped

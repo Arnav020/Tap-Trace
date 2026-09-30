@@ -1,0 +1,412 @@
+{
+  "input_line": 18,
+  "siis_id": "row_20",
+  "query": "My Nexa A14 screen looks distorted right after I received the phone, and I need a diagnostic test.",
+  "query_variations": [
+    "The display of my Nexa A14 appears distorted right after I took it out of the box.",
+    "My new Nexa A14 screen looks all messed up as soon as I got it.",
+    "screen distorted new phone",
+    "Why is the screen all warped right after I opened the phone?!",
+    "My Nexa A14 screeen is distored right after I receved it.",
+    "Upon initial use, the Nexa A14's screen exhibits distortion.",
+    "Got the Nexa A14 and the screen's already weird.",
+    "distorted display immediate",
+    "The phone arrived and the screen is already garbled!",
+    "Screen looks disrtorted right after i recived the Nexa."
+  ],
+  "response": {
+    "contexts": [
+      {
+        "goal": "Follow these steps to perform this Display Distortion Troubleshooting",
+        "title": "Display distortion check",
+        "actions": [
+          {
+            "actionName": "Back Up Data",
+            "description": "It will protect data before changes",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Back up your data before proceeding with this step."
+                ],
+                "validationDeeplink": {
+                  "deeplink": "voiceassist://masked/val/266037d0c5",
+                  "key": "Back up data (TechCorp Cloud)",
+                  "resultType": "boolean",
+                  "condition": "equal",
+                  "value": "True"
+                },
+                "actionableDeeplink": {
+                  "deeplink": "voiceassist://masked/act/b3ed3ed663",
+                  "description": "Enables data backup to TechCorp Cloud via device Settings on the device.",
+                  "message": "Enable Back up data (TechCorp Cloud)",
+                  "originalType": "onURL"
+                }
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Check Screen Damage",
+            "description": "It will identify visible screen defects",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Check for any cracks or other damage to the screen."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Contact Support for Damage",
+            "description": "It will arrange service for damaged screen",
+            "stepGroups": [
+              {
+                "steps": [
+                  "If the device's screen is damaged, contact Customer Support to set up service.",
+                  "If the issue persists after completing all the above steps, contact Customer Support to arrange for service."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Restart Device",
+            "description": "It will refresh system to clear glitches",
+            "stepGroups": [
+              {
+                "steps": [
+                  "On devices with a Power button, press and hold the Power button.",
+                  "Tap Restart.",
+                  "Tap Restart again to confirm.",
+                  "On devices with a Side button, swipe down from the top of the screen to open the Quick settings panel using two fingers.",
+                  "Tap the Power icon."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "critical"
+          },
+          {
+            "actionName": "Factory Data Reset",
+            "description": "It will erase all data and settings",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Navigate to and open Settings.",
+                  "Search for and select Factory data reset.",
+                  "Tap Factory data reset again.",
+                  "Review the information presented.",
+                  "Tap Reset.",
+                  "Tap Delete all.",
+                  "Enter your TechCorp account password."
+                ],
+                "actionableDeeplink": {
+                  "deeplink": "voiceassist://dummy_positive",
+                  "description": "Opens the Factory data reset settings screen",
+                  "message": "Open Factory data reset in device Settings",
+                  "originalType": "placeholder"
+                },
+                "validationDeeplink": null
+              }
+            ],
+            "category": "critical"
+          }
+        ],
+        "score": 0.74
+      }
+    ]
+  },
+  "meta": {
+    "latency_ms": 1749,
+    "cache_hit": false,
+    "model": "groq/openai/gpt-oss-120b",
+    "cost_usd": 0.000663,
+    "fallback": null,
+    "knowledge_fit": "partial",
+    "tokens": {
+      "prompt": 1132,
+      "completion": 822
+    },
+    "llm_stages": {
+      "enrichment": "llm",
+      "structuring": "llm"
+    }
+  },
+  "trace": {
+    "frame": {
+      "symptoms": [
+        "DISTORT"
+      ],
+      "contexts": [],
+      "device": "phone",
+      "part": "",
+      "polarity": "",
+      "config_request": false,
+      "components": [
+        "display"
+      ]
+    },
+    "gate": {
+      "fit": "partial",
+      "fit_score": 0.523,
+      "reason": "context_ok=False (doc ['rotation'] vs complaint []); symptom_ok=False (doc ['ROT'] vs complaint ['DST']); doc_sim=0.29",
+      "kept_sections": [
+        2,
+        4,
+        5,
+        7,
+        8
+      ],
+      "dropped": {
+        "1": "section is about ['rotation'], absent from complaint",
+        "3": "section is about ['rotation'], absent from complaint",
+        "6": "section is about ['rotation'], absent from complaint"
+      }
+    },
+    "units": [
+      {
+        "uid": "U1",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S2.2"
+        ],
+        "steps": [
+          "Check for any cracks or other damage to the screen."
+        ],
+        "evidence": {
+          "S2.2": "Please check for any cracks or other damage to the screen."
+        }
+      },
+      {
+        "uid": "U2",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S2.3",
+          "S8.1"
+        ],
+        "steps": [
+          "If the device's screen is damaged, contact Customer Support to set up service.",
+          "If the issue persists after completing all the above steps, contact Customer Support to arrange for service."
+        ],
+        "evidence": {
+          "S2.3": "If the device's screen is damaged, please contact Customer Support to set up service.",
+          "S8.1": "If the issue persists after completing all the above steps, please contact Customer Support to arrange for service."
+        }
+      },
+      {
+        "uid": "U3",
+        "kind": "other",
+        "category": "critical",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S5.2",
+          "S5.3",
+          "S5.4",
+          "S5.5",
+          "S5.6"
+        ],
+        "steps": [
+          "On devices with a Power button, press and hold the Power button.",
+          "Tap Restart.",
+          "Tap Restart again to confirm.",
+          "On devices with a Side button, swipe down from the top of the screen to open the Quick settings panel using two fingers.",
+          "Tap the Power icon."
+        ],
+        "evidence": {
+          "S5.2": "On devices with a Power button: Press and hold the Power button, then tap Restart.",
+          "S5.3": "Tap Restart again to confirm.",
+          "S5.4": "On devices with a Side button: Using two fingers, swipe down from the top of the screen to open the Quick settings panel.",
+          "S5.5": "Tap the Power icon, then tap Restart.",
+          "S5.6": "Tap Restart again to confirm."
+        }
+      },
+      {
+        "uid": "U4",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S7.2"
+        ],
+        "steps": [
+          "Back up your data before proceeding with this step."
+        ],
+        "evidence": {
+          "S7.2": "It is important to back up your data before proceeding with this step."
+        }
+      },
+      {
+        "uid": "U5",
+        "kind": "nav",
+        "category": "critical",
+        "polarity": "open",
+        "targets": [
+          "Factory data reset",
+          "Factory data reset",
+          "Reset",
+          "Delete all"
+        ],
+        "spans": [
+          "S7.4",
+          "S7.5",
+          "S7.7",
+          "S7.8"
+        ],
+        "steps": [
+          "Navigate to and open Settings.",
+          "Search for and select Factory data reset.",
+          "Tap Factory data reset again.",
+          "Review the information presented.",
+          "Tap Reset.",
+          "Tap Delete all.",
+          "Enter your TechCorp account password."
+        ],
+        "evidence": {
+          "S7.4": "Navigate to Settings, search for and select Factory data reset, and then tap Factory data reset again.",
+          "S7.5": "Review the information presented, then tap Reset.",
+          "S7.7": "Afterward, tap Delete all.",
+          "S7.8": "If prompted, enter your TechCorp account password."
+        }
+      }
+    ],
+    "enrichment": {
+      "canonical_query": "Phone screen is distorted immediately after receiving the device",
+      "hard_negatives": [
+        "Battery won't charge immediately after first use",
+        "Screen won't turn off after prolonged usage",
+        "Cover screen flickers when adjusting brightness",
+        "Phone won't power on after pressing the power button"
+      ]
+    },
+    "structuring": {
+      "no_viable_solution": false,
+      "goals": [
+        {
+          "topic": "Display Distortion",
+          "title": "Display distortion check",
+          "config_request": false,
+          "units": [
+            "U1",
+            "U2",
+            "U3"
+          ]
+        }
+      ],
+      "actions": {
+        "U1": {
+          "keep": true,
+          "name": "Check Screen Damage",
+          "description": "It will identify visible screen defects",
+          "drop_steps": []
+        },
+        "U2": {
+          "keep": true,
+          "name": "Contact Support for Damage",
+          "description": "It will arrange service for damaged screen",
+          "drop_steps": []
+        },
+        "U3": {
+          "keep": true,
+          "name": "Restart Device",
+          "description": "It will refresh system to clear glitches",
+          "drop_steps": []
+        },
+        "U4": {
+          "keep": false,
+          "name": "Back Up Data",
+          "description": "It will protect data before changes",
+          "drop_steps": []
+        },
+        "U5": {
+          "keep": false,
+          "name": "Factory Data Reset",
+          "description": "It will erase all data and settings",
+          "drop_steps": []
+        }
+      }
+    },
+    "actions": [
+      {
+        "unit": "U4",
+        "spans": [
+          "S7.2"
+        ],
+        "kind": "other",
+        "resolution": {
+          "method": "latent-label",
+          "uri": "voiceassist://masked/act/b3ed3ed663",
+          "confidence": 0.769,
+          "reason": "head 'back data' contained in label 'Back up data (TechCorp Cloud)' (cos=0.42)",
+          "candidates": []
+        },
+        "description_source": "llm"
+      },
+      {
+        "unit": "U1",
+        "spans": [
+          "S2.2"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U2",
+        "spans": [
+          "S2.3",
+          "S8.1"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U3",
+        "spans": [
+          "S5.2",
+          "S5.3",
+          "S5.4",
+          "S5.5",
+          "S5.6"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U5",
+        "spans": [
+          "S7.4",
+          "S7.5",
+          "S7.7",
+          "S7.8"
+        ],
+        "kind": "nav",
+        "resolution": {
+          "method": "dummy",
+          "uri": "voiceassist://dummy_positive",
+          "confidence": 0.5,
+          "reason": "chain opens Settings but no catalog screen matches the target exactly",
+          "candidates": []
+        },
+        "description_source": "llm"
+      }
+    ],
+    "output_gate": [],
+    "resolver_memo_hits": 0
+  }
+}

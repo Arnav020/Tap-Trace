@@ -1,0 +1,21 @@
+ 1 row_1   fit=partial  fallback=None     actions= 2  2699ms $0.000566 {'enrichment': 'llm', 'structuring': 'llm'}
+ 2 row_2   fit=full     fallback=None     actions= 4  2204ms $0.000792 {'enrichment': 'llm', 'structuring': 'llm'}
+ 3 row_3   fit=full     fallback=None     actions= 4  3699ms $0.000732 {'enrichment': 'llm', 'structuring': 'llm'}
+ 4 row_4   fit=full     fallback=None     actions= 5  3054ms $0.000707 {'enrichment': 'llm', 'structuring': 'llm'}
+ 5 row_5   fit=full     fallback=None     actions= 3  1936ms $0.000651 {'enrichment': 'llm', 'structuring': 'llm'}
+ 6 row_7   fit=none     fallback=no_match actions= 0  3591ms $0.000425 {'enrichment': 'llm', 'structuring': 'deterministic'}
+ 7 row_8   fit=none     fallback=no_match actions= 0  1584ms $0.000382 {'enrichment': 'llm', 'structuring': 'deterministic'}
+ 8 row_9   fit=full     fallback=None     actions= 4  3039ms $0.000674 {'enrichment': 'llm', 'structuring': 'llm'}
+ 9 row_10  fit=partial  fallback=no_match actions= 0  5984ms $0.000408 {'enrichment': 'llm', 'structuring': 'deterministic'}
+10 row_11  fit=full     fallback=None     actions= 4  1887ms $0.000679 {'enrichment': 'llm', 'structuring': 'llm'}
+11 row_12  fit=none     fallback=no_match actions= 0  2081ms $0.000449 {'enrichment': 'llm', 'structuring': 'deterministic'}
+12 row_13  fit=full     fallback=None     actions= 5  4563ms $0.000753 {'enrichment': 'llm', 'structuring': 'llm'}
+13 row_14  fit=full     fallback=None     actions= 1  4863ms $0.000659 {'enrichment': 'llm', 'structuring': 'llm'}
+14 row_15  fit=full     fallback=None     actions= 5  3857ms $0.000763 {'enrichment': 'llm', 'structuring': 'llm'}
+15 row_16  fit=partial  fallback=None     actions= 2  3142ms $0.000630 {'enrichment': 'llm', 'structuring': 'llm'}
+16 row_17  fit=full     fallback=None     actions= 4  3715ms $0.000668 {'enrichment': 'llm', 'structuring': 'llm'}
+17 row_19  fit=full     fallback=None     actions= 1  3453ms $0.000562 {'enrichment': 'llm', 'structuring': 'llm'}
+18 row_20  fit=partial  fallback=None     actions= 5  1749ms $0.000663 {'enrichment': 'llm', 'structuring': 'llm'}
+19 row_21  fit=full     fallback=None     actions= 9  2504ms $0.000885 {'enrichment': 'llm', 'structuring': 'llm'}
+20 row_22  fit=full     fallback=None     actions= 4  2386ms $0.000749 {'enrichment': 'llm', 'structuring': 'llm'}
+wrote results.jsonl (20 lines) in 538.5s; cache entries=20

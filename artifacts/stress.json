@@ -1,0 +1,26 @@
+{
+  "requests": 400,
+  "concurrency": 16,
+  "cold_start_s": 1.6,
+  "throughput_rps": 495.0,
+  "errors": 0,
+  "schema_invalid": 0,
+  "cache_hits": 235,
+  "latency_ms": {
+    "exact": {
+      "p50": 31.4,
+      "p95": 40.3,
+      "n": 134
+    },
+    "paraphrase": {
+      "p50": 32.0,
+      "p95": 40.5,
+      "n": 133
+    },
+    "unknown": {
+      "p50": 34.7,
+      "p95": 43.9,
+      "n": 133
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "input_line": 7,
+  "siis_id": "row_8",
+  "query": "My new smartphone's main screen stays small and doesn't fill the whole display; I can't make it expand to full size and I've never seen this before.",
+  "query_variations": [
+    "The main display of my smartphone remains reduced in size and will not expand to occupy the full screen when I try to enlarge it.",
+    "My phone's screen stays tiny and I can't make it go full size.",
+    "smartphone screen small expand full",
+    "Why does the screen stay tiny? I can't get it to fill the whole phone!",
+    "My smarphone screen stays smal and won't fill the display.",
+    "The primary screen of the device persists in a minimized state and fails to scale to full-screen dimensions upon user request.",
+    "Can't get the phone screen to go full size, it just stays small.",
+    "phone display tiny cannot enlarge",
+    "This is ridiculous - the screen never expands to full size no matter what I do!",
+    "The main screeen wont expand to full size on my phone."
+  ],
+  "response": {
+    "contexts": []
+  },
+  "meta": {
+    "latency_ms": 1584,
+    "cache_hit": false,
+    "model": "groq/openai/gpt-oss-120b",
+    "cost_usd": 0.000382,
+    "fallback": "no_match",
+    "knowledge_fit": "none",
+    "tokens": {
+      "prompt": 364,
+      "completion": 545
+    },
+    "llm_stages": {
+      "enrichment": "llm",
+      "structuring": "deterministic"
+    }
+  },
+  "trace": {
+    "frame": {
+      "symptoms": [
+        "SIZE"
+      ],
+      "contexts": [],
+      "device": "phone",
+      "part": "",
+      "polarity": "",
+      "config_request": false,
+      "components": [
+        "display"
+      ]
+    },
+    "gate": {
+      "fit": "none",
+      "fit_score": 0.0,
+      "reason": "context_ok=False (doc ['tv_mirroring'] vs complaint []); symptom_ok=True (doc [] vs complaint ['SIZE']); doc_sim=0.29; no viable section",
+      "kept_sections": [],
+      "dropped": {
+        "1": "partial fit: non-generic section",
+        "2": "partial fit: non-generic section",
+        "3": "partial fit: non-generic section",
+        "4": "partial fit: non-generic section",
+        "5": "partial fit: non-generic section",
+        "6": "partial fit: non-generic section",
+        "7": "partial fit: non-generic section",
+        "8": "partial fit: non-generic section",
+        "9": "partial fit: non-generic section",
+        "10": "partial fit: non-generic section",
+        "11": "partial fit: non-generic section",
+        "12": "partial fit: non-generic section"
+      }
+    },
+    "units": [],
+    "enrichment": {
+      "canonical_query": "Smartphone main screen remains small and does not expand to full display when attempting to enlarge it",
+      "hard_negatives": [
+        "Smartphone battery won't charge when plugged in",
+        "Tablet screen flickers intermittently during video playback",
+        "Smartphone won't turn off after pressing power button",
+        "Laptop keyboard keys stick and do not release when typed"
+      ]
+    },
+    "structuring": null,
+    "actions": [],
+    "output_gate": [],
+    "resolver_memo_hits": 0
+  }
+}

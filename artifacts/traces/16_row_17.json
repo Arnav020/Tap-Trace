@@ -1,0 +1,295 @@
+{
+  "input_line": 16,
+  "siis_id": "row_17",
+  "query": "1. \"My Nexa X1 screen goes completely blank, just a dark screen with occasional scrolling and no visible content, so I can't see anything or use Data Transfer to transfer data.\"",
+  "query_variations": [
+    "The Nexa X1's display remains completely dark during Data Transfer attempts, preventing any visual interaction.",
+    "During Data Transfer, the Nexa X1 exhibits a fully black screen with no visible content.",
+    "My Nexa X1 just goes black when I try to move files, I can't see anything.",
+    "When I start a data transfer on my Nexa X1, the screen turns totally dark.",
+    "Nexa X1 screen blank data transfer",
+    "X1 dark display transfer issue",
+    "Why does my Nexa X1 screen go completely black every time I try to transfer data?!",
+    "This is ridiculous - screen stays dark on my Nexa X1 whenever I use Data Transfer!",
+    "My Nexa X1 scren goes blank when I start Data Transfer.",
+    "Nexa X1 screen blak during data transfer, cant see anything."
+  ],
+  "response": {
+    "contexts": [
+      {
+        "goal": "Follow these steps to perform this Blank Screen Troubleshooting",
+        "title": "Blank screen recovery",
+        "actions": [
+          {
+            "actionName": "Use USB Mouse",
+            "description": "It will let you navigate without touch",
+            "stepGroups": [
+              {
+                "steps": [
+                  "If you cannot use the touchscreen on your device, access your data with a USB mouse and keyboard.",
+                  "Connect the mouse and keyboard to your phone or tablet using a USB adapter.",
+                  "Navigate your device as needed."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Connect to Monitor",
+            "description": "It will enable data backup externally",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Back up your device's data by connecting it to a monitor."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Inspect Hardware Damage",
+            "description": "It will identify broken components quickly",
+            "stepGroups": [
+              {
+                "steps": [
+                  "If your device displays only a blank or black screen, check the device, charger, and USB cable for damage."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Force Restart Device",
+            "description": "It will reboot the system safely",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Try forcing a restart by pressing and holding the Power and Volume down buttons for 20 seconds, and then charging the device for at least one hour."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "critical"
+          }
+        ],
+        "score": 0.95
+      }
+    ]
+  },
+  "meta": {
+    "latency_ms": 3715,
+    "cache_hit": false,
+    "model": "groq/openai/gpt-oss-120b",
+    "cost_usd": 0.000668,
+    "fallback": null,
+    "knowledge_fit": "full",
+    "tokens": {
+      "prompt": 1063,
+      "completion": 847
+    },
+    "llm_stages": {
+      "enrichment": "llm",
+      "structuring": "llm"
+    }
+  },
+  "trace": {
+    "frame": {
+      "symptoms": [
+        "BLANK"
+      ],
+      "contexts": [
+        "data_transfer"
+      ],
+      "device": "phone",
+      "part": "",
+      "polarity": "",
+      "config_request": false,
+      "components": [
+        "display"
+      ]
+    },
+    "gate": {
+      "fit": "full",
+      "fit_score": 0.887,
+      "reason": "context_ok=True (doc [] vs complaint ['data_transfer']); symptom_ok=True (doc [] vs complaint ['VIS']); doc_sim=0.33",
+      "kept_sections": [
+        0
+      ],
+      "dropped": {
+        "1": "section is about ['fingerprint'], absent from complaint",
+        "2": "section is about ['kids'], absent from complaint",
+        "3": "section is about ['account_lock'], absent from complaint",
+        "4": "section is about ['keyboard'], absent from complaint"
+      }
+    },
+    "units": [
+      {
+        "uid": "U1",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S0.1",
+          "S0.2"
+        ],
+        "steps": [
+          "If you cannot use the touchscreen on your device, access your data with a USB mouse and keyboard.",
+          "Connect the mouse and keyboard to your phone or tablet using a USB adapter.",
+          "Navigate your device as needed."
+        ],
+        "evidence": {
+          "S0.1": "Even if you cannot use the touchscreen on your device, you can access your data with a USB mouse and keyboard.",
+          "S0.2": "Connect the mouse and keyboard to your phone or tablet using a USB adapter, and then navigate your device as needed."
+        }
+      },
+      {
+        "uid": "U2",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S0.3"
+        ],
+        "steps": [
+          "Back up your device's data by connecting it to a monitor."
+        ],
+        "evidence": {
+          "S0.3": "You can also back up your device's data by connecting it to a monitor."
+        }
+      },
+      {
+        "uid": "U3",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S0.4"
+        ],
+        "steps": [
+          "If your device displays only a blank or black screen, check the device, charger, and USB cable for damage."
+        ],
+        "evidence": {
+          "S0.4": "If your device displays only a blank or black screen, you may need to check the device, charger, and USB cable for damage."
+        }
+      },
+      {
+        "uid": "U4",
+        "kind": "other",
+        "category": "critical",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S0.5"
+        ],
+        "steps": [
+          "Try forcing a restart by pressing and holding the Power and Volume down buttons for 20 seconds, and then charging the device for at least one hour."
+        ],
+        "evidence": {
+          "S0.5": "You can also try forcing a restart by pressing and holding the Power and Volume down buttons for 20 seconds, and then charging the device for at least one hour."
+        }
+      }
+    ],
+    "enrichment": {
+      "canonical_query": "Nexa X1 screen stays blank when attempting Data Transfer, showing only a dark display.",
+      "hard_negatives": [
+        "Nexa X1 screen flickers when charging, but eventually shows content.",
+        "Nexa X1 battery won't charge during Data Transfer, causing shutdown.",
+        "Nexa X1 screen won't turn off after closing the cover screen.",
+        "Nexa X1 camera stays black when opening the app, not during data transfer."
+      ]
+    },
+    "structuring": {
+      "no_viable_solution": false,
+      "goals": [
+        {
+          "topic": "Blank Screen",
+          "title": "Blank screen recovery",
+          "config_request": false,
+          "units": [
+            "U1",
+            "U2",
+            "U3",
+            "U4"
+          ]
+        }
+      ],
+      "actions": {
+        "U1": {
+          "keep": true,
+          "name": "Use USB Mouse",
+          "description": "It will let you navigate without touch",
+          "drop_steps": []
+        },
+        "U2": {
+          "keep": true,
+          "name": "Connect to Monitor",
+          "description": "It will enable data backup externally",
+          "drop_steps": []
+        },
+        "U3": {
+          "keep": true,
+          "name": "Inspect Hardware Damage",
+          "description": "It will identify broken components quickly",
+          "drop_steps": []
+        },
+        "U4": {
+          "keep": true,
+          "name": "Force Restart Device",
+          "description": "It will reboot the system safely",
+          "drop_steps": []
+        }
+      }
+    },
+    "actions": [
+      {
+        "unit": "U1",
+        "spans": [
+          "S0.1",
+          "S0.2"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U2",
+        "spans": [
+          "S0.3"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U3",
+        "spans": [
+          "S0.4"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U4",
+        "spans": [
+          "S0.5"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      }
+    ],
+    "output_gate": [],
+    "resolver_memo_hits": 0
+  }
+}

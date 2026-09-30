@@ -1,0 +1,82 @@
+{
+  "input_line": 6,
+  "siis_id": "row_7",
+  "query": "My tablet's screen stays dark and only three app icons are lit while the rest are dark and won't open, so nothing loads on the screen and I can't use the device.",
+  "query_variations": [
+    "The tablet's display remains black, with merely three application icons illuminated, and the remaining apps fail to launch upon activation.",
+    "Upon powering the tablet, the screen is unlit except for three icons, and all other applications refuse to open.",
+    "My tablet screen is black except for three icons and nothing else works when I turn it on.",
+    "When I boot up the tablet, only three app icons light up and the rest of the screen stays dark.",
+    "tablet dark screen three icons apps not opening",
+    "screen black three icons apps fail load tablet",
+    "Why does my tablet only show three icons and a dark screen? Nothing else works!",
+    "This is ridiculous - tablet screen stays dark, only three icons lit, and I can't open any apps!",
+    "My tabet screen stays dark, only three app icnos lit and nothing loads.",
+    "When I turn on the tablet, the scren is black except three icons and apps wont open."
+  ],
+  "response": {
+    "contexts": []
+  },
+  "meta": {
+    "latency_ms": 3591,
+    "cache_hit": false,
+    "model": "groq/openai/gpt-oss-120b",
+    "cost_usd": 0.000425,
+    "fallback": "no_match",
+    "knowledge_fit": "none",
+    "tokens": {
+      "prompt": 369,
+      "completion": 616
+    },
+    "llm_stages": {
+      "enrichment": "llm",
+      "structuring": "deterministic"
+    }
+  },
+  "trace": {
+    "frame": {
+      "symptoms": [
+        "BLANK"
+      ],
+      "contexts": [],
+      "device": "tablet",
+      "part": "",
+      "polarity": "",
+      "config_request": false,
+      "components": [
+        "display"
+      ]
+    },
+    "gate": {
+      "fit": "none",
+      "fit_score": 0.0,
+      "reason": "context_ok=False (doc ['multiwindow'] vs complaint []); symptom_ok=True (doc [] vs complaint ['VIS']); doc_sim=0.30; no viable section",
+      "kept_sections": [],
+      "dropped": {
+        "0": "partial fit: non-generic section",
+        "1": "section is about ['multiwindow'], absent from complaint",
+        "2": "section is about ['multiwindow'], absent from complaint",
+        "3": "section is about ['multiwindow'], absent from complaint",
+        "4": "section is about ['multiwindow'], absent from complaint",
+        "5": "section is about ['multiwindow'], absent from complaint",
+        "6": "section is about ['multiwindow'], absent from complaint",
+        "7": "section is about ['multiwindow'], absent from complaint",
+        "8": "section is about ['multiwindow'], absent from complaint"
+      }
+    },
+    "units": [],
+    "enrichment": {
+      "canonical_query": "Tablet screen stays dark, only three icons lit and apps won't open when powered on.",
+      "hard_negatives": [
+        "Tablet screen stays dark and won't turn off when idle",
+        "Tablet battery drains quickly causing the screen to black out during use",
+        "Tablet cover screen flickers when opening apps, but the main display works",
+        "Tablet screen stays bright while apps fail to load, requiring a restart"
+      ]
+    },
+    "structuring": null,
+    "actions": [],
+    "output_gate": [],
+    "resolver_memo_hits": 0
+  }
+}

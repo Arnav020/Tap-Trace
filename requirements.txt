@@ -1,0 +1,10 @@
+# Runtime (the Docker image installs only these; no torch / GPU needed)
+fastapi==0.115.11
+uvicorn==0.34.0
+pydantic==2.11.2
+numpy==2.2.6
+onnxruntime==1.20.1
+tokenizers==0.21.0
+openai==2.15.0
+orjson==3.10.15
+httpx==0.28.1

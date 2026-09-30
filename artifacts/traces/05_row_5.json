@@ -1,0 +1,277 @@
+{
+  "input_line": 5,
+  "siis_id": "row_5",
+  "query": "My tablet screen stays completely blank when I try to use Data Transfer to scan the QR code for transferring data from my Nexa X1 phone, so the transfer can't proceed.",
+  "query_variations": [
+    "The tablet's display remains completely blank during the Data Transfer QR code scanning process.",
+    "During the Data Transfer feature, the tablet screen shows no image while attempting to scan the QR code.",
+    "My tablet screen just goes black when I try to scan the QR code for Data Transfer.",
+    "When I use Data Transfer to scan a QR code, the tablet screen stays empty.",
+    "tablet screen blank data transfer QR",
+    "screen black QR scan transfer tablet",
+    "Why does the tablet screen stay dead while I'm trying to scan a QR code for Data Transfer?!",
+    "This stupid tablet shows a blank screen every time I attempt a Data Transfer QR scan!",
+    "Tablet screen stays blnak when using Data Transfer QR scan.",
+    "My tablet scren is blank while triyng to scan QR for data transfer."
+  ],
+  "response": {
+    "contexts": [
+      {
+        "goal": "Follow these steps to perform this Blank Screen Troubleshooting",
+        "title": "Blank screen troubleshooting",
+        "actions": [
+          {
+            "actionName": "Check Wireless Proximity",
+            "description": "It will ensure devices are close enough",
+            "stepGroups": [
+              {
+                "steps": [
+                  "If you are using a wireless transfer, place the devices within 4 inches of each other.",
+                  "If you are using a wired transfer, plug one end of the USB cable into the charging port of the new phone and connect the other end to the charging port of the old phone."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Open Data Transfer App",
+            "description": "It will launch the transfer application correctly",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Swipe up on the Home screen to access the Apps screen.",
+                  "Tap the Search field.",
+                  "Enter and select Data Transfer to open the app.",
+                  "Navigate to the TechCorp folder on the Apps screen and open Data Transfer from there.",
+                  "On the new device, tap Receive on this phone.",
+                  "On the old device, tap Send from this phone."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Initiate Wireless Transfer",
+            "description": "It will start QR code scanning process",
+            "stepGroups": [
+              {
+                "steps": [
+                  "On the new device, tap Nexa/Android.",
+                  "Tap Wireless transfer.",
+                  "On the old device, tap Wireless data transfer.",
+                  "Scan QR code displayed on new phone."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          }
+        ],
+        "score": 0.96
+      }
+    ]
+  },
+  "meta": {
+    "latency_ms": 1936,
+    "cache_hit": false,
+    "model": "groq/openai/gpt-oss-120b",
+    "cost_usd": 0.000651,
+    "fallback": null,
+    "knowledge_fit": "full",
+    "tokens": {
+      "prompt": 1120,
+      "completion": 805
+    },
+    "llm_stages": {
+      "enrichment": "llm",
+      "structuring": "llm"
+    },
+    "retried": true
+  },
+  "trace": {
+    "frame": {
+      "symptoms": [
+        "BLANK"
+      ],
+      "contexts": [
+        "data_transfer"
+      ],
+      "device": "tablet",
+      "part": "",
+      "polarity": "",
+      "config_request": false,
+      "components": [
+        "display"
+      ]
+    },
+    "gate": {
+      "fit": "full",
+      "fit_score": 0.902,
+      "reason": "context_ok=True (doc ['data_transfer'] vs complaint ['data_transfer']); symptom_ok=True (doc [] vs complaint ['VIS']); doc_sim=0.37",
+      "kept_sections": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "dropped": {}
+    },
+    "units": [
+      {
+        "uid": "U1",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S2.1",
+          "S2.2"
+        ],
+        "steps": [
+          "If you are using a wireless transfer, place the devices within 4 inches of each other.",
+          "If you are using a wired transfer, plug one end of the USB cable into the charging port of the new phone and connect the other end to the charging port of the old phone."
+        ],
+        "evidence": {
+          "S2.1": "Wireless connection: If you are using a wireless transfer, place the devices within 4 inches of each other.",
+          "S2.2": "Wired connection: If you are using a wired transfer, plug one end of the USB cable into the charging port of the new phone and connect the other end to the charging port of the old phone."
+        }
+      },
+      {
+        "uid": "U2",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S3.1",
+          "S3.2",
+          "S3.3",
+          "S3.4",
+          "S3.5"
+        ],
+        "steps": [
+          "Swipe up on the Home screen to access the Apps screen.",
+          "Tap the Search field.",
+          "Enter and select Data Transfer to open the app.",
+          "Navigate to the TechCorp folder on the Apps screen and open Data Transfer from there.",
+          "On the new device, tap Receive on this phone.",
+          "On the old device, tap Send from this phone."
+        ],
+        "evidence": {
+          "S3.1": "Swipe up on the Home screen to access the Apps screen.",
+          "S3.2": "Tap the Search field, then enter and select Data Transfer to open the app.",
+          "S3.3": "Alternatively, you can navigate to the TechCorp folder on the Apps screen and open Data Transfer from there.",
+          "S3.4": "Next, on the new device, tap Receive on this phone.",
+          "S3.5": "Then, on the old device, tap Send from this phone"
+        }
+      },
+      {
+        "uid": "U3",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S4.1",
+          "S4.3"
+        ],
+        "steps": [
+          "On the new device, tap Nexa/Android.",
+          "Tap Wireless transfer.",
+          "On the old device, tap Wireless data transfer.",
+          "Scan QR code displayed on new phone."
+        ],
+        "evidence": {
+          "S4.1": "Wireless transfer: On the new device, tap Nexa/Android, then tap Wireless transfer.",
+          "S4.3": "Next, on the old device, tap Wireless data transfer, then scan QR code displayed on new phone."
+        }
+      }
+    ],
+    "enrichment": {
+      "canonical_query": "Tablet screen stays blank when initiating Data Transfer QR code scan.",
+      "hard_negatives": [
+        "Tablet screen stays blank when trying to turn off the device.",
+        "Tablet battery drains completely when initiating Data Transfer QR code scan.",
+        "Tablet cover screen flickers during Data Transfer QR code scanning.",
+        "Tablet screen goes black when attempting to scan a barcode for Wi-Fi setup."
+      ]
+    },
+    "structuring": {
+      "no_viable_solution": false,
+      "goals": [
+        {
+          "topic": "Blank Screen",
+          "title": "Blank screen troubleshooting",
+          "config_request": false,
+          "units": [
+            "U1",
+            "U2",
+            "U3"
+          ]
+        }
+      ],
+      "actions": {
+        "U1": {
+          "keep": true,
+          "name": "Check Wireless Proximity",
+          "description": "It will ensure devices are close enough",
+          "drop_steps": []
+        },
+        "U2": {
+          "keep": true,
+          "name": "Open Data Transfer App",
+          "description": "It will launch the transfer application correctly",
+          "drop_steps": []
+        },
+        "U3": {
+          "keep": true,
+          "name": "Initiate Wireless Transfer",
+          "description": "It will start the QR code scanning process",
+          "drop_steps": []
+        }
+      }
+    },
+    "actions": [
+      {
+        "unit": "U1",
+        "spans": [
+          "S2.1",
+          "S2.2"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U2",
+        "spans": [
+          "S3.1",
+          "S3.2",
+          "S3.3",
+          "S3.4",
+          "S3.5"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U3",
+        "spans": [
+          "S4.1",
+          "S4.3"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm-repaired"
+      }
+    ],
+    "output_gate": [],
+    "resolver_memo_hits": 0
+  }
+}

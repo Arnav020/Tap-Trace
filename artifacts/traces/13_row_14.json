@@ -1,0 +1,156 @@
+{
+  "input_line": 13,
+  "siis_id": "row_14",
+  "query": "My smartphone's screen is completely cracked, it's a total crack and I can't use the device.",
+  "query_variations": [
+    "The smartphone's display is shattered, preventing any use of the phone.",
+    "My phone screen is totally cracked, I can't even use it.",
+    "smartphone cracked screen unusable",
+    "This cracked screen is ruining my phone, I can't use anything!",
+    "My smartfone's scren is cracked, can't use it.",
+    "The device's glass panel is broken, rendering the smartphone inoperable.",
+    "Got a busted screen on my phone, so it's basically dead.",
+    "phone broken glass unusable",
+    "Ugh, cracked screen! My phone is useless now.",
+    "My phne's screeen is cracked, cant use."
+  ],
+  "response": {
+    "contexts": [
+      {
+        "goal": "Follow these steps to perform this Screen Damage Troubleshooting",
+        "title": "Screen repair",
+        "actions": [
+          {
+            "actionName": "Schedule Screen Repair",
+            "description": "It will arrange repair with genuine parts",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Schedule a walk-in or mail-in repair to fix your cracked screen using Genuine Parts.",
+                  "Visit a local Authorized Service Center."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          }
+        ],
+        "score": 0.99
+      }
+    ]
+  },
+  "meta": {
+    "latency_ms": 4863,
+    "cache_hit": false,
+    "model": "groq/openai/gpt-oss-120b",
+    "cost_usd": 0.000659,
+    "fallback": null,
+    "knowledge_fit": "full",
+    "tokens": {
+      "prompt": 902,
+      "completion": 873
+    },
+    "llm_stages": {
+      "enrichment": "llm",
+      "structuring": "llm"
+    }
+  },
+  "trace": {
+    "frame": {
+      "symptoms": [
+        "DAMAGE"
+      ],
+      "contexts": [],
+      "device": "phone",
+      "part": "",
+      "polarity": "",
+      "config_request": false,
+      "components": [
+        "display"
+      ]
+    },
+    "gate": {
+      "fit": "full",
+      "fit_score": 1.0,
+      "reason": "context_ok=True (doc [] vs complaint []); symptom_ok=True (doc ['DMG'] vs complaint ['DMG']); doc_sim=0.77",
+      "kept_sections": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8
+      ],
+      "dropped": {
+        "5": "explanatory section"
+      }
+    },
+    "units": [
+      {
+        "uid": "U1",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S2.1",
+          "S3.1"
+        ],
+        "steps": [
+          "Schedule a walk-in or mail-in repair to fix your cracked screen using Genuine Parts.",
+          "Visit a local Authorized Service Center."
+        ],
+        "evidence": {
+          "S2.1": "You can schedule a walk-in or mail-in repair to fix your cracked screen using Genuine Parts.",
+          "S3.1": "For fast, quality repairs you can trust and rely on, visit a local Authorized Service Center."
+        }
+      }
+    ],
+    "enrichment": {
+      "canonical_query": "Smartphone screen is cracked, making the device unusable.",
+      "hard_negatives": [
+        "Smartphone battery won't charge, device powers off unexpectedly.",
+        "Tablet screen won't turn off, staying lit continuously.",
+        "Smartphone cover screen is cracked but the display works fine.",
+        "Smartphone won't power on after the screen was replaced."
+      ]
+    },
+    "structuring": {
+      "no_viable_solution": false,
+      "goals": [
+        {
+          "topic": "Screen Damage",
+          "title": "Screen repair",
+          "config_request": false,
+          "units": [
+            "U1"
+          ]
+        }
+      ],
+      "actions": {
+        "U1": {
+          "keep": true,
+          "name": "Schedule Screen Repair",
+          "description": "It will arrange repair with genuine parts",
+          "drop_steps": []
+        }
+      }
+    },
+    "actions": [
+      {
+        "unit": "U1",
+        "spans": [
+          "S2.1",
+          "S3.1"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      }
+    ],
+    "output_gate": [],
+    "resolver_memo_hits": 0
+  }
+}

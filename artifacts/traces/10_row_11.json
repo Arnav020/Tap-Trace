@@ -1,0 +1,293 @@
+{
+  "input_line": 10,
+  "siis_id": "row_11",
+  "query": "My Nexa Fold X1 screen is half black - one side of the display is completely dark while the other side works fine, so I can't access the device normally.",
+  "query_variations": [
+    "The Nexa Fold X1 exhibits a half-black screen, with the left portion completely dark and the right portion functioning properly.",
+    "My Nexa Fold X1 screen is half black - one side's totally dark, the other side works fine.",
+    "Nexa Fold X1 screen half black",
+    "Why is my Nexa Fold X1 screen half black?! One side is dead!",
+    "Nexa Fold X1 screen half blak",
+    "In the Nexa Fold X1, the display shows a darkened half, rendering one side unusable while the opposite side remains operational.",
+    "Got a Nexa Fold X1 and the screen's half black - one side's out, the other's okay.",
+    "Fold X1 half black display",
+    "Half the screen on my Nexa Fold X1 is black - this is ridiculous!",
+    "Nexa Fold X1 screen half blck"
+  ],
+  "response": {
+    "contexts": [
+      {
+        "goal": "Follow these steps to perform this Display Issue Troubleshooting",
+        "title": "Half black screen",
+        "actions": [
+          {
+            "actionName": "Use External Input Devices",
+            "description": "It will let you reach your data",
+            "stepGroups": [
+              {
+                "steps": [
+                  "If you cannot use the touchscreen on your device, access your data with a USB mouse and keyboard.",
+                  "Connect the mouse and keyboard to your phone or tablet using a USB adapter.",
+                  "Navigate your device as needed."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Back Up Data via Monitor",
+            "description": "It will protect your data during repair",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Back up your device's data by connecting it to a monitor."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Inspect Device for Damage",
+            "description": "It will identify hardware causing black screen",
+            "stepGroups": [
+              {
+                "steps": [
+                  "If your device displays only a blank or black screen, check the device, charger, and USB cable for damage."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Force Restart Device",
+            "description": "It will attempt to recover screen functionality",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Try forcing a restart by pressing and holding the Power and Volume down buttons for 20 seconds, and then charging the device for at least one hour."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "critical"
+          }
+        ],
+        "score": 0.95
+      }
+    ]
+  },
+  "meta": {
+    "latency_ms": 1887,
+    "cache_hit": false,
+    "model": "groq/openai/gpt-oss-120b",
+    "cost_usd": 0.000679,
+    "fallback": null,
+    "knowledge_fit": "full",
+    "tokens": {
+      "prompt": 1054,
+      "completion": 869
+    },
+    "llm_stages": {
+      "enrichment": "llm",
+      "structuring": "llm"
+    }
+  },
+  "trace": {
+    "frame": {
+      "symptoms": [
+        "BLANK"
+      ],
+      "contexts": [],
+      "device": "foldable",
+      "part": "half",
+      "polarity": "",
+      "config_request": false,
+      "components": [
+        "display"
+      ]
+    },
+    "gate": {
+      "fit": "full",
+      "fit_score": 0.888,
+      "reason": "context_ok=True (doc [] vs complaint []); symptom_ok=True (doc [] vs complaint ['VIS']); doc_sim=0.33",
+      "kept_sections": [
+        0
+      ],
+      "dropped": {
+        "1": "section is about ['fingerprint'], absent from complaint",
+        "2": "section is about ['kids'], absent from complaint",
+        "3": "section is about ['account_lock'], absent from complaint",
+        "4": "section is about ['keyboard'], absent from complaint"
+      }
+    },
+    "units": [
+      {
+        "uid": "U1",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S0.1",
+          "S0.2"
+        ],
+        "steps": [
+          "If you cannot use the touchscreen on your device, access your data with a USB mouse and keyboard.",
+          "Connect the mouse and keyboard to your phone or tablet using a USB adapter.",
+          "Navigate your device as needed."
+        ],
+        "evidence": {
+          "S0.1": "Even if you cannot use the touchscreen on your device, you can access your data with a USB mouse and keyboard.",
+          "S0.2": "Connect the mouse and keyboard to your phone or tablet using a USB adapter, and then navigate your device as needed."
+        }
+      },
+      {
+        "uid": "U2",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S0.3"
+        ],
+        "steps": [
+          "Back up your device's data by connecting it to a monitor."
+        ],
+        "evidence": {
+          "S0.3": "You can also back up your device's data by connecting it to a monitor."
+        }
+      },
+      {
+        "uid": "U3",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S0.4"
+        ],
+        "steps": [
+          "If your device displays only a blank or black screen, check the device, charger, and USB cable for damage."
+        ],
+        "evidence": {
+          "S0.4": "If your device displays only a blank or black screen, you may need to check the device, charger, and USB cable for damage."
+        }
+      },
+      {
+        "uid": "U4",
+        "kind": "other",
+        "category": "critical",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S0.5"
+        ],
+        "steps": [
+          "Try forcing a restart by pressing and holding the Power and Volume down buttons for 20 seconds, and then charging the device for at least one hour."
+        ],
+        "evidence": {
+          "S0.5": "You can also try forcing a restart by pressing and holding the Power and Volume down buttons for 20 seconds, and then charging the device for at least one hour."
+        }
+      }
+    ],
+    "enrichment": {
+      "canonical_query": "Nexa Fold X1 screen half black, one side dark while the other side displays normally",
+      "hard_negatives": [
+        "Nexa Fold X1 screen won't turn on at all",
+        "Nexa Fold X1 battery drains rapidly after charging",
+        "Nexa Fold X1 screen half white, other half bright",
+        "Nexa Fold X1 touch layer unresponsive while display works"
+      ]
+    },
+    "structuring": {
+      "no_viable_solution": false,
+      "goals": [
+        {
+          "topic": "Display Issue",
+          "title": "Half black screen",
+          "config_request": false,
+          "units": [
+            "U1",
+            "U2",
+            "U3",
+            "U4"
+          ]
+        }
+      ],
+      "actions": {
+        "U1": {
+          "keep": true,
+          "name": "Use External Input Devices",
+          "description": "It will let you control device without touch",
+          "drop_steps": []
+        },
+        "U2": {
+          "keep": true,
+          "name": "Back Up Data via Monitor",
+          "description": "It will protect your data during repair",
+          "drop_steps": []
+        },
+        "U3": {
+          "keep": true,
+          "name": "Inspect Device for Damage",
+          "description": "It will identify hardware causing black screen",
+          "drop_steps": []
+        },
+        "U4": {
+          "keep": true,
+          "name": "Force Restart Device",
+          "description": "It will attempt to recover screen functionality",
+          "drop_steps": []
+        }
+      }
+    },
+    "actions": [
+      {
+        "unit": "U1",
+        "spans": [
+          "S0.1",
+          "S0.2"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "deterministic"
+      },
+      {
+        "unit": "U2",
+        "spans": [
+          "S0.3"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U3",
+        "spans": [
+          "S0.4"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U4",
+        "spans": [
+          "S0.5"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      }
+    ],
+    "output_gate": [],
+    "resolver_memo_hits": 0
+  }
+}

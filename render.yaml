@@ -1,0 +1,10 @@
+# Render Blueprint: New + > Blueprint > pick this repo. Builds the Dockerfile and serves the API + demo UI.
+services:
+  - type: web
+    name: taptrace
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: GROQ_API_KEY   # entered in the Render dashboard, never committed
+        sync: false

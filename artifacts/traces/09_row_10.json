@@ -1,0 +1,79 @@
+{
+  "input_line": 9,
+  "siis_id": "row_10",
+  "query": "My TechCorp Nexa Fold X1 screen flickers and goes blank whenever I open it, so I can't see anything or access the settings, which stops me from using the phone.",
+  "query_variations": [
+    "The device's display intermittently flickers and becomes completely black each time the fold is opened, rendering the interface unusable.",
+    "When the foldable phone is unfolded, the screen exhibits flickering followed by a blank display, obstructing any interaction.",
+    "Every time I open the phone, the screen starts flickering and then just goes dark, so I can't use it.",
+    "Open the fold and the screen just flickers and blacks out, making it impossible to see anything.",
+    "fold screen flicker blank",
+    "screen flicker blank when opening",
+    "I open the phone and the screen just flickers and dies - this is ridiculous, I can't even get to settings!",
+    "Why does the screen flicker and go black every time I unfold it? It's useless!",
+    "Screen flickrs and goes blnak when opening the fold.",
+    "When I open it the screeen flickers and blanks out."
+  ],
+  "response": {
+    "contexts": []
+  },
+  "meta": {
+    "latency_ms": 5984,
+    "cache_hit": false,
+    "model": "groq/openai/gpt-oss-120b",
+    "cost_usd": 0.000408,
+    "fallback": "no_match",
+    "knowledge_fit": "partial",
+    "tokens": {
+      "prompt": 371,
+      "completion": 587
+    },
+    "llm_stages": {
+      "enrichment": "llm",
+      "structuring": "deterministic"
+    }
+  },
+  "trace": {
+    "frame": {
+      "symptoms": [
+        "BLANK",
+        "FLICKER"
+      ],
+      "contexts": [],
+      "device": "foldable",
+      "part": "",
+      "polarity": "",
+      "config_request": false,
+      "components": [
+        "display"
+      ]
+    },
+    "gate": {
+      "fit": "partial",
+      "fit_score": 0.549,
+      "reason": "context_ok=False (doc ['camera'] vs complaint []); symptom_ok=True (doc ['FLK'] vs complaint ['FLK', 'VIS']); doc_sim=0.40",
+      "kept_sections": [
+        1
+      ],
+      "dropped": {
+        "2": "section is about ['camera'], absent from complaint",
+        "3": "section is about ['camera'], absent from complaint"
+      },
+      "verdict": "partial fit with escalation-only remedies -> no_match"
+    },
+    "units": [],
+    "enrichment": {
+      "canonical_query": "Phone screen flickers and goes blank when opening the fold, preventing view and settings access.",
+      "hard_negatives": [
+        "Phone screen flickers during video playback but remains on, requiring a software update.",
+        "Phone battery drains rapidly when the fold is opened, causing shutdowns.",
+        "Tablet cover screen flickers and goes blank when closed, not when opened.",
+        "Phone won't turn off after closing the fold, staying on continuously."
+      ]
+    },
+    "structuring": null,
+    "actions": [],
+    "output_gate": [],
+    "resolver_memo_hits": 0
+  }
+}

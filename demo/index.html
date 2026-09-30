@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TapTrace Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#17120e; --ink:#f6efe6; --ink2:#d8cfc3; --mute:#a39a8e; --faint:#7a7167;
+  --glass:rgba(255,255,255,.065); --glass2:rgba(255,255,255,.1); --edge:rgba(255,255,255,.13); --edge2:rgba(255,255,255,.22);
+  --amber:#f2b66d; --amber2:#e39a4d; --sage:#93cdb9; --sky:#9dbfe3; --coral:#ee9a7e; --red:#f08a7a;
+  --hl1:rgba(242,182,109,.28); --hl2:rgba(147,205,185,.26); --hl3:rgba(157,191,227,.26); --hl4:rgba(238,154,126,.26); --hl5:rgba(214,190,255,.18);
+  --r:20px; --font:"Inter","Segoe UI",system-ui,sans-serif; --mono:"JetBrains Mono",Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{font:14px/1.5 var(--font);color:var(--ink);background:linear-gradient(180deg,#1b1612,#14100d) fixed;-webkit-font-smoothing:antialiased}
+.wrap{position:relative;z-index:1;max-width:1480px;margin:auto;padding:22px 26px 30px}
+.glass{background:var(--glass);border:1px solid var(--edge);border-radius:var(--r);backdrop-filter:blur(26px) saturate(140%);-webkit-backdrop-filter:blur(26px) saturate(140%);
+  box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 24px 60px -30px rgba(0,0,0,.7)}
+/* top bar */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:12px}
+.mark{width:30px;height:30px;border-radius:50%;border:2px solid var(--amber);display:grid;place-items:center}
+.mark i{width:11px;height:11px;border-radius:50%;background:var(--amber);display:block}
+.brand b{font-size:17px;font-weight:600;letter-spacing:.2px}
+.brand small{display:block;color:var(--mute);font-size:12px;margin-top:1px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;background:var(--glass);border:1px solid var(--edge);font-size:12px;color:var(--ink2);white-space:nowrap}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--faint)}
+.pill.ok .dot{background:var(--sage);box-shadow:0 0 0 3px rgba(147,205,185,.18)}
+.pill.warn .dot{background:var(--amber)} .pill.bad .dot{background:var(--red)}
+.pill.ok{color:var(--ink)} .pill b{color:var(--ink);font-weight:600}
+/* layout */
+.grid{display:grid;grid-template-columns:minmax(0,1.3fr) 430px;gap:18px;align-items:start}
+@media (max-width:1100px){.grid{grid-template-columns:1fr}}
+.card{padding:18px 20px}
+.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.kicker svg{width:15px;height:15px;stroke:var(--amber)}
+select,textarea{width:100%;font:inherit;color:var(--ink);background:rgba(0,0,0,.25);border:1px solid var(--edge);border-radius:14px;padding:11px 13px;outline:none}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--mute) 50%),linear-gradient(135deg,var(--mute) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:34px}
+select option{background:#241a13;color:var(--ink)}
+textarea{min-height:76px;resize:vertical;margin-top:10px;line-height:1.5}
+select:focus,textarea:focus{border-color:rgba(242,182,109,.55);box-shadow:0 0 0 4px rgba(242,182,109,.12)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.switch{display:inline-flex;align-items:center;gap:9px;color:var(--ink2);font-size:13px;cursor:pointer;user-select:none;margin-right:10px}
+.switch input{display:none}
+.switch span{width:34px;height:20px;border-radius:999px;background:rgba(255,255,255,.14);position:relative;transition:.2s}
+.switch span::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:.2s}
+.switch input:checked+span{background:var(--amber)} .switch input:checked+span::after{left:17px}
+button{font:inherit;border:1px solid var(--edge);background:var(--glass2);color:var(--ink);border-radius:12px;padding:9px 15px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.15s}
+button:hover{background:rgba(255,255,255,.16)}
+button svg{width:15px;height:15px}
+button.primary{background:linear-gradient(180deg,#f5c07d,#e7a254);color:#2a1a0b;border-color:rgba(255,220,170,.6);font-weight:600;box-shadow:0 8px 24px -10px rgba(231,162,84,.8)}
+button.primary:hover{filter:brightness(1.05)}
+button:disabled{opacity:.5;cursor:default}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+/* knowledge */
+.doc{max-height:470px;overflow:auto;font-size:13.5px;line-height:1.75;color:var(--ink2);padding-right:6px}
+.doc::-webkit-scrollbar{width:8px}.doc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:8px}
+.doc h4{margin:14px 0 4px;font-size:13.5px;color:var(--ink);font-weight:600}
+.doc h4:first-child{font-size:15px;margin-top:0}
+.s{border-radius:6px;padding:1px 3px;transition:.2s}.s.dim{opacity:.42}.s.bad{text-decoration:line-through;opacity:.3}
+.sid{font:10px var(--mono);color:var(--mute);margin-right:4px;letter-spacing:.02em}
+.gate{margin-top:14px;padding:12px 14px;border-radius:14px;background:rgba(0,0,0,.22);border:1px solid var(--edge);font-size:12.5px;color:var(--ink2)}
+.gate b{color:var(--amber);font-weight:600}
+.legend{font-size:12px;color:var(--mute);margin:-4px 0 10px}
+pre{max-height:320px;overflow:auto;background:rgba(0,0,0,.35);border:1px solid var(--edge);border-radius:14px;padding:14px;font:12px/1.5 var(--mono);color:var(--ink2);margin:0}
+/* phone */
+.phone{width:400px;margin:0 auto;padding:12px;border-radius:58px;background:linear-gradient(145deg,#4a443e,#1b1815 45%,#3b3631);box-shadow:0 0 0 1px rgba(255,255,255,.08) inset,0 40px 80px -30px rgba(0,0,0,.9),0 10px 30px -10px rgba(0,0,0,.7)}
+.screen{position:relative;border-radius:46px;overflow:hidden;background:linear-gradient(180deg,#1d1612,#120e0b);height:820px;display:flex;flex-direction:column}
+.statusbar{display:flex;justify-content:space-between;align-items:center;padding:16px 28px 6px;font-size:14px;font-weight:600;color:#fff}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000}
+.sb-icons{display:flex;gap:6px;align-items:center}.sb-icons svg{width:16px;height:16px;fill:#fff}
+.apphead{display:flex;align-items:center;justify-content:space-between;padding:12px 20px 8px}
+.apphead .mark{width:24px;height:24px;border-width:2px}.apphead .mark i{width:9px;height:9px}
+.apphead span{font-size:12px;color:var(--mute)}
+.scroll{flex:1;overflow:auto;padding:4px 16px 110px}
+.scroll::-webkit-scrollbar{display:none}
+.goal{font-size:21px;font-weight:600;letter-spacing:-.01em;margin:6px 4px 2px}
+.gsub{font-size:12px;color:var(--mute);margin:0 4px 12px}
+.score{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--amber);background:rgba(242,182,109,.12);border:1px solid rgba(242,182,109,.3);border-radius:999px;padding:2px 9px;margin-left:4px}
+.act{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:14px 14px 12px;margin-bottom:10px}
+.act .t{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.act .n{font-weight:600;font-size:14.5px}
+.cat{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:3px 8px}
+.cat.auto{color:#2a1a0b;background:var(--amber)}.cat.manual{color:var(--ink2);background:rgba(255,255,255,.12)}.cat.critical{color:#2b100b;background:var(--coral)}
+.d{color:var(--mute);font-size:12.5px;margin:3px 0 8px}
+.opt{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);margin:10px 0 4px;font-weight:600}
+ol{margin:0 0 6px 18px;padding:0;font-size:13px;color:var(--ink2)} li{margin:2px 0}
+.tap{width:100%;justify-content:center;margin-top:8px;background:linear-gradient(180deg,#f5c07d,#e7a254);color:#2a1a0b;border:0;font-weight:600;border-radius:14px;padding:10px}
+.dl{font:10px var(--mono);color:var(--faint);margin-top:6px;word-break:break-all}
+.probe{display:flex;align-items:center;gap:7px;font-size:12px;margin-top:6px;color:var(--mute)}
+.probe svg{width:15px;height:15px;flex:none}
+.probe.ok{color:var(--sage)}.probe.bad{color:var(--faint)}
+.probe code{font:11px var(--mono);color:inherit}
+.empty{text-align:center;color:var(--mute);padding:120px 26px}
+.empty b{display:block;color:var(--ink);font-size:17px;margin-bottom:6px}
+.sheet{position:absolute;left:10px;right:10px;bottom:10px;padding:16px 18px 18px;border-radius:28px;background:rgba(40,30,22,.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--edge2);box-shadow:0 -10px 40px -10px rgba(0,0,0,.6)}
+.sheet .grab{width:38px;height:5px;border-radius:5px;background:rgba(255,255,255,.3);margin:-6px auto 10px}
+.sheet .crumb{font-size:11px;color:var(--mute);letter-spacing:.06em;text-transform:uppercase}
+.sheet .line{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:15px;font-weight:600}
+.tg{width:48px;height:28px;border-radius:999px;background:rgba(255,255,255,.18);position:relative}
+.tg::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.25s}
+.tg.on{background:var(--sage)}.tg.on::after{left:23px}
+.homebar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:130px;height:5px;border-radius:5px;background:rgba(255,255,255,.5)}
+.note{font-size:11.5px;color:var(--mute);text-align:center;margin:14px 10px 0}
+/* phone-only snapshot mode */
+body.phone-only{background:#120e0b}
+body.phone-only .top,body.phone-only .left,body.phone-only .note{display:none}
+body.phone-only .wrap{padding:0;max-width:none}
+body.phone-only .grid{display:block}
+body.phone-only .phone{width:390px;padding:0;border-radius:0;background:none;box-shadow:none}
+body.phone-only .screen{border-radius:0;height:844px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top glass">
+    <div class="brand"><div class="mark"><i></i></div><div><b>TapTrace</b><small>Smart Guided Troubleshooting &middot; Samsung PRISM GenAI Hackathon 3.0 &middot; Theme 02</small></div></div>
+    <div class="pills" id="status"><span class="pill"><span class="dot"></span>connecting&hellip;</span></div>
+  </header>
+  <div class="grid">
+    <section class="left" style="display:grid;gap:18px">
+      <div class="card glass">
+        <div class="kicker"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>Agent console</div>
+        <select id="scenario"></select>
+        <textarea id="query" placeholder="Describe the device problem in your own words"></textarea>
+        <div class="row">
+          <label class="switch"><input type="checkbox" id="useSiis" checked><span></span>Send knowledge article (SIIS)</label>
+          <label class="switch"><input type="checkbox" id="noCache"><span></span>Bypass cache &middot; show cold path</label>
+        </div>
+        <div class="row">
+          <button class="primary" id="run"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Troubleshoot</button>
+          <button id="para"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Try paraphrase</button>
+          <button id="neg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>Try hard negative</button>
+          <button id="raw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1M16 21h1a2 2 0 0 0 2-2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg>Raw JSON</button>
+        </div>
+        <div class="meta" id="meta"></div>
+      </div>
+      <div class="card glass">
+        <div class="kicker"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Knowledge article &middot; evidence per action</div>
+        <div class="legend">Highlighted sentences are the exact source of each plan step (colour = action). Struck-through text contains links or corrupt characters and is never used.</div>
+        <div class="doc" id="doc"><div class="empty" style="padding:60px 10px">Pick a scenario and press <b style="display:inline;font-size:inherit">Troubleshoot</b></div></div>
+        <div class="gate" id="gate" hidden></div>
+      </div>
+      <div class="card glass" id="rawCard" hidden><div class="kicker">Response JSON &middot; organisers&rsquo; contract</div><pre id="rawOut"></pre></div>
+    </section>
+    <section>
+      <div class="phone">
+        <div class="screen">
+          <div class="island"></div>
+          <div class="statusbar"><span>9:41</span><span class="sb-icons">
+            <svg viewBox="0 0 24 24"><path d="M2 20h2v-4H2zm5 0h2v-7H7zm5 0h2V9h-2zm5 0h2V5h-2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 18.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM12 13a7 7 0 0 0-5 2.1l1.4 1.4a5 5 0 0 1 7.2 0l1.4-1.4A7 7 0 0 0 12 13zm0-5a12 12 0 0 0-8.5 3.5l1.4 1.4a10 10 0 0 1 14.2 0l1.4-1.4A12 12 0 0 0 12 8z"/></svg>
+            <svg viewBox="0 0 28 24"><rect x="1" y="6" width="22" height="12" rx="3" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="3" y="8" width="16" height="8" rx="1.5"/><rect x="24" y="10" width="2" height="4" rx="1"/></svg></span></div>
+          <div class="apphead"><div class="mark"><i></i></div><span>Settings Assistant</span></div>
+          <div class="scroll" id="screen"><div class="empty"><b>Your fix plan appears here</b>Grounded steps, one tap per Settings change.</div></div>
+          <div id="sheetHost"></div>
+          <div class="homebar"></div>
+        </div>
+      </div>
+      <p class="note">Phone and Settings are simulated in the browser to demonstrate one-tap execution and closed-loop verification with <code>validationDeeplink</code>; no real device is controlled.</p>
+    </section>
+  </div>
+</div>
+<script>
+const $ = s => document.querySelector(s);
+const HL = ["var(--hl1)","var(--hl2)","var(--hl3)","var(--hl4)","var(--hl5)"];
+const ICON = {
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg>',
+  wait:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10" stroke-dasharray="3 3"/></svg>'};
+let scenarios = [], last = null, state = {};
+// Backend discovery: same origin when served by the API (python run.py / Docker); otherwise (VS Code Live Server,
+// opened as a file) fall back to a local API on :8000. Override with ?api=http://host:port
+let API = "";
+async function pickApi(){
+  const o = new URLSearchParams(location.search).get("api");
+  const cands = o ? [o.replace(/\/$/,"")] : [...(location.protocol==="file:"?[]:[""]), "http://localhost:8000", "http://127.0.0.1:8000"];
+  for(const c of cands){ try{ const j = await (await fetch(c+"/health")).json(); if(j && j.status){ API=c; return true; } }catch(e){} }
+  return false;
+}
+function offline(){
+  $("#status").innerHTML = pill("Backend not running","bad");
+  $("#doc").innerHTML = `<div class="empty" style="padding:40px 10px"><b>The TapTrace API is not reachable</b>This page is only the UI; the engine runs in the Python server.<br>Start it in a terminal inside the TIET_TapTrace folder; this page then connects automatically:<pre style="text-align:left;margin-top:14px">python run.py</pre></div>`;
+}
+// Unseen paraphrases verified (scripts/evaluate.py sets) to hit the pre-warmed cache for their own scenario.
+const PARA = {1:"Every time I open an email in the Gmail app, my tablet's display flashes and then turns totally blank.",
+2:"nexa x1 display blank white, text missing in apps",3:"My Fold X1 display went black; I cannot interact with it and cannot move my data with Data Transfer.",
+4:"After roughly a month, my Nexa A15 screen went completely black by itself and shows nothing when I try to turn it on.",
+5:"When I try to scan the Data Transfer QR code, my tablet screen remains blank so the transfer cannot continue.",
+6:"tablet screen dark except 3 app icons, apps wont open",7:"my phone's screen is shrunk and won't go full size",
+8:"The inner display of my Fold X1 stopped working: no picture and no touch response, though the cover screen still works.",
+9:"fold x1 screen flicker blank when opened",10:"fold x1 half black screen one side dark",
+11:"There is a floating circle on my Nexa X1 screen with shortcuts to home, back, volume and screen off, and I want to get rid of it.",
+12:"After my carrier deactivated my old phone, my Nexa X1 screen stays blank and shows no activation message when powered on.",
+13:"The whole screen of my smartphone is cracked and I cannot use it.",15:"The display of my X1 Ultra flashes very rapidly every time I connect the charger.",
+16:"nexa x1 dark blank screen no content data transfer",17:"My Fold X1 screen cracked again at the fold, touch fails in some areas and I can barely see the display.",
+18:"My Nexa A14 display looked distorted as soon as I received it and I would like a diagnostic test.",
+19:"Touch input on my Nexa X1 is delayed and the screen responds sluggishly when I interact with it.",
+20:"My X1 Ultra screen stays black and will not turn on, although the phone rings and otherwise works and is not damaged."};
+// Near-miss complaints verified to be REFUSED by the facet guard / threshold (different fix needed).
+const NEG = {20:"My Nexa X1 Ultra screen won't turn off even when I press the power button",
+15:"My phone gets very hot while charging but the display is fine",19:"My Nexa X1 touchscreen is too sensitive and registers taps I never made"};
+function pill(t, cls=""){return `<span class="pill ${cls}"><span class="dot"></span>${t}</span>`}
+function esc(s){return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+async function health(){
+  try{const h=await (await fetch(API+"/health")).json(); const m=await (await fetch(API+"/v1/metrics")).json();
+    $("#status").innerHTML=pill(h.status==="ok"?"Healthy":"Starting",h.status==="ok"?"ok":"warn")+pill(esc(m.model))+pill(`<b>${m.cache_entries}</b>&nbsp;cached plans`)+pill(`hit rate <b>${(100*m.hit_rate).toFixed(0)}%</b>`);
+  }catch(e){$("#status").innerHTML=pill("Offline","bad")}
+}
+async function init(){
+  if(!(await pickApi())){ offline(); const t = setInterval(async()=>{ if(await pickApi()){ clearInterval(t); init(); } }, 3000); return; }
+  scenarios = await (await fetch(API+"/v1/demo/scenarios")).json();
+  $("#scenario").innerHTML = scenarios.map(s=>`<option value="${s.line}">#${s.line} · ${esc(s.query.slice(0,96))}</option>`).join("");
+  $("#scenario").onchange = ()=>{const s=cur(); $("#query").value=s.query;};
+  $("#scenario").onchange(); health();
+  // Snapshot mode (used to capture real product screenshots for the deck/README):
+  //   /?line=19&auto=1[&view=phone][&tap=1]
+  const P = new URLSearchParams(location.search);
+  if(P.get("view")==="phone") document.body.classList.add("phone-only");
+  if(P.get("line")){ $("#scenario").value=P.get("line"); $("#scenario").onchange(); }
+  if(P.get("auto")){ await run($("#query").value, true); if(P.get("tap")){ const b=document.querySelector('#screen .tap'); if(b) b.click(); } }
+}
+const cur = ()=>scenarios.find(s=>s.line==+$("#scenario").value);
+async function run(query, withSiis){
+  const s = cur(); const body = {query};
+  if(withSiis) body.siis_response = s.siis_response;
+  $("#run").disabled=true;
+  const nc = withSiis && $("#noCache").checked ? "&no_cache=true" : "";
+  const r = await fetch(API+"/v1/troubleshoot?explain=true"+nc,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+  const out = await r.json(); $("#run").disabled=false;
+  last = out; state = {}; renderMeta(out); renderPhone(out); await renderDoc(out, s); health();
+  $("#rawOut").textContent = JSON.stringify({query:out.query,query_variations:out.query_variations,response:out.response,meta:out.meta},null,2);
+}
+function renderMeta(o){
+  const m=o.meta; const c=[];
+  c.push(pill(`<b>${m.latency_ms} ms</b>&nbsp;server`, m.cache_hit? (m.latency_ms<=300?"ok":"warn") : (m.latency_ms<=8000?"ok":"warn")));
+  c.push(pill(m.cache_hit?`Cache hit &middot; ${m.cache_match} &middot; sim ${m.cache_similarity} &ge; &tau; ${m.cache_threshold}`:(m.fallback==="no_siis_context"?"Cache miss &middot; no article sent":"Cold path &middot; LLM + grounding"), m.cache_hit?"ok":""));
+  c.push(pill(`<b>$${(+m.cost_usd).toFixed(6)}</b>`)); c.push(pill(esc(m.model)));
+  if(m.knowledge_fit) c.push(pill("Knowledge fit: "+m.knowledge_fit, m.knowledge_fit==="full"?"ok":"warn"));
+  if(m.fallback) c.push(pill("Fallback: "+m.fallback,"bad"));
+  const tr=o.trace||{}; const cands=(tr.cache&&tr.cache.candidates)||[];
+  cands.forEach(k=>c.push(pill(`Refused &middot; ${k.rejected} (sim ${k.sim})`,"warn")));
+  $("#meta").innerHTML=c.join("");
+}
+function probe(v, dl){
+  if(!v) return "";
+  const val = state[v.key];
+  // onURL probes carry an expected value in the catalog; for an offURL action the expected state is False
+  const expected = (v.resultType==="boolean" && v.condition==="equal") ? String(v.value)
+                 : (dl && dl.originalType==="offURL") ? "False" : null;
+  if(expected!==null){
+    const ok = String(val)===expected;
+    return `<div class="probe ${ok?'ok':'bad'}">${ok?ICON.check:ICON.wait}<span>Validation probe <code>${esc(v.key)} == ${esc(expected)}</code>${val===undefined?' &middot; waiting for tap':''}</span></div>`;
+  }
+  return `<div class="probe ${val!==undefined?'ok':'bad'}">${val!==undefined?ICON.check:ICON.wait}<span>Probe reads <code>${esc(v.key)}</code>${val!==undefined?` = ${esc(val)}`:''}</span></div>`;
+}
+function apply(ai, gi){
+  const a = flat()[ai]; const sg = a.stepGroups[gi]; const dl = sg.actionableDeeplink; const v = sg.validationDeeplink;
+  const key = (v&&v.key) || (dl&&dl.message) || a.actionName;
+  const t = dl && dl.originalType;
+  state[key] = t==="onURL" ? "True" : t==="offURL" ? "False" : t==="updateURL" ? "adjusted" : "opened";
+  state.__screen = {name: (v&&v.key) || (dl&&dl.description) || a.actionName, type: t, uri: dl && dl.deeplink};
+  renderPhone(last);
+}
+const flat = ()=>last.response.contexts.flatMap(g=>g.actions);
+function renderPhone(o){
+  const ctx=o.response.contexts; let h='';
+  $("#sheetHost").innerHTML="";
+  if(!ctx.length){h=`<div class="empty"><b>No grounded plan</b>${o.meta.fallback==="no_match"?"The knowledge article does not address this complaint, so TapTrace returns an empty plan instead of inventing steps.":"No knowledge article was sent and no cached plan matches this complaint."}</div>`;$("#screen").innerHTML=h;return}
+  let ai=0;
+  ctx.forEach(g=>{
+    h+=`<div class="goal">${esc(g.title)}</div><div class="gsub">${esc(g.goal)}<span class="score">score ${g.score}</span></div>`;
+    g.actions.forEach(a=>{
+      h+=`<div class="act"><div class="t"><span class="n">${esc(a.actionName)}</span><span class="cat ${a.category}">${a.category}</span></div><div class="d">${esc(a.description)}</div>`;
+      a.stepGroups.forEach((sg,gi)=>{
+        if(a.stepGroups.length>1) h+=`<div class="opt">Option ${gi+1}</div>`;
+        h+=`<ol>${sg.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol>`;
+        if(sg.actionableDeeplink){h+=`<button class="tap" onclick="apply(${ai},${gi})">One tap &middot; ${esc(sg.actionableDeeplink.message)}</button><div class="dl">${esc(sg.actionableDeeplink.deeplink)}</div>`}
+        h+=probe(sg.validationDeeplink, sg.actionableDeeplink);
+      });
+      h+=`</div>`; ai++;
+    });
+  });
+  $("#screen").innerHTML=h;
+  if(state.__screen){const s=state.__screen; const tog = s.type==="onURL"||s.type==="offURL";
+    $("#sheetHost").innerHTML=`<div class="sheet"><div class="grab"></div><div class="crumb">Settings &rsaquo; opened by deeplink</div>
+      <div class="line"><span>${esc(s.name)}</span>${tog?`<span class="tg ${state[s.name]==="True"?'on':''}"></span>`:'<span style="color:var(--sage);font-size:13px">Opened</span>'}</div>
+      <div class="dl">${esc(s.uri)}</div></div>`}
+}
+async function renderDoc(o, s){
+  const tr = o.trace||{}; const src = tr.original_trace || tr;
+  const acts = src.actions||[];
+  const color = {}; acts.forEach((a,i)=>(a.spans||[]).forEach(sid=>color[sid]=HL[i%HL.length]));
+  const used = new Set(Object.keys(color));
+  const d = await (await fetch(API+"/v1/demo/parse",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({siis_response:s.siis_response})})).json();
+  let h=`<h4>${esc(d.title)}</h4>`;
+  d.sections.forEach(sec=>{ if(sec.heading) h+=`<h4>${esc(sec.heading)}</h4>`;
+    h+=sec.sentences.map(x=>`<span class="s ${x.corrupt||x.leak?'bad':(used.size&&!used.has(x.sid)?'dim':'')}" style="${color[x.sid]?`background:${color[x.sid]};color:var(--ink)`:''}"><span class="sid">${x.sid}</span>${esc(x.text)}</span> `).join("");
+  });
+  $("#doc").innerHTML=h;
+  const g=src.gate; const el=$("#gate"); el.hidden=false;
+  el.innerHTML = g? `<b>Relevance gate &middot; ${esc(g.fit)}</b> &nbsp;${esc(g.reason)}${g.verdict?` &middot; ${esc(g.verdict)}`:''}` : (o.meta.cache_hit?"<b>Served from cache</b> &nbsp;evidence shown from the plan&rsquo;s original cold-path trace.":"");
+}
+$("#run").onclick=()=>run($("#query").value,$("#useSiis").checked);
+$("#para").onclick=()=>{const l=+$("#scenario").value; const q=PARA[l]||("my "+cur().query.toLowerCase().slice(3,90)); $("#query").value=q; $("#useSiis").checked=false; run(q,false)};
+$("#neg").onclick=()=>{const l=+$("#scenario").value; const q=NEG[l]||NEG[20]; $("#query").value=q; $("#useSiis").checked=false; run(q,false)};
+$("#raw").onclick=()=>{$("#rawCard").hidden=!$("#rawCard").hidden};
+init();
+</script>
+</body>
+</html>

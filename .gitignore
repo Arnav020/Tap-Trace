@@ -1,0 +1,11 @@
+# NEVER commit your API key
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+artifacts/scratch*
+artifacts/eval_cache.sqlite
+artifacts/catalog_emb_*.npy
+scratch_*.py
+submission/deck_assets/_colored/
+.venv/

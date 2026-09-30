@@ -1,0 +1,15 @@
+.env
+.git
+**/__pycache__
+.pytest_cache
+artifacts/scratch*
+artifacts/eval_cache.sqlite
+artifacts/traces
+artifacts/build_log.txt
+artifacts/catalog_emb_*.npy
+scratch_*.py
+submission/
+docs/
+tests/
+.venv
+.vscode

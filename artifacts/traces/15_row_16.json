@@ -1,0 +1,237 @@
+{
+  "input_line": 15,
+  "siis_id": "row_16",
+  "query": "My TechCorp X1 Ultra screen flashes extremely quickly (in milliseconds) whenever I plug in a charger, making the display unusable for a short period.",
+  "query_variations": [
+    "When the charger is attached, the X1 Ultra's display flickers at millisecond intervals, making it temporarily unreadable.",
+    "Connecting a power adapter causes the X1 Ultra screen to flash rapidly, resulting in a brief period of unusable display.",
+    "Plugging in the charger makes my X1 Ultra screen blink super fast and I can't see anything.",
+    "Whenever I hook up the charger, the X1 Ultra screen just flashes crazy fast and goes blank for a sec.",
+    "X1 Ultra screen flash charger",
+    "screen flicker charger X1 Ultra milliseconds",
+    "Why does the charger make my X1 Ultra screen flash like a strobe? It's useless!",
+    "Every time I plug the charger in, the X1 Ultra screen blinks insanely fast and I can't use it!",
+    "X1 Ulta screen flashes when charger plugged in",
+    "Plugging charger cause X1 Ultra screeen flash milliseconds"
+  ],
+  "response": {
+    "contexts": [
+      {
+        "goal": "Follow these steps to perform this Screen Flicker Troubleshooting",
+        "title": "Screen flicker fix",
+        "actions": [
+          {
+            "actionName": "Inspect Charging Components",
+            "description": "It will identify physical damage causes",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Inspect your phone or tablet, charger, and USB cable for any physical damage or signs of liquid exposure.",
+                  "Remove any cases or accessories that might be covering the charging port or buttons.",
+                  "Examine the USB connections for any corrosion or bent pins.",
+                  "Check the Liquid Damage Indicator (LDI).",
+                  "Turn off your phone or tablet.",
+                  "Insert the ejector tool into the small hole next to the SIM/MicroSD tray to eject the tray.",
+                  "Shine a flashlight into the SIM/MicroSD slot."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Force Device Restart",
+            "description": "It will reset system to stop flickering",
+            "stepGroups": [
+              {
+                "steps": [
+                  "If there's no physical or liquid damage, force a restart on your device.",
+                  "Press and hold both the Power button (or Side button) and the Volume down button simultaneously for at least 20 seconds.",
+                  "If your device has a removable battery, remove the battery for 60 seconds.",
+                  "Reinsert it."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "critical"
+          }
+        ],
+        "score": 0.79
+      }
+    ]
+  },
+  "meta": {
+    "latency_ms": 3142,
+    "cache_hit": false,
+    "model": "groq/openai/gpt-oss-120b",
+    "cost_usd": 0.00063,
+    "fallback": null,
+    "knowledge_fit": "partial",
+    "tokens": {
+      "prompt": 1104,
+      "completion": 774
+    },
+    "llm_stages": {
+      "enrichment": "llm",
+      "structuring": "llm"
+    }
+  },
+  "trace": {
+    "frame": {
+      "symptoms": [
+        "FLICKER"
+      ],
+      "contexts": [],
+      "device": "",
+      "part": "",
+      "polarity": "",
+      "config_request": false,
+      "components": [
+        "battery",
+        "display"
+      ]
+    },
+    "gate": {
+      "fit": "partial",
+      "fit_score": 0.54,
+      "reason": "context_ok=True (doc [] vs complaint []); symptom_ok=False (doc ['VIS'] vs complaint ['FLK']); doc_sim=0.36",
+      "kept_sections": [
+        2,
+        3
+      ],
+      "dropped": {
+        "1": "partial fit: non-generic section",
+        "4": "partial fit: non-generic section",
+        "5": "partial fit: non-generic section"
+      }
+    },
+    "units": [
+      {
+        "uid": "U1",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S2.1",
+          "S2.2",
+          "S2.3",
+          "S2.5",
+          "S2.8",
+          "S2.9",
+          "S2.10"
+        ],
+        "steps": [
+          "Inspect your phone or tablet, charger, and USB cable for any physical damage or signs of liquid exposure.",
+          "Remove any cases or accessories that might be covering the charging port or buttons.",
+          "Examine the USB connections for any corrosion or bent pins.",
+          "Check the Liquid Damage Indicator (LDI).",
+          "Turn off your phone or tablet.",
+          "Insert the ejector tool into the small hole next to the SIM/MicroSD tray to eject the tray.",
+          "Shine a flashlight into the SIM/MicroSD slot."
+        ],
+        "evidence": {
+          "S2.1": "First, please carefully inspect your phone or tablet, charger, and USB cable for any physical damage or signs of liquid exposure.",
+          "S2.2": "Please remove any cases or accessories that might be covering the charging port or buttons.",
+          "S2.3": "Examine the USB connections for any corrosion or bent pins.",
+          "S2.5": "Next, let's check the Liquid Damage Indicator (LDI).",
+          "S2.8": "Turn off your phone or tablet.",
+          "S2.9": "Insert the ejector tool into the small hole next to the SIM/MicroSD tray to eject the tray.",
+          "S2.10": "Shine a flashlight into the SIM/MicroSD slot."
+        }
+      },
+      {
+        "uid": "U2",
+        "kind": "other",
+        "category": "critical",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S3.1",
+          "S3.3",
+          "S3.4"
+        ],
+        "steps": [
+          "If there's no physical or liquid damage, force a restart on your device.",
+          "Press and hold both the Power button (or Side button) and the Volume down button simultaneously for at least 20 seconds.",
+          "If your device has a removable battery, remove the battery for 60 seconds.",
+          "Reinsert it."
+        ],
+        "evidence": {
+          "S3.1": "If there's no physical or liquid damage, let's try to force a restart on your device.",
+          "S3.3": "Press and hold both the Power button (or Side button) and the Volume down button simultaneously for at least 20 seconds.",
+          "S3.4": "If your device has a removable battery, please remove the battery for 60 seconds, and then reinsert it."
+        }
+      }
+    ],
+    "enrichment": {
+      "canonical_query": "X1 Ultra screen flashes milliseconds when charger is connected, rendering display unusable.",
+      "hard_negatives": [
+        "X1 Ultra screen flickers when volume button is pressed, but it stays on.",
+        "X1 Ultra battery drains instantly when the screen brightness is set to maximum.",
+        "X1 Ultra screen won't turn off after closing the lid, staying lit continuously.",
+        "X1 Ultra charger connection causes the device to overheat, not the screen."
+      ]
+    },
+    "structuring": {
+      "no_viable_solution": false,
+      "goals": [
+        {
+          "topic": "Screen Flicker",
+          "title": "Screen flicker fix",
+          "config_request": false,
+          "units": [
+            "U1",
+            "U2"
+          ]
+        }
+      ],
+      "actions": {
+        "U1": {
+          "keep": true,
+          "name": "Inspect Charging Components",
+          "description": "It will identify physical damage causes",
+          "drop_steps": []
+        },
+        "U2": {
+          "keep": true,
+          "name": "Force Device Restart",
+          "description": "It will reset system to stop flickering",
+          "drop_steps": []
+        }
+      }
+    },
+    "actions": [
+      {
+        "unit": "U1",
+        "spans": [
+          "S2.1",
+          "S2.2",
+          "S2.3",
+          "S2.5",
+          "S2.8",
+          "S2.9",
+          "S2.10"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U2",
+        "spans": [
+          "S3.1",
+          "S3.3",
+          "S3.4"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      }
+    ],
+    "output_gate": [],
+    "resolver_memo_hits": 0
+  }
+}

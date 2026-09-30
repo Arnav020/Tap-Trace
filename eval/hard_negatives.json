@@ -1,0 +1,27 @@
+{
+  "_readme": "Hand-written near-miss complaints: lexically close to cached scenarios but requiring a DIFFERENT fix. Any cache hit on these is a FALSE HIT (serving a wrong plan instantly). 'near' names the scenario each one imitates. Used to report the false-hit rate of global-threshold vs contrastive (adaptive + facet-guard) caching.",
+  "items": [
+    {"near": 20, "text": "My Nexa X1 Ultra screen won't turn off even when I press the power button, it just stays on."},
+    {"near": 8, "text": "My Nexa Fold X1 cover screen is black and unresponsive, but the inner screen still works fine."},
+    {"near": 7, "text": "My new phone's screen content looks huge and zoomed in, text is too big for the display."},
+    {"near": 11, "text": "I want to turn on the floating assistant circle with shortcuts on my Nexa X1, how do I enable it?"},
+    {"near": 19, "text": "My Nexa X1 touchscreen is too sensitive and registers taps I never made."},
+    {"near": 15, "text": "My X1 Ultra doesn't charge at all when I plug in the charger, the screen is fine."},
+    {"near": 15, "text": "My phone gets very hot while charging but the display is fine."},
+    {"near": 1, "text": "Gmail on my tablet won't sync new emails, but the screen works normally."},
+    {"near": 4, "text": "My Nexa A15 battery drains very fast after a month of use."},
+    {"near": 2, "text": "My Nexa X1 speaker has no sound in any app."},
+    {"near": 5, "text": "Data Transfer finished but my photos are missing on the new tablet."},
+    {"near": 13, "text": "The back glass of my phone is cracked but the screen works perfectly."},
+    {"near": 20, "text": "My Nexa X1 Ultra keeps turning on by itself at night."},
+    {"near": 16, "text": "My Nexa X1 Wi-Fi keeps disconnecting every few minutes."},
+    {"near": 9, "text": "My Fold X1 hinge makes a clicking noise when I open it, the screen works."},
+    {"near": 10, "text": "One half of my Fold X1 screen is much brighter than the other half."},
+    {"near": 14, "text": "My X1 Ultra shows a blue light notification LED that won't go away."},
+    {"near": 3, "text": "My Nexa Fold X1 camera shows a black screen but the phone display works."},
+    {"near": 18, "text": "My Nexa A14 colours look too warm and yellowish, I want to adjust the white balance."},
+    {"near": 12, "text": "My Nexa X1 shows 'No SIM card' after the carrier deactivated my old phone, but the screen is fine."},
+    {"near": 6, "text": "My tablet app icons are all showing notification badges I want to remove."},
+    {"near": 17, "text": "My Fold X1 screen protector is peeling at the fold but the screen itself is fine."}
+  ]
+}

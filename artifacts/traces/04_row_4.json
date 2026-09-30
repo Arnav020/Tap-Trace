@@ -1,0 +1,383 @@
+{
+  "input_line": 4,
+  "siis_id": "row_4",
+  "query": "My TechCorp Nexa A14/A15 screen suddenly went completely black on its own after about a month of use. It doesn't display anything, even when I try to turn it on.",
+  "query_variations": [
+    "The A14/A15 device's display became entirely black after approximately one month of use and shows nothing when powered on.",
+    "After about thirty days, the Nexa A14/A15 screen went dark and fails to show any image upon activation.",
+    "My Nexa A14/A15 screen just went black after a month and nothing shows up when I turn it on.",
+    "Went dark on my A14/A15 after a few weeks, and the screen stays black even if I try to power it up.",
+    "A14 A15 screen black month no display",
+    "Nexa screen black after month won't turn on",
+    "Why does my A14/A15 screen suddenly go completely black after just a month? It never displays anything even when I try to turn it on!",
+    "I'm fed up - my Nexa A14/A15 screen blacked out after a month and it won't show anything when I power it up!",
+    "My Nexa A14/A15 screeen went black after a month and won't dislay when I turn it on.",
+    "A14/A15 screen blak after about a month, no displau when i try to power on."
+  ],
+  "response": {
+    "contexts": [
+      {
+        "goal": "Follow these steps to perform this Black Screen Troubleshooting",
+        "title": "Black screen recovery",
+        "actions": [
+          {
+            "actionName": "Inspect Device for Damage",
+            "description": "It will identify physical or liquid issues",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Inspect your phone or tablet, charger, and USB cable for any physical damage or signs of liquid exposure.",
+                  "Remove any cases or accessories that might be covering the charging port or buttons.",
+                  "Examine the USB connections for any corrosion or bent pins.",
+                  "Check the Liquid Damage Indicator (LDI).",
+                  "Turn off your phone or tablet.",
+                  "Insert the ejector tool into the small hole next to the SIM/MicroSD tray to eject the tray.",
+                  "Shine a flashlight into the SIM/MicroSD slot."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Charge Device for One Hour",
+            "description": "It will ensure sufficient power for display",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Connect your phone or tablet to its appropriate charger and let it charge for at least 1 hour."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Power Cycle Without Charger",
+            "description": "It will reset device without external power",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Disconnect the phone or tablet from the charger.",
+                  "Try to turn it on by pressing and holding the Power button (or Side button) for 15 to 20 seconds.",
+                  "Turn off your device and reconnect it to the appropriate charger until it is fully charged."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Contact Customer Support",
+            "description": "It will provide professional assistance options",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Contact the Customer Support Center for further assistance."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Force Restart Device",
+            "description": "It will attempt to revive unresponsive screen",
+            "stepGroups": [
+              {
+                "steps": [
+                  "If there's no physical or liquid damage, force a restart on your device.",
+                  "Press and hold both the Power button (or Side button) and the Volume down button simultaneously for at least 20 seconds.",
+                  "If your device has a removable battery, remove the battery for 60 seconds.",
+                  "Reinsert it."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "critical"
+          }
+        ],
+        "score": 0.99
+      }
+    ]
+  },
+  "meta": {
+    "latency_ms": 3054,
+    "cache_hit": false,
+    "model": "groq/openai/gpt-oss-120b",
+    "cost_usd": 0.000707,
+    "fallback": null,
+    "knowledge_fit": "full",
+    "tokens": {
+      "prompt": 1236,
+      "completion": 870
+    },
+    "llm_stages": {
+      "enrichment": "llm",
+      "structuring": "llm"
+    }
+  },
+  "trace": {
+    "frame": {
+      "symptoms": [
+        "BLANK"
+      ],
+      "contexts": [],
+      "device": "phone",
+      "part": "",
+      "polarity": "",
+      "config_request": false,
+      "components": [
+        "display"
+      ]
+    },
+    "gate": {
+      "fit": "full",
+      "fit_score": 0.968,
+      "reason": "context_ok=True (doc [] vs complaint []); symptom_ok=True (doc ['VIS'] vs complaint ['VIS']); doc_sim=0.52",
+      "kept_sections": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "dropped": {}
+    },
+    "units": [
+      {
+        "uid": "U1",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S2.1",
+          "S2.2",
+          "S2.3",
+          "S2.5",
+          "S2.8",
+          "S2.9",
+          "S2.10"
+        ],
+        "steps": [
+          "Inspect your phone or tablet, charger, and USB cable for any physical damage or signs of liquid exposure.",
+          "Remove any cases or accessories that might be covering the charging port or buttons.",
+          "Examine the USB connections for any corrosion or bent pins.",
+          "Check the Liquid Damage Indicator (LDI).",
+          "Turn off your phone or tablet.",
+          "Insert the ejector tool into the small hole next to the SIM/MicroSD tray to eject the tray.",
+          "Shine a flashlight into the SIM/MicroSD slot."
+        ],
+        "evidence": {
+          "S2.1": "First, please carefully inspect your phone or tablet, charger, and USB cable for any physical damage or signs of liquid exposure.",
+          "S2.2": "Please remove any cases or accessories that might be covering the charging port or buttons.",
+          "S2.3": "Examine the USB connections for any corrosion or bent pins.",
+          "S2.5": "Next, let's check the Liquid Damage Indicator (LDI).",
+          "S2.8": "Turn off your phone or tablet.",
+          "S2.9": "Insert the ejector tool into the small hole next to the SIM/MicroSD tray to eject the tray.",
+          "S2.10": "Shine a flashlight into the SIM/MicroSD slot."
+        }
+      },
+      {
+        "uid": "U2",
+        "kind": "other",
+        "category": "critical",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S3.1",
+          "S3.3",
+          "S3.4"
+        ],
+        "steps": [
+          "If there's no physical or liquid damage, force a restart on your device.",
+          "Press and hold both the Power button (or Side button) and the Volume down button simultaneously for at least 20 seconds.",
+          "If your device has a removable battery, remove the battery for 60 seconds.",
+          "Reinsert it."
+        ],
+        "evidence": {
+          "S3.1": "If there's no physical or liquid damage, let's try to force a restart on your device.",
+          "S3.3": "Press and hold both the Power button (or Side button) and the Volume down button simultaneously for at least 20 seconds.",
+          "S3.4": "If your device has a removable battery, please remove the battery for 60 seconds, and then reinsert it."
+        }
+      },
+      {
+        "uid": "U3",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S4.1"
+        ],
+        "steps": [
+          "Connect your phone or tablet to its appropriate charger and let it charge for at least 1 hour."
+        ],
+        "evidence": {
+          "S4.1": "Now, please connect your phone or tablet to its appropriate charger and let it charge for at least 1 hour."
+        }
+      },
+      {
+        "uid": "U4",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S5.1",
+          "S5.2",
+          "S5.5"
+        ],
+        "steps": [
+          "Disconnect the phone or tablet from the charger.",
+          "Try to turn it on by pressing and holding the Power button (or Side button) for 15 to 20 seconds.",
+          "Turn off your device and reconnect it to the appropriate charger until it is fully charged."
+        ],
+        "evidence": {
+          "S5.1": "After charging, please disconnect the phone or tablet from the charger.",
+          "S5.2": "Then, try to turn it on by pressing and holding the Power button (or Side button) for 15 to 20 seconds.",
+          "S5.5": "Please turn off your device and reconnect it to the appropriate charger until it is fully charged."
+        }
+      },
+      {
+        "uid": "U5",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S5.7"
+        ],
+        "steps": [
+          "Contact the Customer Support Center for further assistance."
+        ],
+        "evidence": {
+          "S5.7": "In this case, please contact the Customer Support Center for further assistance."
+        }
+      }
+    ],
+    "enrichment": {
+      "canonical_query": "A14/A15 screen turns completely black after a month, no display when powering on",
+      "hard_negatives": [
+        "A14/A15 battery drains completely after a month and won't charge when plugged in",
+        "Nexa A14/A15 cover screen flickers after a week and turns off randomly",
+        "A14/A15 screen stays dim after a month but turns on when brightness is increased",
+        "Nexa A14/A15 device won't power on at all after a week of use"
+      ]
+    },
+    "structuring": {
+      "no_viable_solution": false,
+      "goals": [
+        {
+          "topic": "Black Screen",
+          "title": "Black screen recovery",
+          "config_request": false,
+          "units": [
+            "U1",
+            "U2",
+            "U3",
+            "U4",
+            "U5"
+          ]
+        }
+      ],
+      "actions": {
+        "U1": {
+          "keep": true,
+          "name": "Inspect Device for Damage",
+          "description": "It will identify physical or liquid issues",
+          "drop_steps": []
+        },
+        "U2": {
+          "keep": true,
+          "name": "Force Restart Device",
+          "description": "It will attempt to revive an unresponsive screen",
+          "drop_steps": []
+        },
+        "U3": {
+          "keep": true,
+          "name": "Charge Device for One Hour",
+          "description": "It will ensure sufficient power for display",
+          "drop_steps": []
+        },
+        "U4": {
+          "keep": true,
+          "name": "Power Cycle Without Charger",
+          "description": "It will reset the device without external power",
+          "drop_steps": []
+        },
+        "U5": {
+          "keep": true,
+          "name": "Contact Customer Support",
+          "description": "It will provide professional assistance options",
+          "drop_steps": []
+        }
+      }
+    },
+    "actions": [
+      {
+        "unit": "U1",
+        "spans": [
+          "S2.1",
+          "S2.2",
+          "S2.3",
+          "S2.5",
+          "S2.8",
+          "S2.9",
+          "S2.10"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U3",
+        "spans": [
+          "S4.1"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U4",
+        "spans": [
+          "S5.1",
+          "S5.2",
+          "S5.5"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm-repaired"
+      },
+      {
+        "unit": "U5",
+        "spans": [
+          "S5.7"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      },
+      {
+        "unit": "U2",
+        "spans": [
+          "S3.1",
+          "S3.3",
+          "S3.4"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm-repaired"
+      }
+    ],
+    "output_gate": [],
+    "resolver_memo_hits": 0
+  }
+}

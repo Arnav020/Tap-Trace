@@ -1,0 +1,6 @@
+{
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "quantisation": "onnxruntime dynamic INT8 (weights)",
+  "min_cosine_vs_fp32": 0.9662,
+  "size_mb": 23.1
+}

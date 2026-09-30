@@ -1,0 +1,83 @@
+{
+  "input_line": 11,
+  "siis_id": "row_12",
+  "query": "My Nexa X1 has a floating circle that constantly hovers on my screen and gives me quick shortcuts to recent apps, home, back, screen off, volume control, and more; I want to remove it.",
+  "query_variations": [
+    "The Nexa X1 displays a persistent floating shortcut circle on the display that I am unable to remove.",
+    "Got this floating circle on my Nexa X1 that won't go away, any way to kill it?",
+    "floating circle shortcuts overlay remove",
+    "Why does my Nexa X1 keep that annoying floating circle on the screen and refuse to disappear!",
+    "Nexa X1 floating cirle wont go away",
+    "Please advise how to eliminate the constantly hovering shortcut circle on the Nexa X1 screen.",
+    "That little shortcut bubble on my Nexa X1 just won't disappear, help me out.",
+    "Nexa X1 persistent overlay shortcut circle delete",
+    "I'm fed up with the floating shortcut circle on my Nexa X1 that never goes away!",
+    "My Nexa X1 has a floating cirlce that won't disappear"
+  ],
+  "response": {
+    "contexts": []
+  },
+  "meta": {
+    "latency_ms": 2081,
+    "cache_hit": false,
+    "model": "groq/openai/gpt-oss-120b",
+    "cost_usd": 0.000449,
+    "fallback": "no_match",
+    "knowledge_fit": "none",
+    "tokens": {
+      "prompt": 378,
+      "completion": 654
+    },
+    "llm_stages": {
+      "enrichment": "llm",
+      "structuring": "deterministic"
+    }
+  },
+  "trace": {
+    "frame": {
+      "symptoms": [
+        "OVERLAY"
+      ],
+      "contexts": [],
+      "device": "phone",
+      "part": "",
+      "polarity": "off",
+      "config_request": true,
+      "components": [
+        "audio",
+        "display"
+      ]
+    },
+    "gate": {
+      "fit": "none",
+      "fit_score": 0.0,
+      "reason": "context_ok=False (doc ['multiwindow'] vs complaint []); symptom_ok=True (doc [] vs complaint ['OVL']); doc_sim=0.35; no viable section",
+      "kept_sections": [],
+      "dropped": {
+        "0": "partial fit: non-generic section",
+        "1": "section is about ['multiwindow'], absent from complaint",
+        "2": "section is about ['multiwindow'], absent from complaint",
+        "3": "section is about ['multiwindow'], absent from complaint",
+        "4": "section is about ['multiwindow'], absent from complaint",
+        "5": "section is about ['multiwindow'], absent from complaint",
+        "6": "section is about ['multiwindow'], absent from complaint",
+        "7": "section is about ['multiwindow'], absent from complaint",
+        "8": "section is about ['multiwindow'], absent from complaint"
+      }
+    },
+    "units": [],
+    "enrichment": {
+      "canonical_query": "Nexa X1 floating shortcut circle persists on screen and cannot be dismissed",
+      "hard_negatives": [
+        "Nexa X1 floating circle appears only after screen rotation and cannot be moved",
+        "Nexa X1 battery indicator flickers and won't stay on",
+        "Nexa X1 screen brightness won't turn off",
+        "Nexa X1 floating widget disappears when tapping the home button"
+      ]
+    },
+    "structuring": null,
+    "actions": [],
+    "output_gate": [],
+    "resolver_memo_hits": 0
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "input_line": 17,
+  "siis_id": "row_19",
+  "query": "1. \"My Nexa Fold X1 screen is cracked again right where it folds.\" 2. \"The touch doesn't work on certain parts of the screen.\" 3. \"I can hardly see anything on the display.\"",
+  "query_variations": [
+    "The screen of my Nexa Fold X1 is fractured along the hinge, resulting in unresponsive touch zones and reduced brightness.",
+    "My Nexa Fold X1 exhibits a crack at the folding line, partial touch failure, and a noticeably dim display.",
+    "My Nexa Fold X1 screen cracked right where it folds, parts of the touch don't work and it's super dim.",
+    "Got a crack on the fold of my Nexa Fold X1, touch is flaky in places and the screen's really dark.",
+    "Nexa Fold X1 screen crack fold touch dead dim",
+    "fold crack touch unresponsive dim display Nexa",
+    "Why does my Nexa Fold X1 keep cracking at the fold, the touch stops working in areas, and the screen is barely visible!",
+    "This cracked fold on my Nexa Fold X1 is ruining everything - touch dead spots and the display is practically black!",
+    "My Nexa Fod X1 screen craked at the fold, touch not work and dim display.",
+    "Nexa Fold X1 scren cracked where it folds, touch doesnt work some parts, dim visiblity."
+  ],
+  "response": {
+    "contexts": [
+      {
+        "goal": "Follow these steps to perform this Screen Damage Troubleshooting",
+        "title": "Screen repair",
+        "actions": [
+          {
+            "actionName": "Schedule Repair Appointment",
+            "description": "It will arrange professional screen replacement",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Schedule a walk-in or mail-in repair to fix your cracked screen using Genuine Parts.",
+                  "Visit a local Authorized Service Center."
+                ],
+                "actionableDeeplink": null,
+                "validationDeeplink": null
+              }
+            ],
+            "category": "manual"
+          }
+        ],
+        "score": 0.96
+      }
+    ]
+  },
+  "meta": {
+    "latency_ms": 3453,
+    "cache_hit": false,
+    "model": "groq/openai/gpt-oss-120b",
+    "cost_usd": 0.000562,
+    "fallback": null,
+    "knowledge_fit": "full",
+    "tokens": {
+      "prompt": 964,
+      "completion": 696
+    },
+    "llm_stages": {
+      "enrichment": "llm",
+      "structuring": "llm"
+    },
+    "retried": true
+  },
+  "trace": {
+    "frame": {
+      "symptoms": [
+        "BLANK",
+        "DAMAGE",
+        "TOUCH"
+      ],
+      "contexts": [],
+      "device": "foldable",
+      "part": "",
+      "polarity": "",
+      "config_request": false,
+      "components": [
+        "display"
+      ]
+    },
+    "gate": {
+      "fit": "full",
+      "fit_score": 0.91,
+      "reason": "context_ok=True (doc [] vs complaint []); symptom_ok=True (doc ['DMG'] vs complaint ['DMG', 'TCH', 'VIS']); doc_sim=0.38",
+      "kept_sections": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8
+      ],
+      "dropped": {
+        "5": "explanatory section"
+      }
+    },
+    "units": [
+      {
+        "uid": "U1",
+        "kind": "other",
+        "category": "manual",
+        "polarity": "open",
+        "targets": [],
+        "spans": [
+          "S2.1",
+          "S3.1"
+        ],
+        "steps": [
+          "Schedule a walk-in or mail-in repair to fix your cracked screen using Genuine Parts.",
+          "Visit a local Authorized Service Center."
+        ],
+        "evidence": {
+          "S2.1": "You can schedule a walk-in or mail-in repair to fix your cracked screen using Genuine Parts.",
+          "S3.1": "For fast, quality repairs you can trust and rely on, visit a local Authorized Service Center."
+        }
+      }
+    ],
+    "enrichment": {
+      "canonical_query": "Nexa Fold X1 screen cracked at the fold, touch unresponsive in spots, and display dimmed when folded",
+      "hard_negatives": [
+        "Nexa Fold X1 battery won't charge when the screen is on",
+        "Nexa Fold X1 screen won't turn off after closing the cover",
+        "Nexa Fold X1 camera lens fogged, causing blurry photos",
+        "Nexa Fold X1 speaker produces no sound when volume is increased"
+      ]
+    },
+    "structuring": {
+      "no_viable_solution": false,
+      "goals": [
+        {
+          "topic": "Screen Damage",
+          "title": "Screen repair",
+          "config_request": false,
+          "units": [
+            "U1"
+          ]
+        }
+      ],
+      "actions": {
+        "U1": {
+          "keep": true,
+          "name": "Schedule Repair Appointment",
+          "description": "It will arrange professional screen replacement",
+          "drop_steps": []
+        }
+      }
+    },
+    "actions": [
+      {
+        "unit": "U1",
+        "spans": [
+          "S2.1",
+          "S3.1"
+        ],
+        "kind": "other",
+        "resolution": null,
+        "description_source": "llm"
+      }
+    ],
+    "output_gate": [],
+    "resolver_memo_hits": 0
+  }
+}
