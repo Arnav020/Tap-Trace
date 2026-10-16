@@ -53,6 +53,7 @@ WARM = "F2B66D"  # warm highlight on dark backgrounds
 F, FB, MONO = "Segoe UI", "Segoe UI Semibold", "Consolas"
 A = "{http://schemas.openxmlformats.org/drawingml/2006/main}"
 SW, SH = 13.333, 7.5
+TOTAL_SLIDES = 12  # footer page count; the Demo Round deck overrides it
 L, W = 0.62, 12.09
 
 
@@ -234,7 +235,7 @@ def chrome(sl, n, section, headline, sub=None, hl=None):
     T(sl, L, 0.9, 8.95 if sub else W, 1.2, [(runs, {"size": 27, "font": FB, "color": INK, "line": 0.92})])
     if sub:
         T(sl, 9.85, 0.98, 2.86, 1.1, [(sub, {"size": 11, "color": SLATE, "line": 1.05})])
-    T(sl, 11.6, 7.08, 1.11, 0.25, [(f"{n + 1:02d} / 12", {"size": 8, "color": FAINT, "align": PP_ALIGN.RIGHT})])
+    T(sl, 11.6, 7.08, 1.11, 0.25, [(f"{n + 1:02d} / {TOTAL_SLIDES}", {"size": 8, "color": FAINT, "align": PP_ALIGN.RIGHT})])
     T(sl, L, 7.08, 6, 0.25, [("TIET  ·  TAPTRACE  ·  THEME 02 SMART GUIDED TROUBLESHOOTING", {"size": 7.5, "color": FAINT, "spc": 150})])
 
 
@@ -312,6 +313,37 @@ def _bare(url: str) -> str:
     return url.replace("https://", "").replace("http://", "").rstrip("/")
 
 
+def cover_slide(sl, github: str, deployed: str) -> None:
+    """Slide 1 (photo cover with the real UI on the phone); shared by the Round 1 and Demo Round decks."""
+    hero = ASSETS / "hero.jpg"
+    if hero.exists():
+        sl.shapes.add_picture(str(hero), 0, 0, Inches(SW), Inches(SH))
+    else:
+        shape(sl, 0, 0, SW, SH, fill="0B1220")
+    logo_mark(sl, 0.75, 0.62, 0.34, dark=True)
+    T(sl, 1.2, 0.58, 2.5, 0.42, [("TapTrace", {"size": 18, "font": FB, "color": WHITE})], anchor=MSO_ANCHOR.MIDDLE)
+    shape(sl, 2.85, 0.785, 1.2, 0.01, fill="8A7F73")
+    T(sl, 4.2, 0.62, 4.2, 0.34, [("SAMSUNG PRISM  ·  GENAI HACKATHON 3.0",
+                                 {"size": 9, "color": "CFC6BA", "spc": 300})], anchor=MSO_ANCHOR.MIDDLE)
+    T(sl, 0.75, 1.55, 7.0, 2.6, [([("From a vague complaint", {})], {"size": 44, "font": FB, "color": WHITE, "line": 0.95}),
+                                 ([("to a ", {}), ("verified fix", {"color": WARM}), (",", {})], {"size": 44, "font": FB, "color": WHITE, "line": 0.95}),
+                                 ([("in one tap.", {})], {"size": 44, "font": FB, "color": WHITE, "line": 0.95})])
+    T(sl, 0.75, 4.2, 6.2, 0.9, [("A grounded troubleshooting engine for Samsung PRISM Theme 02: every step traced to its source, "
+                                 "every Settings fix one exact deeplink away, every repeat answered from cache in milliseconds.",
+                                 {"size": 13.5, "color": "E6DDD1", "line": 1.12})])
+    feats = [("scan-search", "Evidence-locked", "steps"), ("crosshair", "Exact-screen", "deeplinks"), ("filter", "Relevance", "gate"), ("zap", "Contrastive", "cache")]
+    for i, (ic, a, b) in enumerate(feats):
+        x = 0.75 + i * 1.62
+        icon(sl, ic, x, 5.35, 0.36, "EDE5DA")
+        T(sl, x, 5.82, 1.5, 0.5, [(a, {"size": 10.5, "color": WHITE}), (b, {"size": 10.5, "color": WHITE})])
+        if i:
+            shape(sl, x - 0.14, 5.38, 0.01, 0.85, fill="5A4F45")
+    shape(sl, 0.75, 6.72, 11.85, 0.01, fill="5A4F45")
+    T(sl, 0.75, 6.8, 11.85, 0.5, [("THEME ID 02   |   TEAM TAPTRACE   |   THAPAR INSTITUTE OF ENGINEERING & TECHNOLOGY   |   "
+                                   "ARNAV JOSHI · ajoshi4_be23@thapar.edu", {"size": 8.5, "color": "CFC6BA", "spc": 120, "space": 3}),
+                                  (f"CODE  {_bare(github)}   |   LIVE DEMO  {_bare(deployed)}", {"size": 8.5, "color": WARM, "spc": 120})])
+
+
 # ---------------------------------------------------------------- main
 def main():
     ap = argparse.ArgumentParser()
@@ -361,34 +393,7 @@ def main():
         drop_all(sl)
 
     # ================================================================ 1 COVER
-    sl = S[0]
-    hero = ASSETS / "hero.jpg"
-    if hero.exists():
-        sl.shapes.add_picture(str(hero), 0, 0, Inches(SW), Inches(SH))
-    else:
-        shape(sl, 0, 0, SW, SH, fill="0B1220")
-    logo_mark(sl, 0.75, 0.62, 0.34, dark=True)
-    T(sl, 1.2, 0.58, 2.5, 0.42, [("TapTrace", {"size": 18, "font": FB, "color": WHITE})], anchor=MSO_ANCHOR.MIDDLE)
-    shape(sl, 2.85, 0.785, 1.2, 0.01, fill="8A7F73")
-    T(sl, 4.2, 0.62, 4.2, 0.34, [("SAMSUNG PRISM  ·  GENAI HACKATHON 3.0",
-                                 {"size": 9, "color": "CFC6BA", "spc": 300})], anchor=MSO_ANCHOR.MIDDLE)
-    T(sl, 0.75, 1.55, 7.0, 2.6, [([("From a vague complaint", {})], {"size": 44, "font": FB, "color": WHITE, "line": 0.95}),
-                                 ([("to a ", {}), ("verified fix", {"color": WARM}), (",", {})], {"size": 44, "font": FB, "color": WHITE, "line": 0.95}),
-                                 ([("in one tap.", {})], {"size": 44, "font": FB, "color": WHITE, "line": 0.95})])
-    T(sl, 0.75, 4.2, 6.2, 0.9, [("A grounded troubleshooting engine for Samsung PRISM Theme 02: every step traced to its source, "
-                                 "every Settings fix one exact deeplink away, every repeat answered from cache in milliseconds.",
-                                 {"size": 13.5, "color": "E6DDD1", "line": 1.12})])
-    feats = [("scan-search", "Evidence-locked", "steps"), ("crosshair", "Exact-screen", "deeplinks"), ("filter", "Relevance", "gate"), ("zap", "Contrastive", "cache")]
-    for i, (ic, a, b) in enumerate(feats):
-        x = 0.75 + i * 1.62
-        icon(sl, ic, x, 5.35, 0.36, "EDE5DA")
-        T(sl, x, 5.82, 1.5, 0.5, [(a, {"size": 10.5, "color": WHITE}), (b, {"size": 10.5, "color": WHITE})])
-        if i:
-            shape(sl, x - 0.14, 5.38, 0.01, 0.85, fill="5A4F45")
-    shape(sl, 0.75, 6.72, 11.85, 0.01, fill="5A4F45")
-    T(sl, 0.75, 6.8, 11.85, 0.5, [("THEME ID 02   |   TEAM TAPTRACE   |   THAPAR INSTITUTE OF ENGINEERING & TECHNOLOGY   |   "
-                                   "ARNAV JOSHI · ajoshi4_be23@thapar.edu", {"size": 8.5, "color": "CFC6BA", "spc": 120, "space": 3}),
-                                  (f"CODE  {_bare(args.github)}   |   LIVE DEMO  {_bare(args.deployed)}", {"size": 8.5, "color": WARM, "spc": 120})])
+    cover_slide(S[0], args.github, args.deployed)
 
     # ================================================================ 2 THEME / PROBLEM
     sl = S[1]

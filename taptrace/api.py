@@ -60,7 +60,8 @@ def startup() -> None:
     _boot()
 
 
-@app.get("/health")
+# HEAD is accepted too: uptime monitors (e.g. UptimeRobot free plan) check with HEAD, and a 405 counts as "down".
+@app.api_route("/health", methods=["GET", "HEAD"])
 def health():
     if not _ready.is_set() or _engine is None:
         return JSONResponse({"status": "starting"}, status_code=503)
@@ -127,6 +128,6 @@ _demo = ROOT / "demo"
 if _demo.exists():
     app.mount("/demo", StaticFiles(directory=str(_demo)), name="demo")
 
-    @app.get("/")
+    @app.api_route("/", methods=["GET", "HEAD"])
     def index():
         return FileResponse(str(_demo / "index.html"))

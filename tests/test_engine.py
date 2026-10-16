@@ -298,3 +298,15 @@ def test_llm_falls_back_to_second_model_when_primary_is_rate_limited():
     calls.clear()
     llm.json_call("sys", "user")
     assert calls == ["fallback"]  # primary skipped during its cool-down
+
+
+def test_health_and_root_accept_head_for_uptime_monitors(tmp_path, monkeypatch):
+    from fastapi.testclient import TestClient
+
+    monkeypatch.setenv("TAPTRACE_CACHE_PATH", str(tmp_path / "head_cache.sqlite"))
+    import taptrace.api as api
+
+    with TestClient(api.app) as client:
+        assert client.head("/health").status_code == 200
+        assert client.head("/").status_code == 200
+        assert client.get("/health").json() == {"status": "ok"}
