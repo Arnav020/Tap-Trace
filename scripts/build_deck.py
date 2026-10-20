@@ -349,7 +349,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--template", required=True)
     ap.add_argument("--github", default="https://github.com/Arnav020/Tap-Trace")
-    ap.add_argument("--deployed", default="https://taptrace.onrender.com")
+    ap.add_argument("--deployed", default="https://taptrace-abmd.onrender.com")
     ap.add_argument("--video", default="YouTube / Drive link in the submission form")
     args = ap.parse_args()
 

@@ -2,7 +2,7 @@
 
 **Samsung PRISM GenAI Hackathon 3.0 · Theme 02 · Team TapTrace (Thapar Institute of Engineering and Technology) · Arnav Joshi**
 
-**Live demo:** https://taptrace.onrender.com/ (API docs at https://taptrace.onrender.com/docs) · **Code:** https://github.com/Arnav020/Tap-Trace · **Demo video:** https://youtu.be/72Otbd-1QvM · **Deck:** [submission/TIET_TapTrace.pdf](submission/TIET_TapTrace.pdf)
+**Live demo:** https://taptrace-abmd.onrender.com/ (API docs at https://taptrace-abmd.onrender.com/docs) · **Code:** https://github.com/Arnav020/Tap-Trace · **Demo video:** https://youtu.be/72Otbd-1QvM · **Deck:** [submission/TIET_TapTrace.pdf](submission/TIET_TapTrace.pdf)
 
 > The live demo runs on Render's free plan, which sleeps after 15 minutes idle: the first request can take about a minute to wake it.
 
@@ -22,12 +22,12 @@ POST /v1/troubleshoot  {"query": "My Nexa X1 touch is laggy", "siis_response": {
 
 ### Try it in 60 seconds (live site)
 
-1. Open https://taptrace.onrender.com/ and wait for the **Healthy** pill (the free server may need up to a minute to wake).
+1. Open https://taptrace-abmd.onrender.com/ and wait for the **Healthy** pill (the free server may need up to a minute to wake).
 2. Pick scenario **#19**, switch **Bypass cache** on and press **Troubleshoot**: the full cold path (both LLM stages, gate, resolver, output gate) answers in a few seconds. Every highlighted sentence on the left is the source of a step on the phone.
 3. Press **One tap** on the phone: the exact Settings screen opens through its catalog deeplink and the validation probe confirms the change.
 4. Press **Try paraphrase** (served from the semantic cache in milliseconds, $0) and **Try hard negative** (same words, different fix: the cache refuses and says why).
 5. Pick scenario **#7** and press **Troubleshoot**: the article is about TV mirroring, so the engine returns an empty plan with `no_match` instead of inventing steps.
-6. The API itself is documented at https://taptrace.onrender.com/docs.
+6. The API itself is documented at https://taptrace-abmd.onrender.com/docs.
 
 ## Results (measured by `scripts/evaluate.py`, full report in [metrics.md](metrics.md))
 

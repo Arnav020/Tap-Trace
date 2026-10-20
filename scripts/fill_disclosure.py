@@ -49,7 +49,7 @@ FEATURES = [
      "design decision (for example which provided scenarios should return no_match). No AI tool was used for these decisions."),
     ("GitHub repository, deployment and demo video", "Self-Generated",
      "Done entirely by the team member: created and managed the GitHub repository (commits, release tag), deployed the "
-     "service on Render (https://taptrace.onrender.com/), and recorded and narrated the demo video."),
+     "service on Render (https://taptrace-abmd.onrender.com/), and recorded and narrated the demo video."),
     ("Troubleshooting engine (grounded step extraction, relevance gate, deeplink resolver, semantic cache)", "Both",
      "Tool: Claude Code (Anthropic), as a coding assistant. Prompts: the team member's requirements taken from the Theme 02 "
      "PDF, plus bug reports and fixes. Output: the taptrace/ package. Modification: reviewed and tested by the team member "

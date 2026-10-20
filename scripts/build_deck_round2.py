@@ -41,6 +41,17 @@ def notes(sl, text: str) -> None:
     sl.notes_slide.notes_text_frame.text = text
 
 
+def script_notes(md: str) -> dict:
+    """'## Slide N - Title · start m:ss · ...' sections -> {N: plain-text notes} (markdown emphasis removed)."""
+    out = {}
+    for m in re.finditer(r"^## Slide (\d+)[^\n]*?start ([0-9:]+)[^\n]*\n(.*?)(?=^---|^## |\Z)", md, re.M | re.S):
+        body = re.sub(r"\*\*(.+?)\*\*", r"\1", m.group(3))
+        body = re.sub(r"\*\((.+?)\)\*", r"[\1]", body)
+        body = "\n".join(l.strip() for l in body.strip().splitlines())
+        out[int(m.group(1))] = f"[start {m.group(2)}]\n{body}"
+    return out
+
+
 def keep_first(prs, n: int) -> None:
     """The organisers' template has 12 slides; the demo deck uses the first n (same masters and layouts)."""
     ids = prs.slides._sldIdLst
@@ -60,7 +71,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--template", required=True)
     ap.add_argument("--github", default="https://github.com/Arnav020/Tap-Trace")
-    ap.add_argument("--deployed", default="https://taptrace.onrender.com")
+    ap.add_argument("--deployed", default="https://taptrace-abmd.onrender.com")
     ap.add_argument("--video-file", default=None, help="optional .mp4 (< 2 min) to embed on the demo slide")
     args = ap.parse_args()
 
@@ -367,7 +378,7 @@ def main():
     # ================================================================ 7 DEMO VIDEO  (mail point 5)
     sl = S[6]
     chrome(sl, 6, "Demo video", "Live on the deployed site: one complaint, from article to verified tap.",
-           f"Screen recording of {_bare(args.deployed)}, 1:51.", hl="verified tap")
+           "Screen recording of the live deployment, 1:51.", hl="verified tap")
     vx, vy, vw = L, 2.3, 8.2
     vh = vw * 9 / 16
     poster = ASSETS / "shots" / "console.png"
@@ -432,6 +443,14 @@ def main():
                                     {"size": 8.5, "color": WARM, "spc": 120})])
     notes(sl, "[6:30-6:45]  To sum up: exact screens, grounded steps, honest no-match answers, and a clear path into Galaxy "
               "support. The code and the live demo are linked here. Thank you, I am happy to take questions.")
+
+    # The rehearsed speaking script (../TapTrace_DemoRound_Script.md) replaces the default notes, so presenter
+    # view shows exactly the words that were timed.
+    script = ROOT.parent / "TapTrace_DemoRound_Script.md"
+    if script.exists():
+        for k, body in script_notes(script.read_text(encoding="utf-8")).items():
+            if 1 <= k <= len(S):
+                notes(S[k - 1], body)
 
     out = ROOT / "submission" / "TIET_TapTrace_DemoRound.pptx"
     prs.save(out)
